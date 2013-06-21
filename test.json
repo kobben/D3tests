@@ -1,0 +1,13 @@
+{
+  "type": "FeatureCollection",
+
+  "features": [
+  { "type": "Feature", "id": 0, "properties": { "OBJECTID": 1, "name": "test" },
+    "geometry": { "type": "MultiPolygon",
+      "coordinates": [ [ [ [ 13600, 306900 ],
+        [ 13600, 619300 ],
+        [ 278000, 306900 ],
+        [ 13600, 306900 ]
+      ] ] ] } }
+]
+}

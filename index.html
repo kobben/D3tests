@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+    .boundary {
+        fill: #eee;
+        stroke: #999;
+    }
+</style>
+<body>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+var SVGwidth = 400, SVGheight = 400;
+
+// NL RijksDriehoekstelsel national projection system bounds:
+// 13600,306900,278000,619300
+var minx = 13600;
+var miny = 306900;
+var maxx = 278000;
+var maxy = 619300;
+// use RD projection limits to calculate scale and bounds needed for
+// affine transformation of RD coordinates to screen coordinates
+var height = maxy - miny;
+var width = maxx - minx;
+var scale = Math.min(SVGheight,SVGwidth)/Math.max(height,width);
+
+var y_offset = (maxy * scale);
+var x_offset = -(minx * scale);
+
+var svg = d3.select("body").append("svg")
+        .attr("id", "theMapSVG")
+        .attr("width", SVGwidth)
+        .attr("height", SVGheight)
+        ;
+// AffineTransformation as a basic pseudo-projection of RD coors to screen coords
+// http://en.wikipedia.org/wiki/Transformation_matrix#Affine_transformations
+function AffineTransformation(a, b, c, d, tx, ty) {
+    return {
+        //overrides normal D3 projection stream (to avoid adaptive sampling)
+        stream: function(output) {
+            return {
+                point: function(x, y) { output.point(a * x + b * y + tx, c * x + d * y + ty); },
+                sphere: function() { output.sphere(); },
+                lineStart: function() { output.lineStart(); },
+                lineEnd: function() { output.lineEnd(); },
+                polygonStart: function() { output.polygonStart(); },
+                polygonEnd: function() { output.polygonEnd(); }
+            };
+        }
+    };
+}
+
+var path = d3.geo.path().projection(AffineTransformation(scale, 0, 0, -scale, x_offset, y_offset));
+
+    d3.json("test.json", function(json) {
+        // test.json describes triangle fitting RD bounds, using RD coords)
+        nl=json;
+        svg.append("path")
+                .data(nl.features)
+                .attr("class", "boundary")
+                .attr("d", path)
+        ;
+
+    });
+
+d3.select(self.frameElement).style("height", SVGheight + "px");
+
+</script>
+</body>
