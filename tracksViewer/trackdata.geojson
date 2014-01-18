@@ -1,0 +1,15 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+
+"features": [
+{ "type": "Feature", "properties": { "id": 8, "dist": 60, "timestamp": 70 }, "geometry": { "type": "Point", "coordinates": [ 6.953566471640581, 52.186217896449541 ] } },
+{ "type": "Feature", "properties": { "id": 7, "dist": 31, "timestamp": 60 }, "geometry": { "type": "Point", "coordinates": [ 6.952695969115893, 52.191113767910039 ] } },
+{ "type": "Feature", "properties": { "id": 5, "dist": 25, "timestamp": 50 }, "geometry": { "type": "Point", "coordinates": [ 6.950462940900388, 52.190951354279946 ] } },
+{ "type": "Feature", "properties": { "id": 4, "dist": 23, "timestamp": 40 }, "geometry": { "type": "Point", "coordinates": [ 6.950462940900388, 52.190928152284357 ] } },
+{ "type": "Feature", "properties": { "id": 3, "dist": 21, "timestamp": 30 }, "geometry": { "type": "Point", "coordinates": [ 6.950349397092819, 52.190858546224938 ] } },
+{ "type": "Feature", "properties": { "id": 2, "dist": 20, "timestamp": 20 }, "geometry": { "type": "Point", "coordinates": [ 6.950084461541828, 52.190858546224938 ] } },
+{ "type": "Feature", "properties": { "id": 1, "dist": 10, "timestamp": 10 }, "geometry": { "type": "Point", "coordinates": [ 6.949365350760564, 52.190696131662463 ] } },
+{ "type": "Feature", "properties": { "id": 0, "dist": 0, "timestamp": 0 }, "geometry": { "type": "Point", "coordinates": [ 6.948835479658579, 52.190533716506664 ] } }
+]
+}
