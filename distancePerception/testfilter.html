@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+    <script src="../lib/d3.v3.min.js"></script>
+</head>
+<body>
+
+<script>
+
+var data = [1, 2, 3, 4, 5, 6, 7, 8];
+var svg = d3.select("body").append("svg");
+
+var shapes = svg.selectAll(".shapes")
+.data(data).enter();
+
+shapes.append("circle")
+.filter(function(d){ return d < 5; })
+.attr("cx", function(d, i){ return (i+1) * 25; })
+.attr("cy", 10)
+.attr("r", 10);
+
+shapes.append("rect")
+.filter(function(d){ return d >= 5; })
+.attr("x", function(d, i){ return (i+1) * 25; })
+.attr("y", 25)
+.attr("width", 10)
+.attr("height", 10);
+
+</script>
+
+</body>
+</html>

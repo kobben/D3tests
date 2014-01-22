@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8">
-<title>Equal Distance from Utrecht</title>
+<title>Distance from Amsterdam</title>
 <style>
     @import url(../lib/maps.css);
 .distance, .land {
@@ -34,6 +34,12 @@
   pointer-events: none;
   font-size: 12px;
 }
+.label {
+  font-family: Helvetica, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  text-align: center;
+  text-anchor: middle;
+}
 .pointer {
   pointer-events: none;
   fill: none;
@@ -52,9 +58,16 @@ svg {
   cursor: crosshair;
 }
 .citycircle {
-    fill : red;
-    stroke : none;
+    fill : white;
+    fill-opacity: 0.01;
+    stroke : red;
+    stroke-width: 2pt;
 }
+.centreCity {
+    fill : rgb(0,0,255);
+    fill-opacity: 1;
+    stroke : none;
+    }
 .distancecircle {
     fill : blue;
     stroke : none;
@@ -64,17 +77,13 @@ svg {
     stroke : black;
     stroke-width : .1pt;
 }
-text {
-    fill : black;
-    stroke : none;
-}
 </style>
 
 <script src="../lib/d3.v3.min.js"></script>
 <script src="../lib/topojson.v1.min.js"></script>
 
 <body>
-<div id="equidistant"></div>
+<div id="equidistant" style="overflow: visible"></div>
 
 <script>
 
@@ -84,15 +93,26 @@ var width = 600,
     radians = π / 180,
     radius = 6371,
     format = d3.format(",.0f")
-    mapscale = 1000
+    mapscale = 850
     ;
 
 var cities =  {features: [
-        {name: "Utrecht", coordinates: [5.115556, 52.088889]},
-        {name: "Athene", coordinates: [23.727778, 37.977778]}
-        ]};
+    {name: "Amsterdam", coordinates: [4.892222, 52.373056]},
+    {name: "Moskou", coordinates: [37.616667, 55.75]},
+    {name: "Parijs", coordinates: [2.3508, 48.8567]},
+    {name: "Kiev", coordinates: [30.523333, 50.45]},
+    {name: "Berlijn", coordinates: [13.383333, 52.516667]},
+    {name: "Praag", coordinates: [14.416667, 50.083333]},
+    {name: "Wenen", coordinates: [16.366667, 48.2]},
+    {name: "Boedapest", coordinates: [19.050278, 47.471944]},
+    {name: "Barcelona", coordinates: [2.183333, 41.383333]},
+    {name: "Rome", coordinates: [12.5, 41.9]},
+    {name: "Lissabon", coordinates: [-9.139386, 38.713811]},
+    {name: "Istanboel", coordinates: [28.955, 41.013611]},
+    {name: "Athene", coordinates: [23.727778, 37.977778]}
+    ]};
 
-var projCentre = cities.features[0].coordinates; //= Utrecht
+var projCentre = cities.features[0].coordinates; //= Amsterdam
 
 var equidistant = d3.geo.azimuthalEquidistant()
     .translate([width/2, height/2])
@@ -140,13 +160,13 @@ function updatePointer(path) {
         dy = m[1] - height / 2,
         a = Math.atan2(dy, dx),
         r = Math.sqrt(dx * dx + dy * dy);
-    pointer.attr("d", "M" + [width / 2, height/2] + "l" + [mapscale * Math.PI * Math.cos(a), mapscale * Math.PI * Math.sin(a)] +
+    pointer.attr("d", "M" + [width / 2, height/2] + "l" + [mapscale * π * Math.cos(a), mapscale * π * Math.sin(a)] +
         "M" + m + "a" + [r, r, 0, 0, 1, -2 * dx, -2 * dy] + "A" + [r, r, 0, 0, 1, m]);
     mouseDistance
         .attr("transform", "translate(" + [width / 2, height/2] + ")rotate(" + a / radians + ")translate(" + r + ")" +
-                    "rotate(" + (Math.abs(a) > Math.PI / 2 ? 180 : 0) + ")")
-        .attr("text-anchor", Math.abs(a) < Math.PI / 2 ^ r / mapscale > Math.PI / 2 ? "start" : "end")
-        .attr("dx", Math.abs(a) < Math.PI / 2 ^ r / mapscale > Math.PI / 2 ? "1em" : "-1em")
+                    "rotate(" + (Math.abs(a) > π / 2 ? 180 : 0) + ")")
+        .attr("text-anchor", "end" )
+        .attr("dx", "-1em")
         .attr("dy", "-.3em")
         .text(format(r / mapscale * radius) + "km");
 }
@@ -164,18 +184,63 @@ d3.json("../data/world-50m.json", function(error, world) {
   svg.each(redraw);
 });
 
+var cityObjects = svg.selectAll("circle", ".citycircle").data(cities.features);
 
-svg.selectAll("circle", ".citycircle")
-    .data(cities.features).enter()
-        .append("circle")
-        .attr("class", "citycircle")
-        .attr("cx", function(d) {return equidistant(d.coordinates)[0]} )
-        .attr("cy", function(d) {return equidistant(d.coordinates)[1]} )
-        .attr("id", function(d) {return (d.name)} )
-        .attr("r", 10)
+cityObjects
+    .enter().append("circle")
+    .filter(function(d, i){
+            if (d.name == "Moskou") {
+                return cityObjects
+                        .attr("id", function(d) {return (d.name)} )
+                        .attr("class", "centreCity")
+                        .attr("cx", function(d) {return equidistant(d.coordinates)[0]} )
+                        .attr("cy", function(d) {return equidistant(d.coordinates)[1]} )
+                        .attr("r",5);
+            } else {
+                return cityObjects
+                        .attr("id", function(d) {return (d.name)} )
+                        .attr("class", "citycircle")
+                        .attr("cx", function(d) {return equidistant(d.coordinates)[0]} )
+                        .attr("cy", function(d) {return equidistant(d.coordinates)[1]} )
+                        .attr("r",5);
+            }
+        })
     ;
-svg.each(redraw);
+//cityObjects
+//    .enter().append("circle")
+//    .filter(function(d, i){	return d.name != "Amsterdam";})
+//        .attr("id", function(d) {return (d.name)} )
+//        .attr("class", "citycircle")
+//        .attr("cx", function(d) {return equidistant(d.coordinates)[0]} )
+//        .attr("cy", function(d) {return equidistant(d.coordinates)[1]} )
+//        .attr("r",5)
+//        .on("mouseover", function(d) {
+//            document.getElementById(d.name + "_label").style.visibility="visible";
+//            } )
+//        .on("mouseout", function(d) {
+//            document.getElementById(d.name + "_label").style.visibility="hidden";
+//            } )
+//    ;
+//cityObjects.enter().append("text")
+//    .filter(function(d, i){	return d.name == "Amsterdam";})
+//        .attr("id", function(d) {return (d.name) + "_label"} )
+//        .text(function(d) {return (d.name)} )
+//        .attr("class", "label")
+//        .attr("visibility", "visible")
+//        .attr("x", function(d) {return equidistant(d.coordinates)[0]})
+//        .attr("y", function(d) {return equidistant(d.coordinates)[1] - 10 })
+//    ;
+//cityObjects.enter().append("text")
+//    .filter(function(d, i){	return d.name != "Amsterdam";})
+//        .attr("id", function(d) {return (d.name) + "_label"} )
+//        .text(function(d) {return (d.name)} )
+//        .attr("class", "label")
+//        .attr("visibility", "hidden")
+//        .attr("x", function(d) {return equidistant(d.coordinates)[0]})
+//        .attr("y", function(d) {return equidistant(d.coordinates)[1] - 15 })
+//    ;
 
+svg.each(redraw);
 
 function redraw(path) {
     d3.select(this).selectAll(".land,.graticule,.countries,.outline").attr("d", path);
