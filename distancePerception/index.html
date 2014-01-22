@@ -188,57 +188,37 @@ var cityObjects = svg.selectAll("circle", ".citycircle").data(cities.features);
 
 cityObjects
     .enter().append("circle")
-    .filter(function(d, i){
-            if (d.name == "Moskou") {
-                return cityObjects
-                        .attr("id", function(d) {return (d.name)} )
-                        .attr("class", "centreCity")
-                        .attr("cx", function(d) {return equidistant(d.coordinates)[0]} )
-                        .attr("cy", function(d) {return equidistant(d.coordinates)[1]} )
-                        .attr("r",5);
-            } else {
-                return cityObjects
-                        .attr("id", function(d) {return (d.name)} )
-                        .attr("class", "citycircle")
-                        .attr("cx", function(d) {return equidistant(d.coordinates)[0]} )
-                        .attr("cy", function(d) {return equidistant(d.coordinates)[1]} )
-                        .attr("r",5);
-            }
-        })
+    .filter(function(d, i){	return d.name != "Amsterdam";})
+        .attr("id", function(d) {return (d.name)} )
+        .attr("class", "citycircle")
+        .attr("cx", function(d) {return equidistant(d.coordinates)[0]} )
+        .attr("cy", function(d) {return equidistant(d.coordinates)[1]} )
+        .attr("r",5)
+        .on("mouseover", function(d) {
+            document.getElementById(d.name + "_label").style.visibility="visible";
+            } )
+        .on("mouseout", function(d) {
+            document.getElementById(d.name + "_label").style.visibility="hidden";
+            } )
     ;
-//cityObjects
-//    .enter().append("circle")
-//    .filter(function(d, i){	return d.name != "Amsterdam";})
-//        .attr("id", function(d) {return (d.name)} )
-//        .attr("class", "citycircle")
-//        .attr("cx", function(d) {return equidistant(d.coordinates)[0]} )
-//        .attr("cy", function(d) {return equidistant(d.coordinates)[1]} )
-//        .attr("r",5)
-//        .on("mouseover", function(d) {
-//            document.getElementById(d.name + "_label").style.visibility="visible";
-//            } )
-//        .on("mouseout", function(d) {
-//            document.getElementById(d.name + "_label").style.visibility="hidden";
-//            } )
-//    ;
-//cityObjects.enter().append("text")
-//    .filter(function(d, i){	return d.name == "Amsterdam";})
-//        .attr("id", function(d) {return (d.name) + "_label"} )
-//        .text(function(d) {return (d.name)} )
-//        .attr("class", "label")
-//        .attr("visibility", "visible")
-//        .attr("x", function(d) {return equidistant(d.coordinates)[0]})
-//        .attr("y", function(d) {return equidistant(d.coordinates)[1] - 10 })
-//    ;
-//cityObjects.enter().append("text")
-//    .filter(function(d, i){	return d.name != "Amsterdam";})
-//        .attr("id", function(d) {return (d.name) + "_label"} )
-//        .text(function(d) {return (d.name)} )
-//        .attr("class", "label")
-//        .attr("visibility", "hidden")
-//        .attr("x", function(d) {return equidistant(d.coordinates)[0]})
-//        .attr("y", function(d) {return equidistant(d.coordinates)[1] - 15 })
-//    ;
+cityObjects.enter().append("text")
+    .filter(function(d, i){	return d.name == "Amsterdam";})
+        .attr("id", function(d) {return (d.name) + "_label"} )
+        .text(function(d) {return (d.name)} )
+        .attr("class", "label")
+        .attr("visibility", "visible")
+        .attr("x", function(d) {return equidistant(d.coordinates)[0]})
+        .attr("y", function(d) {return equidistant(d.coordinates)[1] - 10 })
+    ;
+cityObjects.enter().append("text")
+    .filter(function(d, i){	return d.name != "Amsterdam";})
+        .attr("id", function(d) {return (d.name) + "_label"} )
+        .text(function(d) {return (d.name)} )
+        .attr("class", "label")
+        .attr("visibility", "hidden")
+        .attr("x", function(d) {return equidistant(d.coordinates)[0]})
+        .attr("y", function(d) {return equidistant(d.coordinates)[1] - 15 })
+    ;
 
 svg.each(redraw);
 
