@@ -2,32 +2,109 @@
 <html>
 <meta charset="utf-8">
 <head>
-    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="../lib/d3.v3.min.js"></script>
+    <!--<script src="http://d3js.org/d3.v3.min.js"></script>-->
 </head>
 <body>
-
+<table width="600px">
+ <tr><td colspan="2">
+    Results on screen are the same, but in the first method, circle and rect elements are only created
+    for data instances that were "filtered in". The d3.filter() method creates circle and rect elements
+    for all data, but these elements are "empty" for data that was "filtered out".
+    Use your browsers' DOM inspector to see the difference...<p>
+    </p>
+</td></tr>
+<tr><td width="200px">
+<div id="arrayFilter" style="height:100px;">
+<p>This is using the JavaScript standard Array.filter():</p>
+</div>
+</td><td><blockquote style="font-family:courier;font-size:8pt;">
+data = [1, 2, 3, 4, 5, 6, 7, 8]<br/>
+shapes = svg1.selectAll("circle")<br/>
+&nbsp;&nbsp; .data(data.filter(function(d){ return d < 5; }))<br/>
+&nbsp;&nbsp;     .enter()<br/>
+&nbsp;&nbsp;     .append("circle")<br/>
+&nbsp;&nbsp; &nbsp;&nbsp;       ...etc...<br/>
+shapes = svg1.selectAll("rect")<br/>
+&nbsp;&nbsp;     .data(data.filter(function(d){ return d >= 5; }))<br/>
+&nbsp;&nbsp;     .enter()<br/>
+&nbsp;&nbsp;     .append("rect")<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;        ...etc...<br/>
+</blockquote>
+    </td>
+</tr><tr>
+    <tr><td width="200px">
+<hr />
+<div id="D3Filter"  style="height:100px;">
+<p>This is using the d3.filter():</p>
+</td><td><blockquote style="font-family:courier;font-size:8pt;">
+data = [1, 2, 3, 4, 5, 6, 7, 8]<br/>
+shapes = svg1.selectAll("circle")<br/>
+&nbsp;&nbsp; .data(data).enter()<br/>
+&nbsp;&nbsp;     .append("circle")<br/>
+&nbsp;&nbsp;         .filter(function(d){ return d <  5; })
+&nbsp;&nbsp; &nbsp;&nbsp;       ...etc...<br/>
+shapes = svg1.selectAll("rect")
+&nbsp;&nbsp; .data(data).enter()<br/>
+&nbsp;&nbsp;     .append("rect")<br/>
+&nbsp;&nbsp;         .filter(function(d){ return d >=  5; })
+&nbsp;&nbsp;&nbsp;&nbsp;        ...etc...<br/>
+</blockquote>
+</td>
+</div>
+</tr>
+</table>
 <script>
 
 var data = [1, 2, 3, 4, 5, 6, 7, 8];
-var svg = d3.select("body").append("svg");
+var svg1 = d3.select("#arrayFilter").append("svg").attr("id","svg1");
+var svg2 = d3.select("#D3Filter").append("svg").attr("id","svg2");
+var shapes;
 
-var shapes = svg.selectAll(".shapes")
-.data(data).enter();
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//  This is using the JavaScript standard Array.filter():
 
-shapes.append("circle")
-.filter(function(d){ return d < 5; })
-.attr("cx", function(d, i){ return (i+1) * 25; })
-.attr("cy", 10)
-.attr("r", 10);
+shapes = svg1.selectAll("circle")
+        .data(data.filter(function(d){ return d < 5; }))
+    .enter()
+    .append("circle")
+    .attr("cx", function(d, i){ return (i+1) * 25; })
+    .attr("cy", 10)
+    .attr("r", 10)
+    ;
 
-shapes.append("rect")
-.filter(function(d){ return d >= 5; })
-.attr("x", function(d, i){ return (i+1) * 25; })
-.attr("y", 25)
-.attr("width", 10)
-.attr("height", 10);
+shapes = svg1.selectAll("rect")
+      .data(data.filter(function(d){ return d >=  5; }))
+    .enter()
+    .append("rect")
+    .attr("x", function(d, i){ return (i+1) * 25; })
+    .attr("y", 25)
+    .attr("width", 10)
+    .attr("height", 10)
+    ;
+
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//  This is using the d3.filter():
+
+shapes = svg2.selectAll("circle")
+        .data(data).enter()
+        .append("circle")
+        .filter(function(d){ return d < 5; })
+        .attr("cx", function(d, i){ return (i+1) * 25; })
+        .attr("cy", 10)
+        .attr("r", 10)
+;
+
+shapes = svg2.selectAll("rect")
+        .data(data).enter()
+        .append("rect")
+        .filter(function(d){ return d >=  5; })
+        .attr("x", function(d, i){ return (i+1) * 25; })
+        .attr("y", 25)
+        .attr("width", 10)
+        .attr("height", 10)
+;
 
 </script>
-
 </body>
 </html>
