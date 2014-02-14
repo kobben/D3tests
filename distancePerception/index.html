@@ -1,133 +1,131 @@
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8">
-<title>Distance from Amsterdam</title>
-<style>
-    @import url(../lib/maps.css);
-.distance, .land {
-  fill: none;
-  stroke: #000;
-  stroke-width: .5px;
-}
-.land {
-  fill: #eee;
-  stroke: none;
-}
-.countries {
-  fill: none;
-  stroke: #444;
-  stroke-width: .3px;
-}
-.graticule {
-  fill: none;
-  stroke: #000;
-  stroke-opacity: .5;
-  stroke-width: .5px;
-}
-.outline {
-  fill: none;
-  stroke: #000;
-  stroke-width: 2px;
-  pointer-events: all;
-}
-.mouse {
-  pointer-events: none;
-  font-size: 12px;
-}
-.label {
-  font-family: Helvetica, Geneva, Verdana, sans-serif;
-  font-size: 16px;
-  text-align: center;
-  text-anchor: middle;
-}
-.pointer {
-  pointer-events: none;
-  fill: none;
-  stroke: #000;
-  stroke-dasharray: 5,5;
-}
-.axis path, .axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-.axis {
-  font-size: 12px;
-}
-svg {
-  cursor: crosshair;
-}
-.citycircle {
-    fill : white;
-    fill-opacity: 0.01;
-    stroke : red;
-    stroke-width: 2pt;
-}
-.centreCity {
-    fill : rgb(0,0,255);
-    fill-opacity: 1;
-    stroke : none;
-    }
-.distancecircle {
-    fill : blue;
-    stroke : none;
-}
-.connectors {
-    fill : none;
-    stroke : black;
-    stroke-width : .1pt;
-}
-</style>
+<title>Afstanden van Amsterdam</title>
+
+<link href='styles.css' rel='stylesheet' type='text/css'/>
 
 <script src="../lib/d3.v3.min.js"></script>
 <script src="../lib/topojson.v1.min.js"></script>
 
 <body>
-<div id="equidistant" style="overflow: visible"></div>
+<div id="equidistant" style="float:left; overflow: visible">
+</div>
+<div id="menu">
+
+    <input type="button" id="juist" value="FEITELIJK" onclick="changePerception(1)" >
+    <input type="button" id="1977" value="PERCEPTIE 1977-1981" onclick="changePerception(2)">
+    <input type="button" id="2013" value="PERCEPTIE 2013" onclick="changePerception(3)" >
+    <h3>Gepercipieerde afstanden in Europa in 1977-1981 en 2013</h3>
+    Studenten situeren Oost-Europese steden te ver weg en
+    Zuid-Europese te dichtbij.
+    <!--<a id="downloadLink" href="" download='download'>Download</a>-->
+</div>
 
 <script>
 
-var width = 600,
-    height = 600,
+var mapWidth = 600,
+    mapHeight = 600,
+    scalesWidth = 600,
+    scalesHeight = 150,
     π = Math.PI,
     radians = π / 180,
     radius = 6371,
     format = d3.format(",.0f")
-    mapscale = 850
+    mapscale = 250
     ;
 
+var SVGDownload;
+
 var cities =  {features: [
-    {name: "Amsterdam", coordinates: [4.892222, 52.373056]},
-    {name: "Moskou", coordinates: [37.616667, 55.75]},
-    {name: "Parijs", coordinates: [2.3508, 48.8567]},
-    {name: "Kiev", coordinates: [30.523333, 50.45]},
-    {name: "Berlijn", coordinates: [13.383333, 52.516667]},
-    {name: "Praag", coordinates: [14.416667, 50.083333]},
-    {name: "Wenen", coordinates: [16.366667, 48.2]},
-    {name: "Boedapest", coordinates: [19.050278, 47.471944]},
-    {name: "Barcelona", coordinates: [2.183333, 41.383333]},
-    {name: "Rome", coordinates: [12.5, 41.9]},
-    {name: "Lissabon", coordinates: [-9.139386, 38.713811]},
-    {name: "Istanboel", coordinates: [28.955, 41.013611]},
-    {name: "Athene", coordinates: [23.727778, 37.977778]}
+    {name: "Amsterdam", rankTrue: 0, rank1977: 0, rank2013: 0,
+        coordinates: [4.892222, 52.373056], xy1977: [4.892222, 52.373056], xy2013: [4.892222, 52.373056]},
+    {name: "Parijs", rankTrue: 1, rank1977: 1, rank2013: 1,
+        coordinates: [2.3508, 48.8567], xy1977: [2.3508, 48.8567], xy2013: [2.3508, 48.8567]},
+    {name: "Berlijn", rankTrue: 2, rank1977: 2, rank2013: 2,
+        coordinates: [13.383333, 52.516667], xy1977: [13.383333, 52.516667], xy2013: [13.383333, 52.516667]},
+    {name: "Praag", rankTrue: 3, rank1977: 4.8, rank2013: 4.0,
+        coordinates: [14.416667, 50.083333], xy1977: [19, 48.3], xy2013: [17.8, 49]},
+    {name: "Wenen", rankTrue: 4, rank1977: 3.5, rank2013: 3.6,
+        coordinates: [16.366667, 48.2], xy1977: [15.3, 48.8], xy2013: [16, 48.3]},
+    {name: "Boedapest", rankTrue: 5, rank1977: 7.5, rank2013: 7.2,
+        coordinates: [19.050278, 47.471944], xy1977: [22.5, 46], xy2013: [21.6, 46.4]},
+    {name: "Barcelona", rankTrue: 6, rank1977: 5.3, rank2013: 5.4,
+        coordinates: [2.183333, 41.383333], xy1977: [2.5, 43], xy2013: [2.5, 42.7]},
+    {name: "Rome", rankTrue: 7, rank1977: 5.8, rank2013: 6.2,
+        coordinates: [12.5, 41.9], xy1977: [11.6, 42.9], xy2013: [11.9, 42.4]},
+    {name: "Kiev", rankTrue: 8, rank1977: 10.4, rank2013: 9.2,
+        coordinates: [30.523333, 50.45], xy1977: [36.5, 49], xy2013: [34.4, 49.5]},
+    {name: "Lissabon", rankTrue: 9, rank1977: 7.4, rank2013: 7.6,
+        coordinates: [-9.139386, 38.713811], xy1977: [-6.4, 41.8], xy2013: [-7.3, 41.4]},
+    {name: "Moskou", rankTrue: 10, rank1977: 10.6, rank2013: 11.4,
+        coordinates: [37.616667, 55.75], xy1977: [38.8, 56], xy2013: [42, 55.6]},
+    {name: "Istanboel", rankTrue: 11, rank1977: 10.2, rank2013: 10.9,
+        coordinates: [28.955, 41.013611], xy1977: [27.3, 41.9], xy2013: [28.5, 41.2]},
+    {name: "Athene", rankTrue: 12, rank1977: 9.3, rank2013: 9.6,
+        coordinates: [23.727778, 37.977778], xy1977: [21.7, 39.6], xy2013: [22.5, 39]}
     ]};
 
 var projCentre = cities.features[0].coordinates; //= Amsterdam
 
+//TODO: these min-max values should be really be retrieved from data:
+var smallestDist = 0;
+var largestDist = 12;
+var distLineLength = scalesWidth-10;
+
+//vars domain for the scales
+var distScale = d3.scale.linear()
+        .domain([smallestDist, largestDist])
+        .range([0, distLineLength]);
+
+
 var equidistant = d3.geo.azimuthalEquidistant()
-    .translate([width/2, height/2])
+    .translate([mapWidth/2, mapHeight/2])
     .clipAngle(180 - 1e-3)
     .scale(mapscale)
     .precision(.1)
     .rotate([-projCentre[0], -projCentre[1]])
     ;
 
+//create SVG placeholders
 var svg = d3.selectAll("#equidistant")
     .data([equidistant].map(function(projection) { return d3.geo.path().projection(projection); }))
-  .append("svg")
-    .attr("width", width)
-    .attr("height", height)
+    .append("svg")
+        .attr("id", "map")
+        .attr("width", mapWidth)
+        .attr("height", mapHeight)
     ;
+var svgScale = d3.selectAll("#equidistant")
+    .append("svg")
+    .attr("id", "scalesSVG")
+    .attr("width", scalesWidth)
+    .attr("height", scalesHeight)
+    ;
+// set properties of distance axis:
+var distAxis = d3.svg.axis()
+        .scale(distScale)
+        .orient("bottom")
+        ;
+//draw axis + text for distance for each scale
+var xMargin = 10, yD = 50, yP = 5;
+svgScale.append("g")
+        .attr("class", "axis")
+        .attr("transform", "translate(" + xMargin + "," + yD +")" )
+        .call(distAxis)
+;
+svgScale.append("text")
+        .attr("x", xMargin+2)
+        .attr("y", yD-7)
+        .attr("font-size", 11)
+        .text("feitelijk")
+;
+svgScale.append("text")
+        .attr("x", xMargin+2)
+        .attr("y", yD-30)
+        .attr("font-size", 11)
+        .text("perceptie")
+;
+
 
 svg.insert("path", ".distance")
     .datum(d3.geo.graticule())
@@ -156,14 +154,14 @@ svg.each(function(path) {
 function updatePointer(path) {
     var m = path.projection()(mouse),
       pointer = d3.select(this).style("display", null);
-    var dx = m[0] - width / 2,
-        dy = m[1] - height / 2,
+    var dx = m[0] - mapWidth / 2,
+        dy = m[1] - mapHeight / 2,
         a = Math.atan2(dy, dx),
         r = Math.sqrt(dx * dx + dy * dy);
-    pointer.attr("d", "M" + [width / 2, height/2] + "l" + [mapscale * π * Math.cos(a), mapscale * π * Math.sin(a)] +
+    pointer.attr("d", "M" + [mapWidth / 2, mapHeight/2] + "l" + [mapscale * π * Math.cos(a), mapscale * π * Math.sin(a)] +
         "M" + m + "a" + [r, r, 0, 0, 1, -2 * dx, -2 * dy] + "A" + [r, r, 0, 0, 1, m]);
     mouseDistance
-        .attr("transform", "translate(" + [width / 2, height/2] + ")rotate(" + a / radians + ")translate(" + r + ")" +
+        .attr("transform", "translate(" + [mapWidth / 2, mapHeight/2] + ")rotate(" + a / radians + ")translate(" + r + ")" +
                     "rotate(" + (Math.abs(a) > π / 2 ? 180 : 0) + ")")
         .attr("text-anchor", "end" )
         .attr("dx", "-1em")
@@ -186,21 +184,47 @@ d3.json("../data/world-50m.json", function(error, world) {
 
 var cityObjects = svg.selectAll("circle", ".citycircle").data(cities.features);
 
+//draw real cities
 cityObjects
-    .enter().append("circle")
-    .filter(function(d, i){	return d.name != "Amsterdam";})
+        .enter().append("circle")
+//        .filter(function(d, i){	return d.name != "Amsterdam";})
         .attr("id", function(d) {return (d.name)} )
         .attr("class", "citycircle")
+        .attr("r",5)
         .attr("cx", function(d) {return equidistant(d.coordinates)[0]} )
         .attr("cy", function(d) {return equidistant(d.coordinates)[1]} )
-        .attr("r",5)
         .on("mouseover", function(d) {
             document.getElementById(d.name + "_label").style.visibility="visible";
-            } )
+        } )
         .on("mouseout", function(d) {
             document.getElementById(d.name + "_label").style.visibility="hidden";
-            } )
-    ;
+        } )
+;
+//draw cities perception
+cityObjects
+        .enter().append("circle")
+//        .filter(function(d, i){	return d.name != "Amsterdam";})
+        .attr("class", "distancecircle")
+        .attr("r",5)
+        .attr("cx", function(d) {return equidistant(d.coordinates)[0]} )
+        .attr("cy", function(d) {return equidistant(d.coordinates)[1]} )
+        .on("mouseover", function(d) {
+            document.getElementById(d.name + "_label").style.visibility="visible";
+        } )
+        .on("mouseout", function(d) {
+            document.getElementById(d.name + "_label").style.visibility="hidden";
+        } )
+;
+//draw connectors
+cityObjects
+        .enter().append("line")
+//        .filter(function(d, i){	return d.name != "Amsterdam";})
+        .attr("class", "connectors")
+        .attr("x1", function(d) {return equidistant(d.coordinates)[0]} )
+        .attr("y1", function(d) {return equidistant(d.coordinates)[1]} )
+        .attr("x2", function(d) {return equidistant(d.coordinates)[0]} )
+        .attr("y2", function(d) {return equidistant(d.coordinates)[1]} )
+;
 cityObjects.enter().append("text")
     .filter(function(d, i){	return d.name == "Amsterdam";})
         .attr("id", function(d) {return (d.name) + "_label"} )
@@ -220,21 +244,145 @@ cityObjects.enter().append("text")
         .attr("y", function(d) {return equidistant(d.coordinates)[1] - 15 })
     ;
 
+
+var rankObjects = svgScale.selectAll("circle", ".citycircle").data(cities.features);
+
+//draw correct rank circles
+rankObjects
+        .enter().append("circle")
+//        .filter(function(d, i){	return d.name != "Amsterdam";})
+        .attr("id", function(d) {return (d.name)} )
+        .attr("class", "citycircle")
+        .attr("r",5)
+        .attr("cx", function(d) {return xMargin+(distScale(d.rankTrue))})
+        .attr("cy", yD)
+;
+//draw correct rank names
+rankObjects
+        .enter().append("text")
+        .attr("id", function(d) {return (d.name)} )
+        .attr("class", "ranknames")
+        .text(function(d) {return (d.name)} )
+        .attr("x", function(d) {return xMargin+(distScale(d.rankTrue))})
+        .attr("y", yD)
+        .attr("transform", function(d) {
+            var transformStr = "translate(0,10) rotate(90," + (xMargin+(distScale(d.rankTrue)))
+                + ", " + yD + ")" ;
+                return transformStr;
+                } )
+;
+
+//draw connectors
+rankObjects
+        .enter().append("line")
+//        .filter(function(d, i){	return d.name != "Amsterdam";})
+        .attr("class", "connectors")
+        .attr("x1", function(d) {return xMargin+(distScale(d.rankTrue))})
+        .attr("y1", yD)
+        .attr("x2", function(d) {return xMargin+(distScale(d.rankTrue))})
+        .attr("y2", yP)
+;
+//draw correct perceptions
+rankObjects
+        .enter().append("circle")
+//        .filter(function(d, i){	return d.name != "Amsterdam";})
+        .attr("id", function(d) {return (d.name)} )
+        .attr("class", "distancecircle")
+        .attr("r",5)
+        .attr("cx", function(d) {return xMargin+(distScale(d.rankTrue))})
+        .attr("cy", yP)
+;
+
+function changePerception(toPerception) {
+    var changeObjects, changeCities;
+    switch(toPerception)
+    {
+    case 1:
+        changeObjects = svgScale.selectAll(".distancecircle").data(cities.features)
+                .transition().duration(1500)
+                .attr("cx", function(d) {return xMargin+(distScale(d.rankTrue))})
+        ;
+        changeObjects = svgScale.selectAll(".connectors").data(cities.features)
+                .transition().duration(1500)
+                .attr("x1", function(d) {return xMargin+(distScale(d.rankTrue))})
+                .attr("y1", yD)
+                .attr("x2", function(d) {return xMargin+(distScale(d.rankTrue))})
+                .attr("y2", yP)
+        ;
+        changeCities= svg.selectAll(".distancecircle").data(cities.features)
+                .transition().duration(1500)
+                .attr("cx", function(d) {return equidistant(d.coordinates)[0]} )
+                .attr("cy", function(d) {return equidistant(d.coordinates)[1]} )
+        ;
+        changeCities= svg.selectAll(".connectors").data(cities.features)
+                .transition().duration(1500)
+                .attr("x2", function(d) {return equidistant(d.coordinates)[0]} )
+                .attr("y2", function(d) {return equidistant(d.coordinates)[1]} )
+        break;
+    case 2:
+        changeObjects = svgScale.selectAll(".distancecircle").data(cities.features)
+                .transition().duration(1500)
+                .attr("cx", function(d) {return xMargin+(distScale(d.rank1977))})
+        ;
+        changeObjects = svgScale.selectAll(".connectors").data(cities.features)
+                .transition().duration(1500)
+                .attr("x1", function(d) {return xMargin+(distScale(d.rankTrue))})
+                .attr("y1", yD)
+                .attr("x2", function(d) {return xMargin+(distScale(d.rank1977))})
+                .attr("y2", yP)
+        ;
+        changeCities= svg.selectAll(".distancecircle").data(cities.features)
+                .transition().duration(1500)
+                .attr("cx", function(d) {return equidistant(d.xy1977)[0]} )
+                .attr("cy", function(d) {return equidistant(d.xy1977)[1]} )
+        ;
+        changeCities= svg.selectAll(".connectors").data(cities.features)
+                .transition().duration(1500)
+                .attr("x2", function(d) {return equidistant(d.xy1977)[0]} )
+                .attr("y2", function(d) {return equidistant(d.xy1977)[1]} )
+        break;
+    case 3:
+        changeObjects = svgScale.selectAll(".distancecircle").data(cities.features)
+                .transition().duration(1500)
+                .attr("cx", function(d) {return xMargin+(distScale(d.rank2013))})
+        ;
+        changeObjects = svgScale.selectAll(".connectors").data(cities.features)
+                .transition().duration(1500)
+                .attr("x1", function(d) {return xMargin+(distScale(d.rankTrue))})
+                .attr("y1", yD)
+                .attr("x2", function(d) {return xMargin+(distScale(d.rank2013))})
+                .attr("y2", yP)
+        ;
+        changeCities= svg.selectAll(".distancecircle").data(cities.features)
+                .transition().duration(1500)
+                .attr("cx", function(d) {return equidistant(d.xy2013)[0]} )
+                .attr("cy", function(d) {return equidistant(d.xy2013)[1]} )
+        ;
+        changeCities= svg.selectAll(".connectors").data(cities.features)
+                .transition().duration(1500)
+                .attr("x2", function(d) {return equidistant(d.xy2013)[0]} )
+                .attr("y2", function(d) {return equidistant(d.xy2013)[1]} )
+        break;
+    }
+}
+
 svg.each(redraw);
 
 function redraw(path) {
     d3.select(this).selectAll(".land,.graticule,.countries,.outline").attr("d", path);
 }
 
-
 ////Encode the SVG DOM for saving
-//var serializer = new XMLSerializer();
-//var xmlString = serializer.serializeToString(d3.select('svg').node());
-//var imgData = 'data:image/svg+xml;base64,' + btoa(xmlString);
-////Use the download attribute (or a shim) to provide a link
-//document.write("<a href=");
-//document.write(imgData);
-//document.write(" download='download'>Download</a>");
+function doSave() {
+    var serializer = new XMLSerializer();
+    //    var xmlString = serializer.serializeToString(d3.select('svgScale').node());
+    var xmlString = serializer.serializeToString(document.getElementById("scalesSVG"));
+    SVGDownload = 'data:image/svg+xml;base64,' + btoa(xmlString);
+    document.getElementById("downloadLink").href = SVGDownload;
+}
+
+
+
 
 
 </script>

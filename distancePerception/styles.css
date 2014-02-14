@@ -28,7 +28,7 @@ p.cite, p.cite a {
 }
 
 body {
-  margin-top: 0;
+  margin-top: 10;
   font-family: Georgia, serif;
   /*text-align: center;*/
 }
@@ -81,18 +81,18 @@ canvas {
     stroke-width: .5px;
 }
 .land {
-    fill: #eee;
-    stroke: none;
+    fill: rgb(255,240,214);
+    stroke: rgb(0,159,227);
 }
 .countries {
     fill: none;
-    stroke: #444;
+    stroke: rgb(204,114,117);
     stroke-width: .3px;
 }
 .graticule {
     fill: none;
-    stroke: #000;
-    stroke-opacity: .5;
+    stroke: #ccc;
+    stroke-opacity: 1;
     stroke-width: .5px;
 }
 .outline {
@@ -131,12 +131,26 @@ svg {
 #scalesSVG {
     position: absolute;
     left: 610px;
-    top:40px;
+    top:20px;
     width: 640px;
-    height: 250px;
+    height: 150px;
     background-color: white;
     stroke : black;
     stroke-width : .3pt;
+}
+#menu {
+    position: absolute;
+    left: 610px;
+    top:160px;
+    width: 640px;
+    height: 100%;
+    margin: 10px;
+    background-color: white;
+    stroke : black;
+    stroke-width : .3pt;
+}
+#map {
+    background-color: rgb(216,228,246);
 }
 .citycircle {
     fill : white;
