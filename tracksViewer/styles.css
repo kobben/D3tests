@@ -1,0 +1,142 @@
+#map{
+  width: 550px;
+  height: 520px;
+  margin: 0;
+  padding: 0;
+}
+
+.map{
+	stroke: red;
+	fill: none;
+}
+
+.stations svg {
+width: 60px;
+height: 20px;
+padding-right: 100px;
+font: 10px sans-serif;
+}
+
+.groof{
+fill: #fff;
+font-family: Arial;
+font-size:10px;
+}
+
+body {
+    background-color: lightgray;
+}
+p {
+	font-family: Arial;
+	font-size:10px;
+}
+
+div {
+	fill: #FF6;
+	font-family: Arial;
+	font-size:12px;
+	color: #F36;
+}
+div.bar {
+	display: inline-block;
+	width: 20px;
+	height: 75px;
+	background-color: blue;
+	text-align:center;
+	margin-right: 2px;
+}
+
+svg{
+	border:none;
+    background-color: white;
+	padding: 5px;
+}
+
+svg.round {
+	border-color: red;
+	border-width: 1px;
+}
+
+.track {
+fill: grey;
+stroke: grey;
+stroke-width: 1.5px;
+}
+
+.stop {
+fill: red;
+stroke: red;
+stroke-width: 2px;
+}
+.nostop {
+    fill: lightgray    ;
+    stroke: none;
+}
+svg.ground {
+	border-color: blue;
+	stroke-width: 1px;
+}
+
+    #svgNormal,  #svgTime2Geo, #svgGeo2Time {
+		position: absolute;
+		left: 580px;
+        fill : none;
+        stroke : gray;
+        stroke-width : .3pt;
+    }
+
+	#svgTime2Geo {
+	top:192px;
+	}
+
+
+	#svgGeo2Time {
+	top:376px;
+	}
+
+    .timecircle {
+        fill : rgb(200,200,255);
+        stroke : black;
+        stroke-width: .5px;
+    }
+    .distancecircle {
+        fill : rgb(255,175,175);
+        stroke : black;
+        stroke-width: .5px;
+    }
+	.nocircle{
+		display: none;
+	}
+    .connectorTriangles {
+    stroke : black;
+    stroke-width : .1pt;
+    }
+    .connectors {
+        fill : none;
+        stroke : black;
+        stroke-width : .1pt;
+    }
+    .noconnector {
+		display: none;
+    }
+    text {
+        stroke : none;
+		font-family: Arial;
+    }
+
+.axis text {
+    font-family: Arial;
+    font-size: 8px;
+    fill: gray;
+}
+.axisNoLabels text {
+    font-family: Arial;
+    font-size: 0px;
+    fill: gray;
+}
+.axis path, .axis line {
+    fill: none;
+     stroke : gray;
+     stroke-width : .3pt;
+    shape-rendering: crispEdges;
+}
