@@ -32,14 +32,11 @@
 // ##############################################################
 // FOR EACH NEW DATASET: THE VARIABLES BELOW NEED TO BE SET
 //
-
-// gesjson file with points & stops:
+// geojson file with points & stops:
 var dataFile = "data/gpsTrack.geojson";
-
 // lon and lat of center ogf map and map scale:
 var mapCenterLon = 6.895, mapCenterLat = 52.219;
 var mapScale = 3000000;
-
 // format string for date an/or time formatter
 // see https://github.com/mbostock/d3/wiki/Time-Formatting
 var dateFormat = d3.time.format("%H:%M:%S");
@@ -58,7 +55,6 @@ var timeLabelledTicksUnit = d3.time.minutes;
 var timeLabelledTicksValue = 5;
 var timeUnLabelledTicksUnit = d3.time.seconds;
 var timeUnLabelledTicksValue = 20;
-
 //
 // ##############################################################
 // ##############################################################
@@ -73,23 +69,23 @@ var mapWidth = 550;
 var mapHeight = 538;
 //Define map projection
 var projection = d3.geo.mercator()
-    .rotate([0,0]) //lon,lat]
-    .center([mapCenterLon,mapCenterLat]) //[lon,lat]
-    .translate([mapWidth/2, mapHeight/2])
-    .precision(0.1)
-    .scale([mapScale]);
+        .rotate([0,0]) //lon,lat]
+        .center([mapCenterLon,mapCenterLat]) //[lon,lat]
+        .translate([mapWidth/2, mapHeight/2])
+        .precision(0.1)
+        .scale([mapScale]);
 //Define path generator
 var path = d3.geo.path()
-     .projection(projection);
+        .projection(projection);
 
 //Create SVG element for Map paneL:
 var svgMap = d3.select("body")
-    .append("svg:svg")
-    .attr("id", "mapSVG")
-    .attr("width", mapWidth)
-    .attr("height", mapHeight)
-    .append("svg:g")
-    ;
+                .append("svg:svg")
+                .attr("id", "mapSVG")
+                .attr("width", mapWidth)
+                .attr("height", mapHeight)
+                .append("svg:g")
+        ;
 svgMap.append("text")
         .attr("x", 10)
         .attr("y", 35)
@@ -122,39 +118,39 @@ var distScale = d3.scale.linear()
 
 //create SVG placeholders for scale panels:
 var svgNormal = d3.select("body").append("svg")
-        .attr("id", "svgNormal")
-        .attr("width", SVGscaleWidth)
-        .attr("height", SVGscaleHeight)
-;
+                .attr("id", "svgNormal")
+                .attr("width", SVGscaleWidth)
+                .attr("height", SVGscaleHeight)
+        ;
 
 var svgTime2Geo = d3.select("body").append("svg")
-        .attr("id", "svgTime2Geo")
-        .attr("width", SVGscaleWidth)
-        .attr("height", SVGscaleHeight)
-;
+                .attr("id", "svgTime2Geo")
+                .attr("width", SVGscaleWidth)
+                .attr("height", SVGscaleHeight)
+        ;
 
 var svgGeo2Time = d3.select("body").append("svg")
-        .attr("id", "svgGeo2Time")
-        .attr("width", SVGscaleWidth)
-        .attr("height", SVGscaleHeight)
-;
+                .attr("id", "svgGeo2Time")
+                .attr("width", SVGscaleWidth)
+                .attr("height", SVGscaleHeight)
+        ;
 // gradient def for colour gradienst:
 var gradient1 = svgNormal.append("defs")
-        .append("linearGradient")
-        .attr("id", "gradient1")
-        .attr("x1", "0%")
-        .attr("y1", "100%")
-        .attr("x2", "0%")
-        .attr("y2", "0%")
+                .append("linearGradient")
+                .attr("id", "gradient1")
+                .attr("x1", "0%")
+                .attr("y1", "100%")
+                .attr("x2", "0%")
+                .attr("y2", "0%")
         ;
 gradient1.append("stop")
         .attr("offset","0%")
         .attr("style", "stop-color:rgb(255,0,0);stop-opacity:.3")
-        ;
+;
 gradient1.append("stop")
         .attr("offset","100%")
         .attr("style", "stop-color:rgb(0,0,255);stop-opacity:.3")
-        ;
+;
 
 // *******************
 // prepare panels:
@@ -264,10 +260,10 @@ svgGeo2Time.append("text")
 //TIME
 //create generalized axis...
 var timeAxis = d3.svg.axis()
-        .scale(timeScale)
-        .orient("bottom")
-        .ticks(timeLabelledTicksUnit, timeLabelledTicksValue)
-        .tickSize(10, 0)
+                .scale(timeScale)
+                .orient("bottom")
+                .ticks(timeLabelledTicksUnit, timeLabelledTicksValue)
+                .tickSize(10, 0)
         ;
 //...and draw axes with labels
 svgNormal.append("g")
@@ -277,10 +273,10 @@ svgNormal.append("g")
 ;
 //create detailed axis...
 var timeAxis2 = d3.svg.axis()
-        .scale(timeScale)
-        .orient("bottom")
-        .ticks(timeUnLabelledTicksUnit, timeUnLabelledTicksValue)
-        .tickSize(6, 0)
+                .scale(timeScale)
+                .orient("bottom")
+                .ticks(timeUnLabelledTicksUnit, timeUnLabelledTicksValue)
+                .tickSize(6, 0)
         ;
 //...and draw axes without labels
 svgNormal.append("g")
@@ -349,7 +345,7 @@ svgGeo2Time.append("text")
 d3.json(dataFile, function(error, stop_points) {
     if (error !=null) console.log(error);
     var allPoints = stop_points.features;
-    var theStops = stop_points.features.filter(function(d){ return d.properties.stop == 1; });
+    var theStops = stop_points.features.filter(function(d){ return (d.properties.stop == 1 || d.properties.stop == -1); });
     drawMap(allPoints);
     drawNormalPanel(theStops);
     drawTime2GeoPanel(theStops);
@@ -396,57 +392,57 @@ function drawMap(data) {
 // **********************
 function drawNormalPanel(data) {
 
- //create distance circles
+    //create distance circles
     svgNormal.selectAll(".distancecircle")
-        .data(data)
-//            .data(data.filter(function(d){ return d.properties.stop == 1; })) //filter out non-stops
-        .enter()
-        .append("circle")
-        .attr("class", "distancecircle")
-        .attr("cx", function(d) {return xMargin+(distScale(d.properties.distance))})
-        .attr("cy", yD)
-        .attr("r", 3)
+//        .data(data)
+            .data(data.filter(function(d){ return d.properties.stop == 1; })) //filter out non-stops
+            .enter()
+            .append("circle")
+            .attr("class", "distancecircle")
+            .attr("cx", function(d) {return xMargin+(distScale(d.properties.distance))})
+            .attr("cy", yD)
+            .attr("r", 3)
     ;
 
 //create connectors
     svgNormal.selectAll(".connectorTriangles")
-            .data(data)
-//            .data(data.filter(function(d){ return d.properties.stop == 1; })) //filter out non-stops
-        .enter()
-        .append("path")
-        .attr("class", "connectorTriangles")
+//            .data(data)
+            .data(data.filter(function(d){ return d.properties.stop == 1; })) //filter out non-stops
+            .enter()
+            .append("path")
+            .attr("class", "connectorTriangles")
 //            .attr("fill", "url(#gradient1")
-        .attr("d", function(d) {
-            var startX = xMargin + 0, endX = xMargin + scaleLength;
-            if (d.properties.arrival != null) {
-                startX = xMargin+(timeScale(parseMyDate(d.properties.arrival)))
-            }
-            if (d.properties.departure != null) {
-                endX = xMargin+(timeScale(parseMyDate(d.properties.departure)))
-            }
-            var dStr = "M" + (startX) + " " + yT;
-            dStr += " L" + (xMargin+(distScale(d.properties.distance))) + " " + yD;
-            dStr += " L" + (endX) + " " + yT;
-            return dStr;
-        })
+            .attr("d", function(d) {
+                var startX = xMargin + 0, endX = xMargin + scaleLength;
+                if (d.properties.arrival != null) {
+                    startX = xMargin+(timeScale(parseMyDate(d.properties.arrival)))
+                }
+                if (d.properties.departure != null) {
+                    endX = xMargin+(timeScale(parseMyDate(d.properties.departure)))
+                }
+                var dStr = "M" + (startX) + " " + yT;
+                dStr += " L" + (xMargin+(distScale(d.properties.distance))) + " " + yD;
+                dStr += " L" + (endX) + " " + yT;
+                return dStr;
+            })
     ;
 //create time rects
     svgNormal.selectAll(".timecircle")
             .data(data)
 //            .data(data.filter(function(d){ return d.properties.stop == 1; })) //filter out non-stops
-        .enter()
-        .append("rect")
-        .attr("class", "timecircle")
-        .attr("x", function(d) {
-            var startX = xMargin + 0;
-            if (d.properties.arrival != null) {
-                startX = xMargin+(timeScale(parseMyDate(d.properties.arrival)))
-            }
-            return startX;
+            .enter()
+            .append("rect")
+            .attr("class", "timecircle")
+            .attr("x", function(d) {
+                var startX = xMargin + 0;
+                if (d.properties.arrival != null) {
+                    startX = xMargin+(timeScale(parseMyDate(d.properties.arrival)))
+                }
+                return startX;
             })
-        .attr("y", yT - 3)
-        .attr("height", rectHeight)
-        .attr("width", function(d) {
+            .attr("y", yT - 3)
+            .attr("height", rectHeight)
+            .attr("width", function(d) {
                 var startX = xMargin + 0, endX = xMargin + scaleLength;
                 if (d.properties.departure != null) {
                     endX = xMargin+(timeScale(parseMyDate(d.properties.departure)))
@@ -454,8 +450,8 @@ function drawNormalPanel(data) {
                 if (d.properties.arrival != null) {
                     startX = xMargin+(timeScale(parseMyDate(d.properties.arrival)))
                 }
-            return endX - startX;
-        })
+                return endX - startX;
+            })
     ;
 }// end of drawNormalPanel
 
@@ -468,8 +464,8 @@ function drawTime2GeoPanel(data) {
 
 //create connectors
     svgTime2Geo.selectAll(".connectorTriangles")
-            .data(data)
-//            .data(data.filter(function(d){ return d.properties.stop == 1; })) //filter out non-stops
+//            .data(data)
+            .data(data.filter(function(d){ return d.properties.stop == 1; })) //filter out non-stops
             .enter()
             .append("rect")
             .attr("class", "connectorTriangles")
@@ -557,49 +553,49 @@ function drawTime2GeoPanel(data) {
     // loop through parts BETWEEN stops
     for (i = 0; i < (data.length-1); i++) {
 //        if (data[i].properties.stop == 1) {//filter out non-stops
-            var smallestDist = data[i].properties.distance;
-            var largestDist = data[i+1].properties.distance;
-            // from end of this stop...
-            var startX = (timeScale(parseMyDate(data[i].properties.departure)))  + xMargin ;
-            // ...to start of next stop...
-            var endX = (timeScale(parseMyDate(data[i+1].properties.arrival))) + xMargin ;
-            distScales[i] = d3.scale.linear()
-                    .domain([smallestDist, largestDist])
-                    .range([startX, endX])
-            ;
-            svgTime2Geo.append("line")
-                    .attr("class","axis")
-                    .attr("x1",startX)
-                    .attr("y1",yD - 6)
-                    .attr("x2",endX)
-                    .attr("y2",yD - 6)
-            ;
-            // create detailed axis...
-            distAxes[i] = d3.svg.axis()
-                    .scale(distScales[i] )
-                    .orient("top")
-                    .ticks(distSlicesUnLabelledTicksValue)
-                    .tickSize(6, 6)
-            ;
-            //...and draw it without labels
-            svgTime2Geo.append("g")
-                    .attr("class", "axisNoLabels")
-                    .attr("transform", "translate(" + (0) + "," + yD +")" )
-                    .call(distAxes[i])
-            ;
-            // create generalized axis...
-            distAxes2[i] = d3.svg.axis()
-                    .scale(distScales[i] )
-                    .orient("top")
-                    .ticks(distSlicesLabelledTicksValue)
-                    .tickSize(10, 0)
-            ;
-            // .. and draw it  with labels
-            svgTime2Geo.append("g")
-                    .attr("class", "axis")
-                    .attr("transform", "translate(" + (0) + "," + yD +")" )
-                    .call(distAxes2[i])
-            ;
+        var smallestDist = data[i].properties.distance;
+        var largestDist = data[i+1].properties.distance;
+        // from end of this stop...
+        var startX = (timeScale(parseMyDate(data[i].properties.departure)))  + xMargin ;
+        // ...to start of next stop...
+        var endX = (timeScale(parseMyDate(data[i+1].properties.arrival))) + xMargin ;
+        distScales[i] = d3.scale.linear()
+                .domain([smallestDist, largestDist])
+                .range([startX, endX])
+        ;
+        svgTime2Geo.append("line")
+                .attr("class","axis")
+                .attr("x1",startX)
+                .attr("y1",yD - 6)
+                .attr("x2",endX)
+                .attr("y2",yD - 6)
+        ;
+        // create detailed axis...
+        distAxes[i] = d3.svg.axis()
+                .scale(distScales[i] )
+                .orient("top")
+                .ticks(distSlicesUnLabelledTicksValue)
+                .tickSize(6, 6)
+        ;
+        //...and draw it without labels
+        svgTime2Geo.append("g")
+                .attr("class", "axisNoLabels")
+                .attr("transform", "translate(" + (0) + "," + yD +")" )
+                .call(distAxes[i])
+        ;
+        // create generalized axis...
+        distAxes2[i] = d3.svg.axis()
+                .scale(distScales[i] )
+                .orient("top")
+                .ticks(distSlicesLabelledTicksValue)
+                .tickSize(10, 0)
+        ;
+        // .. and draw it  with labels
+        svgTime2Geo.append("g")
+                .attr("class", "axis")
+                .attr("transform", "translate(" + (0) + "," + yD +")" )
+                .call(distAxes2[i])
+        ;
 //        } // end filter if
     } // end loop
 }// end of drawTime2GeoPanel
@@ -611,17 +607,17 @@ function drawTime2GeoPanel(data) {
 function drawGeo2TimePanel(data) {
 
 //create connectors
-svgGeo2Time.selectAll(".connectorTriangles")
-        .data(data)
-//        .data(data.filter(function(d){ return d.properties.stop == 1; })) //filter out non-stops
-        .enter()
-        .append("line")
-        .attr("class", "connectorTriangles")
-        .attr("x1", function(d) {return xMargin+(distScale(d.properties.distance))})
-        .attr("y1", yD )
-        .attr("x2", function(d) {return xMargin+(distScale(d.properties.distance))})
-        .attr("y2", yT )
-;
+    svgGeo2Time.selectAll(".connectorTriangles")
+//            .data(data)
+            .data(data.filter(function(d){ return d.properties.stop == 1; })) //filter out non-stops
+            .enter()
+            .append("line")
+            .attr("class", "connectorTriangles")
+            .attr("x1", function(d) {return xMargin+(distScale(d.properties.distance))})
+            .attr("y1", yD )
+            .attr("x2", function(d) {return xMargin+(distScale(d.properties.distance))})
+            .attr("y2", yT )
+    ;
 
 // create sliced axes
 // **********************
@@ -632,66 +628,66 @@ svgGeo2Time.selectAll(".connectorTriangles")
     // loop through parts BETWEEN stops
     for (i = 0; i < (data.length-1); i++) {
 //        if (data[i].properties.stop == 1) {//filter out non-stops
-            var earliestTime = parseMyDate(data[i].properties.departure);
-            var latestTime = parseMyDate(data[i+1].properties.arrival);
-            // from end of this stop...
-            var startX = (distScale(data[i].properties.distance))  + xMargin ;
-            // ...to start of next stop...
-            var endX = (distScale(data[i+1].properties.distance)) + xMargin ;
-            timeScales[i] = d3.time.scale()
-                    .domain([earliestTime, latestTime])
-                    .range([startX, endX])
-            ;
-            // create detailed axis...
-            timeAxes[i] = d3.svg.axis()
-                    .scale(timeScales[i] )
-                    .orient("bottom")
-                    .ticks(timeUnLabelledTicksUnit, timeUnLabelledTicksValue)
-                    .tickSize(6, 6)
-            ;
-            //...and draw it without labels
-            svgGeo2Time.append("g")
-                    .attr("class", "axisNoLabels")
-                    .attr("transform", "translate(" + (0) + "," + yT +")" )
-                    .call(timeAxes[i])
-            ;
-            // create generalized axis...
-            timeAxes2[i] = d3.svg.axis()
-                    .scale(timeScales[i] )
-                    .orient("bottom")
-                    .ticks(timeLabelledTicksUnit, timeLabelledTicksValue)
-                    .tickSize(10, 0)
-            ;
-            // .. and draw it  with labels
-            svgGeo2Time.append("g")
-                    .attr("class", "axis")
-                    .attr("transform", "translate(" + (0) + "," + yT +")" )
-                    .call(timeAxes2[i])
-            ;
+        var earliestTime = parseMyDate(data[i].properties.departure);
+        var latestTime = parseMyDate(data[i+1].properties.arrival);
+        // from end of this stop...
+        var startX = (distScale(data[i].properties.distance))  + xMargin ;
+        // ...to start of next stop...
+        var endX = (distScale(data[i+1].properties.distance)) + xMargin ;
+        timeScales[i] = d3.time.scale()
+                .domain([earliestTime, latestTime])
+                .range([startX, endX])
+        ;
+        // create detailed axis...
+        timeAxes[i] = d3.svg.axis()
+                .scale(timeScales[i] )
+                .orient("bottom")
+                .ticks(timeUnLabelledTicksUnit, timeUnLabelledTicksValue)
+                .tickSize(6, 6)
+        ;
+        //...and draw it without labels
+        svgGeo2Time.append("g")
+                .attr("class", "axisNoLabels")
+                .attr("transform", "translate(" + (0) + "," + yT +")" )
+                .call(timeAxes[i])
+        ;
+        // create generalized axis...
+        timeAxes2[i] = d3.svg.axis()
+                .scale(timeScales[i] )
+                .orient("bottom")
+                .ticks(timeLabelledTicksUnit, timeLabelledTicksValue)
+                .tickSize(10, 0)
+        ;
+        // .. and draw it  with labels
+        svgGeo2Time.append("g")
+                .attr("class", "axis")
+                .attr("transform", "translate(" + (0) + "," + yT +")" )
+                .call(timeAxes2[i])
+        ;
 //        } // end filter if
     }// end of loop
 
 
 //create distance circles
-svgGeo2Time.selectAll(".distancecircle")
-        .data(data.filter(function(d){ return d.properties.stop == 1; })) //filter out non-stops
-        .enter()
-        .append("circle")
-        .attr("class", "distancecircle")
-        .attr("cx", function(d) {return xMargin+(distScale(d.properties.distance))})
-        .attr("cy", yD)
-        .attr("r", 3)
-;
+    svgGeo2Time.selectAll(".distancecircle")
+            .data(data.filter(function(d){ return d.properties.stop == 1; })) //filter out non-stops
+            .enter()
+            .append("circle")
+            .attr("class", "distancecircle")
+            .attr("cx", function(d) {return xMargin+(distScale(d.properties.distance))})
+            .attr("cy", yD)
+            .attr("r", 3)
+    ;
 //create time circles
-svgGeo2Time.selectAll(".timecircle")
-        .data(data.filter(function(d){ return d.properties.stop == 1; })) //filter out non-stops
-        .enter()
-        .append("circle")
-        .attr("class", "timecircle")
-        .attr("cx", function(d) {return xMargin+(distScale(d.properties.distance))})
-        .attr("cy", yT)
-        .attr("r", 3)
-;
+    svgGeo2Time.selectAll(".timecircle")
+            .data(data.filter(function(d){ return d.properties.stop == 1; })) //filter out non-stops
+            .enter()
+            .append("circle")
+            .attr("class", "timecircle")
+            .attr("cx", function(d) {return xMargin+(distScale(d.properties.distance))})
+            .attr("cy", yT)
+            .attr("r", 3)
+    ;
 
 }// end of drawGeo2TimePanel
 
