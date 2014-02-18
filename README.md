@@ -1,4 +1,3 @@
 D3tests
 =======
-
-for small stand-alone D3 tests
+for stand-alone D3 experiments

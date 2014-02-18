@@ -1,12 +1,12 @@
 .breadcrumbs {
   font-size: small;
-  text-align: center;
+  text-align: left;
   width: 100%;
   padding: 5px 0;
-  margin: 0;
+  margin: 0px;
   font-style: italic;
   border-bottom: solid #eee 1px;
-  color: #000;
+  color: rgb(126, 126, 126);
 }
 
 .breadcrumbs a {
@@ -16,6 +16,7 @@
 .breadcrumbs a:hover {
   color: #000;
 }
+
 
 p.cite {
   text-align: right;
