@@ -3,31 +3,39 @@
 <title>Azimuth and Distance from Enschede</title>
 <style>
 @import url(../lib/maps.css);
+h1, h2{
+    text-align: center;
+}
 .distance, .land {
   fill: none;
   stroke: #000;
   stroke-width: .5px;
 }
+.sea {
+    fill:rgb(216,228,246);
+    stroke: none;
+}
 .land {
-  fill: #eee;
-  stroke: none;
+    fill: rgb(255,240,214);
+    stroke: rgb(216,228,246);
+    stroke-width: .3px;
 }
 .countries {
-  fill: none;
-  stroke: #444;
-  stroke-width: .2px;
+    fill: none;
+    stroke: rgb(204,114,117);
+    stroke-width: .2px;
 }
 .graticule {
-  fill: none;
-  stroke: #000;
-  stroke-opacity: .5;
-  stroke-width: .5px;
+    fill: none;
+    stroke: #ccc;
+    stroke-opacity: 1;
+    stroke-width: .5px;
 }
 .outline {
-  fill: none;
-  stroke: #000;
-  stroke-width: 2px;
-  pointer-events: all;
+    fill: none;
+    stroke: #000;
+    stroke-width: 2px;
+    pointer-events: all;
 }
 .mouse {
   pointer-events: none;
@@ -133,6 +141,8 @@ svg0.append("g")
     .style("text-anchor", "middle")
     .text("Distance from enschede (km)")
 
+
+
 var axis = svg1.append("g")
     .attr("class", "axis")
     .attr("transform", "translate(" + width / 2 + "," + 400 + ")");
@@ -148,14 +158,18 @@ tick.append("text")
     .text(function(d) { return d + "°"; });
 tick.append("line")
     .attr("y2", function(d) { return d > 270 || d < 90 ? -5 : 5; });
+//
+//svg.append("path")
+//        .datum({type: "Sphere"})
+//        .attr("class", "sea");
 
 svg.insert("path", ".distance")
     .datum(d3.geo.graticule())
     .attr("class", "graticule");
 
 svg.append("path")
-    .datum({type: "Sphere"})
-    .attr("class", "outline");
+        .datum({type: "Sphere"})
+        .attr("class", "outline");
 
 svg.each(function(path) {
   var projection = path.projection();

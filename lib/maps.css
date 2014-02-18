@@ -103,6 +103,8 @@ canvas {
     stroke-width: 2px;
     pointer-events: all;
 }
+#map {
+}
 .mouse {
     pointer-events: none;
     font-size: 12px;
