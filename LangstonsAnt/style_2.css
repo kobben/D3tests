@@ -1,0 +1,36 @@
+body {
+    font: 0.75em Verdana;
+}
+header {
+    font: 1em Verdana;
+    padding: 1px 10px;
+    background-color: rgb(200,200,220);
+}
+header h1 {
+    color:rgb(255,0,0);
+}
+section {
+    padding: 5px 5px;
+}
+#theRest {
+    float: left;
+    width: 400px;
+}
+#theAnt {
+    float: left;
+    width: 750px;
+}
+#controls {
+    height: 125px;
+}
+footer {
+    clear: both;
+    height: 150px;
+    font: 0.85em Times;
+    color: rgb(100,100,100);
+    background-color: rgb(240,240,240);
+    padding: 12px 2px;
+}
+.explain {
+    font-style: italic;
+}

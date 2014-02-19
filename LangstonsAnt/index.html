@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Langston's Ant</title>
+    <link rel="stylesheet" href="style_2.css">
+    <script src="script_2.js"></script>
+</head>
+<body onload="init()">
+
+<section id="theAnt">
+    <header><h1>Implementation of Langton's Ant using HTML5 Canvas</h1></header>
+    <canvas id="myCanvas" width="750" height="750" onclick="canvasClick(event)">
+        Your browser does not support the HTML5 canvas tag...
+    </canvas>
+</section>
+
+
+<section id="theRest">
+    <article id="controls">
+        <header><h1>CONTROLS</h1></header>
+        <span id="instructions" style="display: inline;">
+            CLICK IN GRID TO TOGGLE CELL STATUS (white/red)... <br/>
+            Start direction:
+            <button onclick="startDir(NORTH)">N</button>
+            <button onclick="startDir(EAST)">E</button>
+            <button onclick="startDir(SOUTH)">S</button>
+            <button onclick="startDir(WEST)">W</button> now: <span id="dir_display">NORTH</span><br/>
+            <button onclick="setUpReady()">START ANT (at blue square)</button>
+        </span>
+        <span id="running" style="display: none;">
+            <button onclick="startAnt()">RUN</button><br/>
+            <button onclick="stepAnt()">STEP</button>
+            <span id="step_display">...</span><br/>
+            <button onclick="resetAnt()">RESET</button>
+         </span>
+    </article>
+    <article>
+        <header><h1>Langton's ant</h1></header>
+        <p>
+        <a href="http://en.wikipedia.org/wiki/Langton's_ant" target="_blank">
+            Langton's ant</a> is a two-dimensional Turing machine with a
+            very simple set of rules but complicated <b>emergent behaviour</b>. It is often used to
+            point out the weakness of <b>reductionism<</b> in science: The Ant lives according to simple rules,
+            yet these do not really help to understand its behaviour...
+            It was invented by Chris Langton in 1986.
+        </p>
+        <span class="explain">
+        Squares on a plane are coloured variously either red or white. We arbitrarily identify one square as the "ant". The
+        ant can travel in any of the four cardinal directions at each step it takes. The ant moves according to these rules:
+        <ul>
+        <li>At a white square, turn 90° right, toggle the colour of the square, move forward one square
+        <li>At a red square, turn 90° left, toggle the colour of the square, move forward one square
+        </ul>
+        These simple rules lead to complex behaviour:
+        <dl>
+        <dt>Simplicity:</dt>
+        <dd>During the first few hundred moves it creates very simple patterns which are often symmetric.</dd>
+        <dt>Chaos:</dt>
+        <dd>After a few hundred moves, a big, irregular pattern of red and white squares appears. The ant traces a
+        pseudo-random path until around 10,000 steps.</dd>
+        <dt>Emergent order:</dt>
+        <dd> Finally the ant starts building a recurrent "highway" pattern of 104 steps that repeat indefinitely. All finite
+        initial configurations tested eventually converge to the same repetitive pattern, suggesting that the "highway" is
+        an attractor of Langton's ant, but no one has been able to prove that this is true for all such initial
+        configurations. It is only known that the ant's trajectory is always unbounded regardless of the initial
+        configuration.</dd>
+        </dl>
+        </span>
+        <p>
+          Tested on MacOSX 10.7.5: works OK in current Chrome, Safari and Opera. Problem in some versions of Firefox (e.g. cant set squares, have to switch
+            apps or tabs to force canvas update in version 22).
+        </p>
+    </article>
+</section>
+
+
+<footer>
+    <p>&copy;<time datetime="2013-06" />2013 – Barend Köbben</p>
+    <figure>
+       <a href="http://2013.foss4g.org" target="_blank"><img src="./supporting.png" alt="supporting FOSS4G" /></a>
+    </figure>
+</footer>
+
+
+</body>
+</html>
