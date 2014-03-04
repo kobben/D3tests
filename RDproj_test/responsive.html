@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head><title>Responsive RD map</title>
+<script src="../lib/d3.v3.min.js"></script>
+<!--<script src="http://d3js.org/d3.v3.min.js"></script>-->
+<style>
+    .boundary {
+        fill: #eee;
+        stroke: #999;
+    }
+</style>
+
+<script>
+var margins = 10;
+var SVGwidth = window.innerWidth - (margins * 2), SVGheight = window.innerHeight - (margins * 2);
+
+// RD=RijksDriehoekstelsel=Dutch national projection system bounds:
+var minx = 13600;
+var miny = 306900;
+var maxx = 278000;
+var maxy = 619300;
+// use RD limits to calculate scale and bounds needed for
+// affine transformation of RD coordinates to screen coordinates
+var dataHeight = maxy - miny;
+var dataWidth = maxx - minx;
+var nlData, scale, y_offset, x_offset, mapDiv, svg;
+
+// AffineTransformation as a basic pseudo-projection of RD coords to screen coords
+// http://en.wikipedia.org/wiki/Transformation_matrix#Affine_transformations
+function AffineTransformation(a, b, c, d, tx, ty) {
+    return {
+        //overrides normal D3 projection stream (to avoid adaptive sampling)
+        stream: function(output) {
+            return {
+                point: function(x, y) { output.point(a * x + b * y + tx, c * x + d * y + ty); },
+                sphere: function() { output.sphere(); },
+                lineStart: function() { output.lineStart(); },
+                lineEnd: function() { output.lineEnd(); },
+                polygonStart: function() { output.polygonStart(); },
+                polygonEnd: function() { output.polygonEnd(); }
+            };
+        }
+    };
+}
+
+function init() {
+    mapDiv = d3.select("body");
+    d3.json("../data/nl_rd.json", function(json) {
+        // nl_rd.json = small map of Netherlands, using RD (EPSG:28992)
+        // RD = Rijksdriehoeksstelsel = Double-Stereographic projection on the Bessel ellipsoid
+        nlData=json;
+        fitToBox(nlData);
+    });
+}
+
+function fitToBox(pathData) {
+    if (svg != null) {svg.remove();}
+    svg = mapDiv.append("svg")
+        .attr("id", "theMapSVG")
+        .attr("width", SVGwidth)
+        .attr("height", SVGheight)
+    ;
+    SVGwidth = window.innerWidth - (margins * 2);
+    SVGheight = window.innerHeight - (margins * 2);
+    //choose scale that fills box
+    xscale = SVGwidth/dataWidth;
+    yscale = SVGheight/dataHeight;
+    scale = Math.min(xscale,yscale);
+    y_offset = (maxy * scale);
+    x_offset = -(minx * scale);
+    var projectedPath = d3.geo.path().projection(AffineTransformation(scale, 0, 0, -scale, x_offset, y_offset));
+    svg.append("path")
+        .data(pathData.features)
+        .attr("class", "boundary")
+        .attr("d", projectedPath)
+    ;
+}
+
+</script>
+</head>
+<body onload="init()" onresize="fitToBox(nlData)">
+</body>
+</html>
