@@ -23,34 +23,34 @@
     // FOR EACH NEW DATASET: THE VARIABLES BELOW NEED TO BE SET
     //
 // geojson file with points & stops:
-var dataFile = "data/gpsTrack.geojson";
-// lon and lat of center of map and map scale:
-var mapCenterLon = 6.895, mapCenterLat = 52.219;
-var mapScale = 3000000;
+var dataFile = "data/m15088.geojson";
+    // lon and lat of center of map and map scale:
+    var mapCenterLon = -6.3, mapCenterLat = 53.355;
+    var mapScale = 180000;
 // format string for date an/or time formatter
 // see https://github.com/mbostock/d3/wiki/Time-Formatting
 var dateFormat = d3.time.format("%H:%M:%S");
 // lowest and highest time/date values found in data:
-var earliestTimeStr = "10:37:32";
-var latestTimeStr = "11:05:59";
+    var earliestTimeStr = "17:31:06";
+    var latestTimeStr = "18:34:28";
 // lowest and highest distance values found in data:
-var smallestDist = 0;
-var largestDist = 1466.48;
-//Units & interval values for axes:
-var distLabelledTicksValue = 20;
-var distUnLabelledTicksValue = 100;
-var distSlicesLabelledTicksValue = 2;
-var distSlicesUnLabelledTicksValue = 10;
-var timeLabelledTicksUnit = d3.time.minutes;
-var timeLabelledTicksValue = 5;
-var timeUnLabelledTicksUnit = d3.time.seconds;
-var timeUnLabelledTicksValue = 20;
+    var smallestDist = 0;
+    var largestDist = 27.02882976;
+    //Units & interval values for axes:
+    var distLabelledTicksValue = 5;
+    var distUnLabelledTicksValue = 50;
+    var distSlicesLabelledTicksValue = 1;
+    var distSlicesUnLabelledTicksValue = 10;
+    var timeLabelledTicksUnit = d3.time.minutes;
+    var timeLabelledTicksValue = 5;
+    var timeUnLabelledTicksUnit = d3.time.seconds;
+    var timeUnLabelledTicksValue = 30;
     // circle sizes used in Map:
-    var stopSize = 5;
-    var noStopSize = 2;
+    var stopSize = 4;
+    var noStopSize = 0;
     // nameLabel + Attr: title + attribute to use for instance "name" in pop-ups:
-    var nameLabel = "ID:";
-    var nameAttr = "id";
+    var nameLabel = "Bus:";
+    var nameAttr = "m_id";
     // background image: set to "" to not have any
     var background_image = "";
 //

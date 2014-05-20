@@ -15,7 +15,7 @@
 // prepare map panel:
 // *******************
 //Width and height
-var mapWidth = 550;
+var mapWidth = 500;
 var mapHeight = 538;
 //Define map projection
 var projection = d3.geo.mercator()
@@ -36,6 +36,15 @@ var svgMap = d3.select("body")
     .attr("height", mapHeight)
     .append("g")
   ;
+if (background_image != "") {
+  svgMap.append("image")
+    .attr("xlink:href", background_image)
+    .attr("x", background_shiftX)
+    .attr("y", background_shiftY)
+    .attr("width", mapWidth + background_widthPlus)
+    .attr("height", mapHeight + background_heightPlus)
+  ;
+}
 svgMap.append("text")
   .attr("x", 5)
   .attr("y", 20)
@@ -129,19 +138,6 @@ svgGeo2Time.append("text")
 
 //DISTANCE
 
-//create generalized axis...
-var distAxis = d3.svg.axis()
-  .scale(distScale)
-  .orient("top")
-  .ticks(distLabelledTicksValue)
-  .tickSize(10, 0);
-;
-//...and draw axes with labels
-svgNormal.append("g")
-  .attr("class", "axis")
-  .attr("transform", "translate(" + xMargin + "," + yD +")" )
-  .call(distAxis)
-;
 //create detailed axis...
 var distAxis2 = d3.svg.axis()
   .scale(distScale)
@@ -154,6 +150,19 @@ svgNormal.append("g")
   .attr("class", "axisNoLabels")
   .attr("transform", "translate(" + xMargin + "," + yD +")" )
   .call(distAxis2)
+;
+//create generalized axis...
+var distAxis = d3.svg.axis()
+  .scale(distScale)
+  .orient("top")
+  .ticks(distLabelledTicksValue)
+  .tickSize(10, 0);
+;
+//...and draw axes with labels
+svgNormal.append("g")
+  .attr("class", "axis")
+  .attr("transform", "translate(" + xMargin + "," + yD +")" )
+  .call(distAxis)
 ;
 //append top line for
 svgNormal.append("line")
@@ -206,19 +215,6 @@ svgGeo2Time.append("text")
 
 
 //TIME
-//create generalized axis...
-var timeAxis = d3.svg.axis()
-    .scale(timeScale)
-    .orient("bottom")
-    .ticks(timeLabelledTicksUnit, timeLabelledTicksValue)
-    .tickSize(10, 0)
-  ;
-//...and draw axes with labels
-svgNormal.append("g")
-  .attr("class", "axis")
-  .attr("transform", "translate(" + xMargin + "," + yT +")" )
-  .call(timeAxis)
-;
 //create detailed axis...
 var timeAxis2 = d3.svg.axis()
     .scale(timeScale)
@@ -231,6 +227,19 @@ svgNormal.append("g")
   .attr("class", "axisNoLabels")
   .attr("transform", "translate(" + xMargin + "," + yT +")" )
   .call(timeAxis2)
+;
+//create generalized axis...
+var timeAxis = d3.svg.axis()
+    .scale(timeScale)
+    .orient("bottom")
+    .ticks(timeLabelledTicksUnit, timeLabelledTicksValue)
+    .tickSize(10, 0)
+  ;
+//...and draw axes with labels
+svgNormal.append("g")
+  .attr("class", "axis")
+  .attr("transform", "translate(" + xMargin + "," + yT +")" )
+  .call(timeAxis)
 ;
 svgNormal.append("line")
   .attr("class","axis")
@@ -306,9 +315,6 @@ infoDiv = d3.select("body").append("div")
     drawGeo2TimePanel(theStops);
   });	//end of function loading data
 
-
-var TMP;
-
 // **********************
 // Map Panel:
 // **********************
@@ -335,9 +341,9 @@ function drawMap(data) {
     .attr("cy", function (d) {return projection(d.geometry.coordinates)[1];})
     .attr("r", function (d) {
       if (d.properties.stop == 1) {
-        return 4;
+        return stopSize;
       } else {
-        return 2;
+        return noStopSize;
       }
     })
     .attr("class", function (d) {
@@ -696,9 +702,10 @@ function selectMe(elem, data) {
   el.setAttribute("height", el.getAttribute("height")*2);
   el = document.getElementById("t2g_t_" + dataID);
   el.setAttribute("height", el.getAttribute("height")*2);
+  var theName = eval("data.properties." + nameAttr);
   var infoStr = "";
-  infoStr += "<h1>" + data.properties.id + ": " + (data.properties.name == undefined ? "": data.properties.name) + "</h1>";
-//  infoStr += "<hr>";
+  infoStr += "<h1>" + (theName == undefined ? "": (nameLabel + " " + theName)) + "</h1>";
+  infoStr += "<hr>";
   infoStr += "arrival: " + data.properties.arrival + "<br />";
   infoStr += "departure: " + data.properties.departure + "<br />";
   infoStr += "distance: " + data.properties.distance;

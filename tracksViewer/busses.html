@@ -4,10 +4,9 @@
     <meta charset="utf-8">
     <title>TRACKING GEOGRAPHY &amp; TIME</title>
     <script type="text/javascript" src="../lib/d3.v3.min.js"></script>
-    <script src="../lib/d3.geo.projection.v0.min.js"></script>
-    <!--<script src="../lib/topojson.v1.min.js"></script>-->
-    <!--<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script> -->
-    <link rel="stylesheet" type="text/css" href="styles.css">
+  <script src="../lib/d3.geo.projection.v0.min.js"></script>
+  <script src="../lib/queue.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 
@@ -16,41 +15,45 @@
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     /*
      TRACKING GEOGRAPHY & TIME
-     D3.js Javascript web-aap to generate web pages from track data
+     D3.js Javascript web-app to generate interactive maps from track data
      */
     // ##############################################################
     // ##############################################################
     // FOR EACH NEW DATASET: THE VARIABLES BELOW NEED TO BE SET
     //
-// geojson file with points & stops:
-var dataFile = "data/gpsTrack.geojson";
+var numTimeSeries = 3;
+// geojson files with points & stops:
+var dataFile = ["data/m15088.geojson", "data/m15061.geojson", "data/m15025.geojson"];
+var seriesNames = ["Bus 15088", "Bus 15061", "Bus 15025"];
 // lon and lat of center of map and map scale:
-var mapCenterLon = 6.895, mapCenterLat = 52.219;
-var mapScale = 3000000;
+    var mapCenterLon = -6.3, mapCenterLat = 53.355;
+    var mapScale = 180000;
 // format string for date an/or time formatter
 // see https://github.com/mbostock/d3/wiki/Time-Formatting
 var dateFormat = d3.time.format("%H:%M:%S");
 // lowest and highest time/date values found in data:
-var earliestTimeStr = "10:37:32";
-var latestTimeStr = "11:05:59";
+
+var earliestTimeStr = ["17:31:06", "21:31:08", "21:54:50"];
+var latestTimeStr = ["18:34:28", "22:32:23", "22:44:09"];
 // lowest and highest distance values found in data:
-var smallestDist = 0;
-var largestDist = 1466.48;
+var smallestDist = [0, 0, 0];
+var largestDist = [27.02882976, 26.91270174, 26.8245576];
 //Units & interval values for axes:
-var distLabelledTicksValue = 20;
-var distUnLabelledTicksValue = 100;
-var distSlicesLabelledTicksValue = 2;
-var distSlicesUnLabelledTicksValue = 10;
-var timeLabelledTicksUnit = d3.time.minutes;
-var timeLabelledTicksValue = 5;
-var timeUnLabelledTicksUnit = d3.time.seconds;
-var timeUnLabelledTicksValue = 20;
+    //Units & interval values for axes:
+    var distLabelledTicksValue = 10;
+    var distUnLabelledTicksValue = 20;
+    var distSlicesLabelledTicksValue = 1;
+    var distSlicesUnLabelledTicksValue = 10;
+    var timeLabelledTicksUnit = d3.time.minutes;
+    var timeLabelledTicksValue = 5;
+    var timeUnLabelledTicksUnit = d3.time.seconds;
+    var timeUnLabelledTicksValue = 30;
     // circle sizes used in Map:
-    var stopSize = 5;
-    var noStopSize = 2;
+    var stopSize = 4;
+    var noStopSize = 0;
     // nameLabel + Attr: title + attribute to use for instance "name" in pop-ups:
-    var nameLabel = "ID:";
-    var nameAttr = "id";
+    var nameLabel = "Bus:";
+    var nameAttr = "m_id";
     // background image: set to "" to not have any
     var background_image = "";
 //
@@ -58,6 +61,6 @@ var timeUnLabelledTicksValue = 20;
 // ##############################################################
 </script>
 <!--load trackviewer D3 javascript:-->
-<script src="trackViewer.js"></script>
+<script src="busTrackViewer.js"></script>
 </body>
 </html>

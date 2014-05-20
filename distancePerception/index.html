@@ -22,7 +22,10 @@
     <p class="breadcrumbs">
         Klik op de knoppen om de verschillen te zien tussen de feitelijke locatie en volgorde, en zoals ze
         door studenten werden ingeschat in twee onderzoeksperioden...<br/>
-        Werkt in moderne browsers die HTML5 ondersteunen (dus niet in Internet Explorer 8 en lager!)
+     </p><p class="breadcrumbs" style="font-size:x-small; ">
+        Werkt in moderne browsers die HTML5 ondersteunen (dus niet in Internet Explorer 8 en lager!)<br/>
+  [kaart bij artikel: Oost-Europa bijft ver weg, de Pater et al, Geografie, 2014-03, pp.12-15]
+
     </p>    <!--<a id="downloadLink" href="" download='download'>Download</a>-->
 </div>
 
@@ -30,7 +33,7 @@
 
 var mapWidth = 600,
     mapHeight = 600,
-    scalesWidth = 600,
+    scalesWidth = 500,
     scalesHeight = 150,
     π = Math.PI,
     radians = π / 180,
@@ -145,33 +148,15 @@ var pointer = svg.append("path")
 var mouseDistance = svg.append("text").attr("class", "mouse");
 
 svg.each(function(path) {
-    var projection = path.projection();
-    d3.select(this).selectAll(".outline")
-            .on("mousemove", function() {
-                mouse = projection.invert(d3.mouse(this));
-                d3.event.stopPropagation();
-                pointer.each(updatePointer);
-            });
+  var projection = path.projection();
+  d3.select(this).selectAll(".outline")
+    .on("mousemove", function() {
+      mouse = projection.invert(d3.mouse(this));
+      d3.event.stopPropagation();
+      pointer.each(updatePointer);
+    });
 });
 
-
-function updatePointer(path) {
-    var m = path.projection()(mouse),
-      pointer = d3.select(this).style("display", null);
-    var dx = m[0] - mapWidth / 2,
-        dy = m[1] - mapHeight / 2,
-        a = Math.atan2(dy, dx),
-        r = Math.sqrt(dx * dx + dy * dy);
-    pointer.attr("d", "M" + [mapWidth / 2, mapHeight/2] + "l" + [mapscale * π * Math.cos(a), mapscale * π * Math.sin(a)] +
-        "M" + m + "a" + [r, r, 0, 0, 1, -2 * dx, -2 * dy] + "A" + [r, r, 0, 0, 1, m]);
-    mouseDistance
-        .attr("transform", "translate(" + [mapWidth / 2, mapHeight/2] + ")rotate(" + a / radians + ")translate(" + r + ")" +
-                    "rotate(" + (Math.abs(a) > π / 2 ? 180 : 0) + ")")
-        .attr("text-anchor", "end" )
-        .attr("dx", "-1em")
-        .attr("dy", "-.3em")
-        .text(format(r / mapscale * radius) + "km");
-}
 
 
 d3.json("../data/world-50m.json", function(error, world) {
@@ -297,6 +282,28 @@ rankObjects
         .attr("cy", yP)
 ;
 
+
+
+
+function updatePointer(path) {
+  var m = path.projection()(mouse),
+    pointer = d3.select(this).style("display", null);
+  var dx = m[0] - mapWidth / 2,
+    dy = m[1] - mapHeight / 2,
+    a = Math.atan2(dy, dx),
+    r = Math.sqrt(dx * dx + dy * dy);
+  pointer.attr("d", "M" + [mapWidth / 2, mapHeight/2] + "l" + [mapscale * π * Math.cos(a), mapscale * π * Math.sin(a)] +
+    "M" + m + "a" + [r, r, 0, 0, 1, -2 * dx, -2 * dy] + "A" + [r, r, 0, 0, 1, m]);
+  mouseDistance
+    .attr("transform", "translate(" + [mapWidth / 2, mapHeight/2] + ")rotate(" + a / radians + ")translate(" + r + ")" +
+      "rotate(" + (Math.abs(a) > π / 2 ? 180 : 0) + ")")
+    .attr("text-anchor", "end" )
+    .attr("dx", "-1em")
+    .attr("dy", "-.3em")
+    .text(format(r / mapscale * radius) + "km");
+}
+
+
 function changePerception(toPerception) {
     var changeObjects, changeCities;
     switch(toPerception)
@@ -384,9 +391,6 @@ function doSave() {
     SVGDownload = 'data:image/svg+xml;base64,' + btoa(xmlString);
     document.getElementById("downloadLink").href = SVGDownload;
 }
-
-
-
 
 
 </script>

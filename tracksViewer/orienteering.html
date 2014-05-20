@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>TRACKING GEOGRAPHY &amp; TIME</title>
+  <script type="text/javascript" src="../lib/d3.v3.min.js"></script>
+  <script src="../lib/d3.geo.projection.v0.min.js"></script>
+  <script src="../lib/queue.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+
+<script type="text/javascript">
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  /*
+   TRACKING GEOGRAPHY & TIME
+   D3.js Javascript web-app to generate interactive maps from track data
+   */
+  // ##############################################################
+  // ##############################################################
+  // FOR EACH NEW DATASET: THE VARIABLES BELOW NEED TO BE SET
+  //
+  var numTimeSeries = 2;
+  // geojson files with points & stops:
+  var dataFile = ["data/mj.geojson", "data/lz.geojson"];
+  var seriesNames = ["Runner Menno-Jan", "Runner Laszlo"];
+  // lon and lat of center of map and map scale:
+  var mapCenterLon = 13.7295, mapCenterLat = 51.056;
+  var mapScale = 2200000;
+  // format string for date an/or time formatter
+  // see https://github.com/mbostock/d3/wiki/Time-Formatting
+  var dateFormat = d3.time.format("%H:%M:%S");
+  // lowest and highest time/date values found in data:
+
+  var earliestTimeStr = ["00:00:00", "00:00:00"];
+  var latestTimeStr = ["00:30:48", "00:31:28"];
+  // lowest and highest distance values found in data:
+  var smallestDist = [0, 0];
+  var largestDist = [5108.7, 4640.8];
+  //Units & interval values for axes:
+  //Units & interval values for axes:
+  var distLabelledTicksValue = 5;
+  var distUnLabelledTicksValue = 100;
+  var distSlicesLabelledTicksValue = 2;
+  var distSlicesUnLabelledTicksValue = 10;
+  var timeLabelledTicksUnit = d3.time.minutes;
+  var timeLabelledTicksValue = 2;
+  var timeUnLabelledTicksUnit = d3.time.seconds;
+  var timeUnLabelledTicksValue = 20;
+  // circle sizes used in Map:
+  var stopSize = 4;
+  var noStopSize = 1;
+  // nameLabel + Attr: title + attribute to use for instance "name" in pop-ups:
+  var nameLabel = "Runner:";
+  var nameAttr = "name";
+  // background image: set to "" to not have any
+  var background_image = "./data/basemap_light.png";
+//  var background_image = "";
+  var background_widthPlus = 50;
+  var background_heightPlus = 50;
+  var background_shiftX = -12;
+  var background_shiftY = 13;
+  //
+  // ##############################################################
+  // ##############################################################
+</script>
+<!--load trackviewer D3 javascript:-->
+<script src="orienteeringTrackViewer.js"></script>
+</body>
+</html>

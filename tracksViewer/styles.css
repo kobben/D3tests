@@ -11,6 +11,10 @@ p {
     font-size: 16px;
     fill: red;
 }
+.panelLegend {
+    font-size: 10px;
+    fill: red;
+}
 div {
 	fill: #FF6;
 	color: #F36;
@@ -21,8 +25,8 @@ svg{
 	padding: 5px;
 }
 #map{
-    width: 550px;
-    height: 520px;
+    width: 500px;
+    height: 538px;
     margin: 0;
     padding: 0;
 }
@@ -31,22 +35,32 @@ svg{
     stroke: grey;
     stroke-width: 1.5px;
 }
-.nostop {
-    fill: lightgray    ;
-    stroke: none;
-}
-#svgNormal, #svgTime2Geo, #svgGeo2Time {
+#svgNormal, #svgTime2Geo, #svgGeo2Time, #svgGeo2Time0, #svgGeo2Time1, #svgGeo2Time2 {
     position: absolute;
-    left: 580px;
+    left: 525px;
+    width: 630px;
     fill : none;
     stroke : gray;
     stroke-width : .3pt;
 }
+#svgNormal {
+    top:192px;
+    /*top:8px;*/
+}
 #svgTime2Geo {
-top:192px;
+    top:8px;
 }
 #svgGeo2Time {
-top:376px;
+    top:376px;
+}
+#svgGeo2Time0 {
+    top:192px;
+}
+#svgGeo2Time1 {
+    top:335px;
+}
+#svgGeo2Time2 {
+    top:478px;
 }
 #infoDiv{
     z-index: 0;
@@ -55,7 +69,7 @@ top:376px;
     top: 10px;
     padding: 3px;
     background-color: rgb(244, 243, 186);
-    opacity: 0.75;
+    opacity: 0.85;
     border: solid 1px red;
     border-radius: 4px;
     font-size : 10px;
@@ -66,14 +80,64 @@ top:376px;
     font-weight: bold;
 }
 .timecircle {
-    fill : rgb(200,200,255);
-    stroke : black;
+    fill : rgb(0,0,255);
+    fill-opacity : .7;
+    stroke : gray;
+    stroke-width: .5px;
+}
+.timecircle_0 {
+    fill : rgb(0,0,255);
+    fill-opacity : .7;
+    stroke : gray;
+    stroke-width: .5px;
+}
+.timecircle_1 {
+    fill : rgb(0,255,0);
+    fill-opacity : .7;
+    stroke : gray;
+    stroke-width: .5px;
+}
+.timecircle_2 {
+    fill : rgb(255,0,0);
+    fill-opacity : .7;
+    stroke : gray;
     stroke-width: .5px;
 }
 .distancecircle {
-    fill : rgb(255,150,150);
-    stroke : black;
+    fill : rgb(255,0,0);
+    fill-opacity : .7;
+    stroke : none;
     stroke-width: .5px;
+}
+.distancecircle_0 {
+    fill : rgb(255,0,0);
+    fill-opacity : .7;
+    stroke : none;
+    stroke-width: .5px;
+}
+.distancecircle_1 {
+    fill : rgb(0,0,255);
+    fill-opacity : .7;
+    stroke : none;
+    stroke-width: .5px;
+}
+.distancecircle_2 {
+    fill : rgb(0,255,0);
+    fill-opacity : .7;
+    stroke : none;
+    stroke-width: .5px;
+}
+.nostop {
+    fill: gray;
+    stroke: none;
+}
+.nostop1 {
+    fill: rgb(255,100,100);
+    stroke: none;
+}
+.nostop2 {
+    fill: rgb(100,100,255);
+    stroke: none;
 }
 .nocircle{
     display: none;
@@ -81,7 +145,17 @@ top:376px;
 .connectors {
     fill : none;
     stroke : black;
-    stroke-width : .1pt;
+    stroke-width : .2pt;
+}
+.connectors1 {
+    fill : none;
+    stroke : red;
+    stroke-width : .2pt;
+}
+.connectors2 {
+    fill : none;
+    stroke : blue;
+    stroke-width : .2pt;
 }
 .noconnector {
     display: none;
@@ -105,5 +179,4 @@ text {
     fill: none;
      stroke : gray;
      stroke-width : .3pt;
-    shape-rendering: crispEdges;
 }
