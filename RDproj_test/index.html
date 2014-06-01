@@ -22,7 +22,8 @@
 
     <script>
 
-        var SVGwidth = 00, SVGheight = 400;
+        var SVGwidth = 400, SVGheight = 400;
+
 
         // RD=RijksDriehoekstelsel=Dutch national projection system bounds:
         var minx = 13600;
@@ -78,13 +79,14 @@
             x_offset = -(minx * scale);
 
             var RDpath = d3.geo.path().projection(AffineTransformation(scale, 0, 0, -scale, x_offset, y_offset));
-
-            d3.json("../data/nl_rd.json", function(json) {
+             d3.json("../data/nl_rd.json", function(json) {
                 // nl_rd.json = small map of Netherlands, using RD (EPSG:28992)
                 // RD = Rijksdriehoeksstelsel = Double-Stereographic projection on the Bessel ellipsoid
                 nl=json;
-                svg.append("path")
+                svg.selectAll("path")
                         .data(nl.features)
+                        .enter()
+                        .append("path")
                         .attr("class", "boundary")
                         .attr("d", RDpath)
                 ;
