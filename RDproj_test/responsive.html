@@ -70,8 +70,9 @@ function fitToBox(pathData) {
     y_offset = (maxy * scale);
     x_offset = -(minx * scale);
     var projectedPath = d3.geo.path().projection(AffineTransformation(scale, 0, 0, -scale, x_offset, y_offset));
-    svg.append("path")
+    svg.selectAll("path")
         .data(pathData.features)
+        .enter().append("path")
         .attr("class", "boundary")
         .attr("d", projectedPath)
     ;
