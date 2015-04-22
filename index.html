@@ -5,15 +5,37 @@
     <link rel="stylesheet" type="text/css" href="lib/maps.css">
 </head>
 <body>
-<h2>Site for standalone HTML5 (SVG, Canvas) and D3 experiments, tests and examples:</h2>
+<h2>Site for HTML5 (SVG, Canvas) and D3 experiments, tests and examples:</h2>
 
 <dl>
+    <dt><b>Standard D3 Maps (using lon-lat geographic coordinates)</b>:</dt>
+    <dd>The standard way the D3 geo methods work is with data in lon-lat geographic coordinates, being projected by <tt>d3.geo</tt>
+        functions. Versatile and powerful, especially if using <tt>topojson</tt> data.
+        <ul>
+            <li><a href="exercise/overijssel.html">Simplest example (of municipalities of Overijssel province)</a></li>
+            <li>Different projections and UI, using the same data of locations of SVGOpen &amp; GraphicalWeb conferences:</li>
+            <ul>
+            <li><a href="GraphicalWebCities/">Static map (SVG -- Winkel Tripel projection)</a></li>
+            <li><a href="GraphicalWebCities/zoomsvg.html">Click to iterate through locations (SVG -- Orthographic projection)</a></li>
+            <li><a href="GraphicalWebCities/zoom.html">Animates through locations (Canvas -- Orthographic projection)</a></li>
+            </ul>
+        </ul>
+    </dd>
 
-    <dt><a href="azimuth-distance/">Measuring Distance &amp; Azimuth:</a></dt>
-    <dd>Explains how a Plate-Carr&eacute; projection can serve as a nifty tool
-        to show bearing and distance from a location on Earth., where you would normally use a equidistant projection....</dd>
+    <dt><a href="RDproj_test/"><b>Maps using projected meter coordinates</b>:</a></dt>
+    <dd>Map a geojson with cartesian coordinates, instead of lat-lon's (in this case the Dutch RD) --
+        Uses an override of standard D3 geo projection behaviour:
+        don't perform a full projection and resampling, but only a 1st order (affine) translation and
+        scaling to transform real-world XY-coordinates into SVG screen coordinates...<br/>
+        Includes auto-scaling (responsive) example.
+    </dd>
 
-    <dt><a href="tracksViewer/">Tool to explore tracks withs stops:</a></dt>
+
+    <dt><a href="distancePerception/"><b>Distance Perception</b>:</a></dt>
+    <dd>Distances in Europe, as perceived by 1st year Geography students --
+        Students overestimate distances to eastern-European cities compared to Southern-European ones...</dd>
+
+    <dt><b>Tool to explore tracks withs stops</b>:</dt>
     <dd>Shows stops and distance travelled in different ways -- as map, as time and
         distance equally scaled, as time scaled dependent of distance and as distance scaled dependent of time. Currently the following tracks can be viewed:
       <ul>
@@ -24,25 +46,22 @@
       </ul>
     </dd>
 
-    <dt><a href="testFilter/">D3 and Javascript data filter test:</a></dt>
+    <dt><a href="TwenteRailroads/"><b>History of railroads in Twente</b>:</a></dt>
+    <dd>This web-map shows the history of the railroads in Twente (a region in of Overijssel province, in the Netherlands).
+        Moving the time-slider will show the changes through the years.</dd>
+
+    <dt><a href="azimuth-distance/"><b>Measuring Distance &amp; Azimuth</b>:</a></dt>
+    <dd>Explains how a Plate-Carr&eacute; projection can serve as a nifty tool
+        to show bearing and distance from a location on Earth., where you would normally use a equidistant projection....</dd>
+
+    <dt><a href="testFilter/"><b>D3 and Javascript data filter test</b>:</a></dt>
     <dd>Explains difference between JavaScript standard Array.filter() and d3.filter() function...</dd>
 
-    <dt><a href="distancePerception/">Distance Perception:</a></dt>
-    <dd>Distances in Europe, as perceived by 1st year Geography students --
-        Students overestimate distances to eastern-European cities compared to Southern-European ones...</dd>
-
-    <dt><a href="LangstonsAnt/">Langton's Ant:</a></dt>
+    <dt><a href="LangstonsAnt/"><b>Langton's Ant</b>:</a></dt>
     <dd>This is an implementation of Langton's Ant using HTML5 Canvas --
         Langton's ant is a two-dimensional
         Turing machine with a very simple set of rules but complicated emergent behaviour...</dd>
 
-    <dt><a href="RDproj_test/">Using projected coordinates:</a></dt>
-    <dd>Map a geojson with cartesian coordinates, instead of lat-lon's (in this case the Dutch RD) --
-        Uses an override of standard D3 geo projection behaviour:
-        don't perform a full projection and resampling, but only a 1st order (affine) translation and
-        scaling to transform real-world XY-coordinates into SVG screen coordinates...<br/>
-        Includes auto-scaling (responsive) example.
-    </dd>
 
 </dl>
 

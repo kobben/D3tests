@@ -12,17 +12,6 @@ header h1 {
 section {
     padding: 5px 5px;
 }
-#theRest {
-    float: left;
-    width: 400px;
-}
-#theAnt {
-    float: left;
-    width: 750px;
-}
-#controls {
-    height: 125px;
-}
 footer {
     clear: both;
     height: 150px;
@@ -34,3 +23,22 @@ footer {
 .explain {
     font-style: italic;
 }
+
+.svgFrame {
+    fill: red;
+    stroke: #999;
+}
+.canvasStyle {
+    width: 266px;
+    height: 315px;
+    z-index: 1;
+}
+#mapDiv {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 266px;
+    height: 315px;
+    z-index: 0;
+}
+

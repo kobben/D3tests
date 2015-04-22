@@ -1,0 +1,90 @@
+body {
+  margin-top: 10;
+  font-family: Georgia, serif;
+  /*text-align: center;*/
+}
+
+p {
+    font-size: 0.8em;
+    line-height: 1.1em;
+}
+
+h1, h2, h3 {
+  font-weight: 300;
+}
+
+h1 {
+  font-size: 1.5em;
+}
+
+canvas {
+  cursor: move;
+}
+
+.clear {
+  clear: both;
+}
+.distance, .land {
+    fill: none;
+    stroke: #000;
+    stroke-width: .5px;
+}
+.land {
+    fill: rgb(255,240,214);
+    stroke: rgb(0,159,227);
+}
+.globe {
+    fill: rgb(216,228,246);
+    stroke: rgb(0,159,227);
+}
+.borders {
+    fill: none;
+    stroke: rgb(204,114,117);
+    stroke-width: .3px;
+}
+.graticule {
+    fill: none;
+    stroke: rgb(0,159,227);
+    stroke-opacity: 1;
+    stroke-width: .2px;
+}
+.outline {
+    fill: none;
+    stroke: #000;
+    stroke-width: 2px;
+    pointer-events: all;
+}
+.mouse {
+    pointer-events: none;
+    font-size: 12px;
+}
+.label {
+    font-family: Helvetica, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    text-align: center;
+    text-anchor: middle;
+}
+.pointer {
+    pointer-events: none;
+    fill: none;
+    stroke: #000;
+    stroke-dasharray: 5,5;
+}
+#map {
+    background-color: rgb(255,255,255);
+}
+svg {
+    cursor: move;
+    background-color: rgb(255,255,255);
+}
+.normalcity {
+    fill : red;
+    fill-opacity: 1;
+    stroke : white;
+    stroke-width: 1pt;
+}
+.selectedcity {
+    fill: blue;
+    stroke: blue;
+    stroke-width: 8pt;
+    stroke-opacity: .5;

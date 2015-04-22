@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData">
+  <component name="PublishConfigData" serverName="D3tests">
     <serverData>
       <paths name="D3tests">
         <serverdata>
           <mappings>
-            <mapping deploy="/InetPub/kobben/D3tests" local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$" web="http://localhost/D3tests/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="D3tests_remote">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

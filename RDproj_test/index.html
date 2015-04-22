@@ -79,6 +79,7 @@
             x_offset = -(minx * scale);
 
             var RDpath = d3.geo.path().projection(AffineTransformation(scale, 0, 0, -scale, x_offset, y_offset));
+
              d3.json("../data/nl_rd.json", function(json) {
                 // nl_rd.json = small map of Netherlands, using RD (EPSG:28992)
                 // RD = Rijksdriehoeksstelsel = Double-Stereographic projection on the Bessel ellipsoid

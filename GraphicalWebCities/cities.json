@@ -1,0 +1,166 @@
+{
+  "type": "Topology",
+  "objects": {
+    "cities": {
+      "type": "GeometryCollection",
+      "geometries": [
+        {
+          "type": "Point",
+          "coordinates": [
+            8.50728,
+            47.40819
+          ],
+          "properties": {
+            "year": 2002,
+            "place": "Zürich",
+            "country": "Switzerland"
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [
+            -122.87053,
+            49.29325
+          ],
+          "properties": {
+            "year": 2003,
+            "place": "Vancouver",
+            "country": "Canada"
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [
+            139.74292,
+            35.64911
+          ],
+          "properties": {
+            "year": 2004,
+            "place": "Tokyo",
+            "country": "Japan"
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [
+            6.85653,
+            52.23842
+          ],
+          "properties": {
+            "year": 2005,
+            "place": "Enschede",
+            "country": "The Netherlands"
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [
+            139.74292,
+            35.64911
+          ],
+          "properties": {
+            "year": 2007,
+            "place": "Tokyo",
+            "country": "Japan"
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [
+            11.07806,
+            49.44653
+          ],
+          "properties": {
+            "year": 2008,
+            "place": "Nürnberg",
+            "country": "Germany"
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [
+            -121.92894,
+            37.427
+          ],
+          "properties": {
+            "year": 2009,
+            "place": "Mountain View"
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [
+            2.34642,
+            48.82644
+          ],
+          "properties": {
+            "year": 2010,
+            "place": "Paris",
+            "country": "France"
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [
+            -70.91869,
+            42.36175
+          ],
+          "properties": {
+            "year": 2011,
+            "place": "Cambridge",
+            "country": "USA"
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [
+            8.50728,
+            47.40819
+          ],
+          "properties": {
+            "year": 2012,
+            "place": "Zürich",
+            "country": "Switzerland"
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [
+            -122.401254,
+            37.783879
+          ],
+          "properties": {
+            "year": 2013,
+            "place": "San Francisco",
+            "country": "USA"
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [
+            -1.3263137,
+            51.0591662
+          ],
+          "properties": {
+            "year": 2014,
+            "place": "Winchester",
+            "country": "United Kingdom"
+          }
+        },
+        {
+          "type": "Point",
+          "coordinates": [
+            -79.99861,
+            40.44158
+          ],
+          "properties": {
+            "year": 2015,
+            "place": "Pittsburgh",
+            "country": "USA"
+          }
+        }
+      ]
+    }
+  },
+  "arcs": []
+}

@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Animated World Zoom</title>
+<style>
+    @import url(./styles.css);    }
+</style>
+
+
+<h1 id="theTitle">SVGOpen and The Graphical Web locations...</h1>
+<div id="map"></div>
+
+<p>This is an animated D3 map. if you click the animation stops and the globe is interactive. Nice, but uses  canvas
+    animation that might not work fluently nor flawless on some systems. Also has a clipping issue with circles when
+    in interactive mode...</p><p>
+    <a href="index.html">Static</a> -- <a href="zoomsvg.html">Interactive</a> -- Animated
+</p>
+<!--<div id="control"><label for="north-up"><input type="checkbox" checked id="north-up"> North is up</label></div>-->
+
+<script src="../lib/d3.v3.min.js"></script>
+<script src="../lib/topojson.min.js"></script>
+<script src="../lib/d3.geo.zoom.js"></script>
+<script>
+
+    var cities;
+
+    var degrees = 180 / Math.PI,
+            ratio = window.devicePixelRatio || 1,
+            width = 340,
+            height = 300,
+            p = ratio;
+
+    var projection = d3.geo.orthographic()
+            .rotate([0, -30])
+            .scale(height / 2 - 1)
+            .translate([width / 2, height / 2])
+            .clipExtent([[-p, -p], [width + p, height + p]])
+            .precision(.5);
+
+    var canvas = d3.select("#map").append("canvas")
+            .attr("width", width * ratio)
+            .attr("height", height * ratio)
+            .style("width", width + "px")
+            .style("height", height + "px");
+
+    var c = canvas.node().getContext("2d");
+
+    var geopath = d3.geo.path()
+            .projection(projection)
+            .context(roundRatioContext(c));
+
+    var northUp = true;
+
+    d3.json("./world-50m.json", function(error, world) {
+
+
+        d3.json("./cities.json", function (error, json) {
+            cities = topojson.feature(json, json.objects.cities).features;
+
+            var globe = {type: "Sphere"},
+                    graticule = d3.geo.graticule()(),
+                    land = topojson.feature(world, world.objects.land),
+                    borders = topojson.mesh(world, world.objects.countries),
+                    countries = d3.shuffle(topojson.feature(world, world.objects.countries).features),
+                    i = -1,
+                    i0 = i;
+
+            var zoom = d3.geo.zoom()
+                    .projection(projection)
+                    .duration(function (S) {
+                        return 6000 * Math.sqrt(S);
+                    }) // assume ease="quad-in-out"
+                    .scaleExtent([height / 2 - 1, Infinity])
+                    .on("zoom", function () {
+                        projection.clipAngle(Math.asin(Math.min(1, .5 * Math.sqrt(width * width + height * height) / projection.scale())) * degrees);
+                        c.clearRect(0, 0, width * ratio, height * ratio);
+                        c.fillStyle = "#d8e4f6", c.beginPath(), geopath(globe), c.fill();
+                        c.strokeStyle = "#009fe3", c.lineWidth = .25 * ratio, c.beginPath(), geopath(graticule), c.stroke();
+                        c.fillStyle = "#fff0d6", c.strokeStyle = "#009fe3", c.lineWidth = .5 * ratio, c.beginPath(), geopath(land), c.fill(), c.stroke();
+//                        c.fillStyle = "#f00", c.beginPath(), geopath(countries[i0]), c.fill();
+//                        c.fillStyle = "#f00", c.beginPath(), geopath(countries[i]), c.fill();
+                        c.strokeStyle = "#999", c.lineWidth = .25 * ratio, c.beginPath(), geopath(borders), c.stroke();
+
+                        for (var z = 0; z < cities.length; z++) {
+                            drawCity(z, "#00f", "#fff", 6)
+                        }
+                        drawCity((i==-1) ? 0 : i, "#f00", "#fff", 9);
+
+                        c.strokeStyle = "#009fe3", c.lineWidth = .5 * ratio, c.beginPath(), geopath(globe), c.stroke();
+                    })
+                    .on("zoomend", transition);
+
+            canvas
+                    .call(zoom)
+                    .call(zoom.event)
+            ;
+
+            function transition() {
+                zoomBounds(projection, cities[i = ((i0 = i) + 1) % cities.length]);
+                canvas.transition()
+                        .ease("quad-in-out")
+                        .duration(6000) // see https://github.com/mbostock/d3/pull/2045
+                        .call(zoom.projection(projection).event);
+                var theStr = cities[i].properties.place + " (" + cities[i].properties.year + ")";
+                document.getElementById("theTitle").innerHTML = theStr;
+            }
+
+            function zoomBounds(projection, o) {
+                var centroid = d3.geo.centroid(o),
+                        clip = projection.clipExtent();
+
+                projection
+                        .rotate(northUp ? [-centroid[0], -centroid[1]] : zoom.rotateTo(centroid))
+                        .clipExtent(null)
+                        .scale(1)
+                        .translate([0, 0]);
+
+                var b = geopath.bounds(o),
+                        k = Math.min(1000, .45 / Math.max(Math.max(Math.abs(b[1][0]), Math.abs(b[0][0])) / width, Math.max(Math.abs(b[1][1]), Math.abs(b[0][1])) / height));
+
+                projection
+                        .clipExtent(clip)
+                        .scale(k)
+                        .translate([width / 2, height / 2]);
+            }
+        })
+    });
+
+    function drawCity(i, fillcolor, strokecolor, radius) {
+        c.strokeStyle = strokecolor, c.fillStyle = fillcolor, c.lineWidth = 1 * ratio,
+//                 c.beginPath(), geopath(cities[i]),c.closePath(), c.fill(), c.stroke();
+                c.beginPath(), c.arc(
+                    Math.round(ratio * projection(cities[i].geometry.coordinates)[0]),
+                    Math.round(ratio * projection(cities[i].geometry.coordinates)[1]),
+                    radius*ratio, 0, 2 * Math.PI, false),
+                c.closePath(), c.fill(), c.stroke();
+    }
+
+    // Round to integer pixels for speed, and set pixel ratio.
+    function roundRatioContext(context) {
+        return {
+            moveTo: function(x, y) { context.moveTo(Math.round(x * ratio), Math.round(y * ratio)); },
+            lineTo: function(x, y) { context.lineTo(Math.round(x * ratio), Math.round(y * ratio)); },
+            closePath: function() { context.closePath(); }
+        };
+    }
+
+</script>

@@ -83,10 +83,6 @@ svgMapPanel
   } )
 ;
 
-
-
-
-
 // *******************
 // prepareTime-distance panels:
 // *******************
@@ -99,7 +95,10 @@ var rectHeight = 6; //for rects in scales
 // DATE & TIME FIDDLING:
 //first use original date format to parse,
 // gets dates wrt 1900/1/1 :
-var nullTime = dateFormat.parse("00:00:00");
+//var nullTime = dateFormat.parse("00:00:00");
+var nullTime = new Date("01-01-1970 12:00:00");
+var formatMinutes = function(d) { return dateFormat(new Date(2012, 0, 1, 0, d)); };
+
 var T_nullTime = +nullTime;
 var earliestTime = new Array;
 var latestTime = new Array;

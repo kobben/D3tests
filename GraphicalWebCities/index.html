@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head><title>The Graphic Web Locations</title>
+    <script src="../lib/d3.v3.min.js"></script>
+    <script src="../lib/d3.geo.projection.v0.min.js"></script>
+    <script src="../lib/topojson.min.js"></script>
+<!--<script src="http://d3js.org/d3.v3.min.js"></script>-->
+<link rel="stylesheet" type="text/css" href="./styles.css">
+
+
+
+<script>
+
+
+function init() {
+
+    var SVGwidth = 800, SVGheight = 480;
+
+    var mapDiv = d3.select("#mapDiv");
+
+    var svg = mapDiv.append("svg")
+            .attr("id", "theMapSVG")
+            .attr("width", SVGwidth)
+            .attr("height", SVGheight)
+    ;
+
+    //Define map projection
+    var projection = d3.geo.robinson()
+            .scale(140)
+            .translate([SVGwidth / 2, SVGheight / 2])
+            .precision(.1);
+
+    //Define path generator
+    svgpath = d3.geo.path()
+            .projection(projection);
+
+
+    d3.json("./cities.json", function (error, json) {
+        var cities = topojson.feature(json, json.objects.cities).features;
+
+        d3.json("./world-50m.json", function(error, json) {
+
+            var globe = {type: "Sphere"},
+                    graticule = d3.geo.graticule()(),
+                    land = topojson.feature(json, json.objects.land),
+                    borders = topojson.mesh(json, json.objects.countries)
+                    ;
+
+            svg.append("path")
+                .datum(globe)
+                .attr("class", "globe")
+                .attr("d", svgpath)
+            ;
+            svg.append("path")
+                    .datum(graticule)
+                    .attr("class", "graticule")
+                    .attr("d", svgpath)
+            ;
+            svg.append("path")
+                    .datum(land)
+                    .attr("class", "land")
+                    .attr("d", svgpath)
+                    .attr("class", "land")
+            ;
+            svg.append("path")
+                    .datum(borders)
+                    .attr("class", "borders")
+                    .attr("d", svgpath)
+            ;
+
+           svg.append("g")
+                    .attr("id", "cities")
+                    .selectAll("path")
+                    .data(cities)
+                    .enter().append("path")
+                    .attr("class", "normalcity")
+                    .attr("d", svgpath.pointRadius(5))
+            ;
+        });
+
+    });
+} //end init
+
+
+
+</script>
+
+</head>
+<body onload="init()">
+
+<h1 id="theTitle">SVGOpen and The Graphical Web locations...</h1>
+
+<div id="mapDiv">
+</div>
+
+<p>This is the base data, presented straight away in a static D3 map. Boring, maybe, but also clean and clear...<br>
+    Static -- <a href="zoomsvg.html">Interactive</a> -- <a href="zoom.html">Animated</a>
+</p>
+
+
+</body>
+</html>
