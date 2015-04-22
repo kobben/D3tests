@@ -1,0 +1,199 @@
+svg {
+    border: none;
+    padding: 0px;
+    margin: 0px
+}
+
+
+#help {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border: none;
+    padding: 10px;
+    margin: 10px
+}
+
+#controls {
+    position: absolute;
+    top: 500px;
+    left: 0px;
+    border: none;
+    padding: 10px;
+    margin: 10px
+}
+
+input[type=range] {
+    width: 275px;
+    height:10px;
+    z-index: 0;
+}
+input[type=text] {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    color: #000000
+}
+
+.bold {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: #000000
+}
+
+.tableHead {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #000000
+}
+
+td {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #000000
+}
+
+p {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #000000
+}
+
+li {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #000000
+}
+
+th {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: #000000;
+    background-color: #CCCCCC
+}
+
+a {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: indianred;
+    text-decoration: none
+}
+
+a:hover {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #000000;
+    text-decoration: none
+}
+
+a.tablelink {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: indianred;
+    text-decoration: none
+}
+
+a.tablelink:hover {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: #000000;
+    text-decoration: none
+}
+
+.massFeld {
+    background-color: white
+}
+
+.mapBorder {
+    border: 1px solid black;
+    padding: 0px;
+    margin: 0px
+}
+
+.townlabels {
+    font-family: Helvetica, Verdana, Arial, sans-serif;
+    font-size: 9px;
+    baseline-shift: 20%;
+    pointer-events: none
+}
+
+.hoofdspoorweg {
+    fill: none;
+    stroke-width: 2px;
+    stroke: rgb(0, 0, 0);
+    stroke-linecap: round;
+}
+
+.lokaalspoorweg {
+    fill: none;
+    stroke-width: 1px;
+    stroke: rgb(0, 0, 0);
+    stroke-linecap: round;
+}
+
+.tramweg {
+    fill: none;
+    stroke-width: 1px;
+    stroke: rgb(0, 0, 0);
+    stroke-dasharray: 3px, 2px;
+    stroke-linecap: round;
+}
+
+.th0leg3M {
+    fill: none;
+    stroke-width: 126.4;
+    stroke: rgb(110, 110, 110);
+    stroke-linecap: round;
+    stroke-opacity: 0
+}
+
+.th1leg0M0 {
+    font-family: 'ESRI Default Marker';
+    font-size: 1011.2;
+    fill: rgb(0, 0, 0);
+    text-rendering: optimizeSpeed
+}
+
+.th1leg1M0 {
+    font-family: 'ESRI Default Marker';
+    font-size: 1011.2;
+    fill: rgb(0, 0, 0);
+    text-rendering: optimizeSpeed;
+    fill-opacity: 0
+}
+
+.towns {
+    fill: rgb(191, 191, 191);
+    stroke: none;
+}
+
+.th2leg1M {
+    fill: rgb(0, 0, 0);
+    stroke-width: 0;
+    stroke: rgb(0, 0, 0);
+    fill-opacity: 0;
+    stroke-opacity: 0
+}
+
+.twente {
+    fill: rgb(242, 242, 242);
+    stroke: none;
+}
+
+.th3leg1M {
+    fill: rgb(0, 0, 0);
+    stroke-width: 0;
+    stroke: rgb(0, 0, 0);
+    fill-opacity: 0;
+    stroke-opacity: 0
+}

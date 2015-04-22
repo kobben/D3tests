@@ -1,0 +1,32 @@
+{
+"type": "FeatureCollection",
+"features": [
+{ "type": "Feature", "properties": { "name": "HELLENDOORN" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 29797.47, -19286.44 ] ] } },
+{ "type": "Feature", "properties": { "name": "NEEDE" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 42902.89, -48697.13 ] ] } },
+{ "type": "Feature", "properties": { "name": "MARIENBERG" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 38449.81, -7205.15 ] ] } },
+{ "type": "Feature", "properties": { "name": "BOEKELO" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 49760.5, -40470.3 ] ] } },
+{ "type": "Feature", "properties": { "name": "HOLTEN" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 27509.67, -32563.93 ] ] } },
+{ "type": "Feature", "properties": { "name": "LOCHEM" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 28819.42, -45638.37 ] ] } },
+{ "type": "Feature", "properties": { "name": "AHAUS" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 65586.26, -54447.81 ] ] } },
+{ "type": "Feature", "properties": { "name": "ALSTÄTTE" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 62082.3, -46863.2 ] ] } },
+{ "type": "Feature", "properties": { "name": "BAD BENTHEIM" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 72731.54338235296018, -27087.870015479871654 ] ] } },
+{ "type": "Feature", "properties": { "name": "NORDHORN" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 71224.8, -14375.5 ] ] } },
+{ "type": "Feature", "properties": { "name": "GRONAU" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 70878.2, -40220.6 ] ] } },
+{ "type": "Feature", "properties": { "name": "LOSSER" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 67637.76, -32726.64 ] ] } },
+{ "type": "Feature", "properties": { "name": "GLANERBRUG" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 64220.887794117639714, -39860.779992260060681 ] ] } },
+{ "type": "Feature", "properties": { "name": "DELDEN" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 45617.22, -33506.5 ] ] } },
+{ "type": "Feature", "properties": { "name": "WIERDEN" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 39490.0, -23327.13 ] ] } },
+{ "type": "Feature", "properties": { "name": "VRIEZENVEEN" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 40883.99, -17639.45 ] ] } },
+{ "type": "Feature", "properties": { "name": "VROOMSHOOP" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 38478.73, -12078.8 ] ] } },
+{ "type": "Feature", "properties": { "name": "NIJVERDAL" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 31588.27, -22386.68 ] ] } },
+{ "type": "Feature", "properties": { "name": "RIJSSEN" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 33367.7, -29965.17 ] ] } },
+{ "type": "Feature", "properties": { "name": "GOOR" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 39497.06, -36206.99 ] ] } },
+{ "type": "Feature", "properties": { "name": "HAAKSBERGEN" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 49877.91, -45619.18 ] ] } },
+{ "type": "Feature", "properties": { "name": "DENEKAMP" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 67844.12, -20077.03 ] ] } },
+{ "type": "Feature", "properties": { "name": "OLDENZAAL" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 62483.1, -27432.09 ] ] } },
+{ "type": "Feature", "properties": { "name": "BORNE" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 50657.14, -28574.13 ] ] } },
+{ "type": "Feature", "properties": { "name": "HENGELO" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 52389.16, -32003.98 ] ] } },
+{ "type": "Feature", "properties": { "name": "ENSCHEDE" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 58310.95, -36513.1 ] ] } },
+{ "type": "Feature", "properties": { "name": "ALMELO" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 44028.01, -22343.78 ] ] } }
+]
+}

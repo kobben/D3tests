@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head><title>Railroads in Twente</title>
+    <link rel="stylesheet" type="text/css" href="./files/style.css">
+    <script src="../lib/d3.v3.min.js"></script>
+</head>
+
+
+<body>
+
+
+<script type="text/javascript">
+
+    function showJaar(jaar) {
+        mapLayerRailroads.selectAll("path").each(function (d) {
+            if (d.properties.yr_opened <= jaar && d.properties.yr_closed > jaar) {
+                this.setAttribute("visibility", "visible")
+            }
+            else {
+                this.setAttribute("visibility", "hidden")
+            }
+        })
+    }
+
+    var minJaar = 1864, maxJaar = 2015;
+
+    var SvgWidth = 700,
+            SvgHeight = 580
+            ;
+
+    var minX = 21300, maxX = 71930,
+            minY = -50000, maxY = -7700
+            ;
+
+    var height = maxY - minY,
+            width = maxX - minX,
+            scale = Math.min(SvgHeight, SvgWidth) / Math.max(height, width),
+            yOffset = (maxY * scale),
+            xOffset = -(minX * scale)
+            ;
+
+    var svg = d3.select("body")
+                    .append("svg")
+                    .attr("id", "theMapSvg")
+                    .attr("width", SvgWidth)
+                    .attr("height", SvgHeight)
+            ;
+
+    function AffineTransformation(a, b, c, d, tx, ty) {
+        return {
+            stream: function (output) {
+                return {
+                    point: function (x, y) {
+                        output.point(a * x + b * y + tx, c * x + d * y + ty);
+                    },
+                    sphere: function () {
+                        output.sphere();
+                    },
+                    lineStart: function () {
+                        output.lineStart();
+                    },
+                    lineEnd: function () {
+                        output.lineEnd();
+                    },
+                    polygonStart: function () {
+                        output.polygonStart();
+                    },
+                    polygonEnd: function () {
+                        output.polygonEnd();
+                    }
+                };
+            }
+        };
+    }
+
+    var geoPath = d3.geo.path().projection(AffineTransformation(scale, 0, 0, -scale, xOffset, yOffset));
+
+    //twente outline
+    var mapLayerTwente = svg.append("g")
+            .attr("id", "mapLayerTwente");
+    d3.json("./files/twente.geojson", function (json) {
+        mapLayerTwente.selectAll("path")
+                .data(json.features)
+                .enter()
+                .append("path")
+                .attr("class", "twente")
+                .attr("d", geoPath)
+        ;
+    });
+    ;
+
+    //towns
+    var mapLayerTowns = svg.append("g")
+            .attr("id", "mapLayerTowns");
+    d3.json("./files/towns.geojson", function (json) {
+        mapLayerTowns.selectAll("path")
+                .data(json.features)
+                .enter()
+                .append("path")
+                .attr("class", "towns")
+                .attr("d", geoPath)
+        ;
+    });
+    ;
+
+    //railroads
+    var mapLayerRailroads = svg.append("g")
+            .attr("id", "mapLayerRailroads");
+    var runningID = 0;
+    d3.json("./files/railroads.geojson", function (json) {
+        mapLayerRailroads.selectAll("path")
+                .data(json.features)
+                .enter()
+                .append("path")
+                .attr("id", function (d, i) {
+                    return "RR_" + i
+                })
+                .attr("class", function (d) {
+                    return d.properties.railwaytype
+                })
+                .attr("yr_opened", function (d) {
+                    return d.properties.yr_opened
+                })
+                .attr("yr_closed", function (d) {
+                    return d.properties.yr_closed
+                })
+                .attr("visibility", "hidden")
+                .attr("d", geoPath)
+                .on("click", function (d) {
+                    alert(infoTextFromData(d));
+                })
+                .append("title")
+                .text(function (d) {
+                    return infoTextFromData(d);
+                })
+        ;
+
+        showJaar(1928);
+    });
+
+
+    //townlabels
+    var mapLayerTownlabels = svg.append("g")
+            .attr("id", "mapLayerTownlabels");
+    d3.json("./files/townlabels.geojson", function (json) {
+        mapLayerTownlabels.selectAll("text")
+                .data(json.features)
+                .enter()
+                .append("text")
+                .attr("class", "townlabels")
+                .attr("x", function (d) {
+                    return geoPath(d).substring(1, geoPath(d).indexOf(","));
+                })
+                .attr("y", function (d) {
+                    return geoPath(d).substring(geoPath(d).indexOf(",") + 1, geoPath(d).indexOf("m"));
+                })
+                .text(function (d) {
+                    return d.properties.name
+                })
+        ;
+    });
+
+
+    function infoTextFromData(d) {
+        var theStr = "";
+        if (d.properties.railwaytype == "hoofdspoorweg") {
+            theStr += "Main line ";
+        } else if (d.properties.railwaytype == "lokaalspoorweg") {
+            theStr += "Branch line ";
+        } else {
+            theStr += "Tramway ";
+        }
+        theStr += "(" + d.properties.yr_opened + "-";
+        if (d.properties.yr_closed == "9999") {
+            theStr += "...";
+        } else {
+            theStr += d.properties.yr_closed;
+        }
+        theStr += ")";
+        return theStr;
+    }
+
+    function setJaarSlider() {
+        var jaarBox = document.getElementById("jaarBox");
+        var jaarSlider = document.getElementById("jaarSlider");
+        jaarBox.value = jaarSlider.value;
+        showJaar(jaarSlider.value);
+    }
+
+    function setJaarBox() {
+        var jaarBox = document.getElementById("jaarBox");
+        var jaarSlider = document.getElementById("jaarSlider");
+        if (jaarBox.value < minJaar) {
+            jaarBox.value = minJaar;
+        }if (jaarBox.value > maxJaar) {
+            jaarBox.value = maxJaar;
+        }
+        jaarSlider.value = jaarBox.value;
+        showJaar(jaarSlider.value);
+    }
+
+</script>
+<div id="controls">
+    <input size="4" id="jaarBox" type="text" value="1928" onchange="setJaarBox()" />
+    <br/>
+    <input id="jaarSlider" type="range" min="1864" max="2015" step="1" value="1928"
+           oninput="setJaarSlider()"/>
+</div>
+<p class="tableHead">HISTORY OF RAILROADS IN
+    TWENTE</p>
+<p>This web-map shows the history of the railroads in Twente (a region in
+    of Overijssel province, in the Netherlands). Of each railroad segment,
+    the opening and closing years (and when known, the exact dates) are available.
+    Moving the time-slider will show the changes through the years. The map
+    starts with the year 1928 selected, the year that the railway system was
+    at its most extensive. </p>
+<p>Note that the distinction between &quot;main line&quot; and &quot;branch
+    line&quot; was originally &quot;Hoofdspoorwegen&quot; and &quot;Lokaalspoorwegen&quot;,
+    which is a defined by Dutch law, and quite different from American, British
+    or other systems!</p>
+        <p>
+        <span class="bold">Using
+        the time-slider:</span><br>
+            You can drag the slider left and right
+            to change the year (from 1864 - 2015).
+            For quick changes, click anywhere on the slider area.
+            For precise year-by-year changes, click in the year text and change it to the year desired.
+         <p><font size="-2"><strong>Sources: </strong></font><font size="-2">The
+            data is based on many publications, the most important being &quot;Lokaalspoorwegen
+            in Twente en de Achterhoek&quot; (Evert Heusinkveld) and the &quot;Spoor-
+            en tramwegkaart van het Koninkrijk der Nederlanden&quot; (map 1:400.000
+            of 1931)</font><br>
+        </p>
+</body>
+</html>

@@ -1,0 +1,67 @@
+{
+"type": "FeatureCollection",
+
+"features": [
+
+
+{ "type": "Feature", "properties": { "id": 0, "name" : "Geerdijk" }, "geometry": { "type": "Point", "coordinates": [ 37511.2,  -9951.2] } },
+
+{ "type": "Feature", "properties": { "id": 1, "name" : "Vroomshoop" }, "geometry": { "type": "Point", "coordinates": [ 37735.5,  -12044.2] } },
+
+{ "type": "Feature", "properties": { "id": 2, "name" : "Daarlerveen" }, "geometry": { "type": "Point", "coordinates": [ 38196.5,  -13823.1] } },
+
+{ "type": "Feature", "properties": { "id": 3, "name" : "Vriezenveen" }, "geometry": { "type": "Point", "coordinates": [ 39935.6,  -18137.4] } },
+
+{ "type": "Feature", "properties": { "id": 4, "name" : "Nijverdal" }, "geometry": { "type": "Point", "coordinates": [ 31530.5,  -22339.7] } },
+
+{ "type": "Feature", "properties": { "id": 5, "name" : "Wierden" }, "geometry": { "type": "Point", "coordinates": [ 39011.5,  -22682.8] } },
+
+{ "type": "Feature", "properties": { "id": 6, "name" : "Almelo" }, "geometry": { "type": "Point", "coordinates": [ 43773.9,  -23085.2] } },
+
+{ "type": "Feature", "properties": { "id": 7, "name" : "Almelo De Riet" }, "geometry": { "type": "Point", "coordinates": [ 44531.6,  -24695.4] } },
+
+{ "type": "Feature", "properties": { "id": 8, "name" : "Rijssen" }, "geometry": { "type": "Point", "coordinates": [ 34558,  -28250.5] } },
+
+{ "type": "Feature", "properties": { "id": 9, "name" : "Oldenzaal" }, "geometry": { "type": "Point", "coordinates": [ 63389.9,  -28249.2] } },
+
+{ "type": "Feature", "properties": { "id": 10, "name" : "Borne" }, "geometry": { "type": "Point", "coordinates": [ 50234.9,  -29471.4] } },
+
+{ "type": "Feature", "properties": { "id": 11, "name" : "Holten" }, "geometry": { "type": "Point", "coordinates": [ 28707.4,  -31191.3] } },
+
+{ "type": "Feature", "properties": { "id": 12, "name" : "Hengelo Oost" }, "geometry": { "type": "Point", "coordinates": [ 55093.2,  -32676] } },
+
+{ "type": "Feature", "properties": { "id": 13, "name" : "Hengelo" }, "geometry": { "type": "Point", "coordinates": [ 53374,  -33479.7] } },
+
+{ "type": "Feature", "properties": { "id": 14, "name" : "Delden" }, "geometry": { "type": "Point", "coordinates": [ 47978.4,  -33769] } },
+
+{ "type": "Feature", "properties": { "id": 15, "name" : "Drienerlo" }, "geometry": { "type": "Point", "coordinates": [ 56629.3,  -36251.1] } },
+
+{ "type": "Feature", "properties": { "id": 16, "name" : "Goor" }, "geometry": { "type": "Point", "coordinates": [ 39982.7,  -37242.7] } },
+
+{ "type": "Feature", "properties": { "id": 17, "name" : "Enschede" }, "geometry": { "type": "Point", "coordinates": [ 60064.4,  -37716.8] } },
+
+{ "type": "Feature", "properties": { "id": 18, "name" : "Boekelo" }, "geometry": { "type": "Point", "coordinates": [ 54259.6,  -40159.2] } },
+
+{ "type": "Feature", "properties": { "id": 19, "name" : "Haaksbergen" }, "geometry": { "type": "Point", "coordinates": [ 50175.3,  -44805] } },
+
+{ "type": "Feature", "properties": { "id": 20, "name" : "Lochem" }, "geometry": { "type": "Point", "coordinates": [ 28396.5,  -44583.9] } },
+
+{ "type": "Feature", "properties": { "id": 21, "name" : "Alstätte" }, "geometry": { "type": "Point", "coordinates": [ 61740,  -47174.4] } },
+
+{ "type": "Feature", "properties": { "id": 22, "name" : "Gronau" }, "geometry": { "type": "Point", "coordinates": [ 69166.7,  -38602.6] } },
+
+{ "type": "Feature", "properties": { "id": 23, "name" : "Bad Bentheim" }, "geometry": { "type": "Point", "coordinates": [ 78001.4,  -27445.4] } },
+
+{ "type": "Feature", "properties": { "id": 24, "name" : "Nordhorn" }, "geometry": { "type": "Point", "coordinates": [ 70882.6,  -14686.6] } },
+
+{ "type": "Feature", "properties": { "id": 25, "name" : "Glanerbrug" }, "geometry": { "type": "Point", "coordinates": [ 65816.9,  -38030] } },
+
+{ "type": "Feature", "properties": { "id": 26, "name" : "De Eschmarke" }, "geometry": { "type": "Point", "coordinates": [ 64257.7,  -37781.6] } },
+
+{ "type": "Feature", "properties": { "id": 27, "name" : "Ahaus" }, "geometry": { "type": "Point", "coordinates": [ 68875.4,  -53840.4] } },
+
+{ "type": "Feature", "properties": { "id": 28, "name" : "Mariënberg" }, "geometry": { "type": "Point", "coordinates": [ 38538.8,  -6140.2] } }
+
+
+]
+}

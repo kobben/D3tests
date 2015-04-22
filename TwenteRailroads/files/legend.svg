@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Author: ITC/Creator: MapViewSVG 2.2 by uismedia (http://www.mapview.de); 25/03/03 19:47:53 -->
+<svg width="164" height="165" zoomAndPan="disable" xmlns="http://www.w3.org/2000/svg">
+<style type="text/css"><![CDATA[
+.SVGlegHead { font-family:Verdana,Arial,Helvetica,sans-serif; font-size:13px; font-weight:bold; fill:black; baseline-shift:-12 }
+.SVGnormal { font-family:Verdana,Arial,Helvetica,sans-serif; font-size:10px; font-weight:normal; fill:black }
+.SVGlegText { font-family:Verdana,Arial,Helvetica,sans-serif; font-size:10px; font-weight:normal; fill:black; baseline-shift:-9 }
+.th0leg0M { fill:none; stroke-width:4; stroke:rgb(0,0,0); stroke-opacity:1; shape-rendering:optimizeSpeed }
+.th0leg1M { fill:none; stroke-width:2; stroke:rgb(0,0,0); stroke-opacity:1; shape-rendering:optimizeSpeed }
+.th0leg2M { fill:none; stroke-width:2; stroke:rgb(0,0,0); stroke-dasharray:3, 2; stroke-opacity:1; shape-rendering:optimizeSpeed }
+.th1leg0M0 { font-family:'ESRI Default Marker'; font-size:8; fill:rgb(0,0,0); text-rendering:optimizeSpeed; fill-opacity:1 }
+.th2leg0M { fill:rgb(191,191,191); stroke-width:0.4; stroke:rgb(240,240,240); fill-opacity:1; stroke-opacity:0; shape-rendering:optimizeSpeed }
+.th3leg0M { fill:rgb(242,242,242); stroke-width:0.4; stroke:rgb(240,240,240); fill-opacity:1; stroke-opacity:0; shape-rendering:optimizeSpeed }
+]]></style>
+<title>SPOORWEGEN IN TWENTE- Legend</title>
+<rect x="0" y="0" width="164" height="165" style="fill:white; stroke:none"/>
+<defs>
+<symbol id="NotSeen" style="shape-rendering:optimizeSpeed">
+<rect x="0" y="0" width="12" height="12" style="fill:white; stroke:black; stroke-width:2"/>
+</symbol>
+<symbol id="Seen" style="shape-rendering:optimizeSpeed">
+<rect x="0" y="0" width="12" height="12" style="stroke:black; stroke-width:2"/>
+<line x1="0" y1="0" x2="12" y2="12" style="stroke:black; stroke-width:1"/>
+<line x1="0" y1="12" x2="12" y2="0" style="stroke:black; stroke-width:1"/>
+</symbol>
+<symbol id="Table" style="shape-rendering:optimizeSpeed">
+<rect x="0" y="0" width="12" height="12" style="fill:white; stroke:black; stroke-width:2"/>
+<path d="M 0 3 H 12" style="stroke:black; stroke-width:1"/>
+<path d="M 0 6 H 12" style="stroke:black; stroke-width:1"/>
+<path d="M 0 9 H 12" style="stroke:black; stroke-width:1"/>
+<path d="M 3 0 V 12" style="stroke:black; stroke-width:1"/>
+<path d="M 7 0 V 12" style="stroke:black; stroke-width:1"/>
+</symbol>
+<symbol id="Query" style="shape-rendering:optimizeSpeed">
+<rect x="0" y="0" width="12" height="12" style="fill:white; stroke:black; stroke-width:2"/>
+<rect x="0" y="3" width="11" height="6" style="fill:yellow; stroke:black; stroke-width:1"/>
+<path d="M 0 3 H 12" style="stroke:black; stroke-width:1"/>
+<path d="M 0 6 H 12" style="stroke:black; stroke-width:1"/>
+<path d="M 0 9 H 12" style="stroke:black; stroke-width:1"/>
+<path d="M 3 0 V 12" style="stroke:black; stroke-width:1"/>
+<path d="M 7 0 V 12" style="stroke:black; stroke-width:1"/>
+</symbol>
+<rect id="polyKast" y="0" x="0" width="24" height="12"/>
+<line id="lineKast" x1="0" y1="6" x2="24" y2="6"/>
+</defs>
+<defs>
+<font id="esri_11" horiz-adv-x="688"> <font-face font-family="ESRI Default Marker" units-per-em="1000" panose-1="2 0 0 0 0 0 0 0 0 0" ascent="817" descent="-7" alphabetic="0" />
+<missing-glyph horiz-adv-x="500"/>
+<glyph unicode="&quot;" glyph-name="FL0022h" horiz-adv-x="700" d="M350 340H-330V-340H350V340Z"/>
+</font>
+</defs>
+<defs>
+</defs>
+<g id="gesamtLeg" transform="translate(0,0)">
+<g id="leg0" transform="translate(0,0)">
+<use id="NotVis0" x="0" y="0" xlink:href="#NotSeen" onclick="makeInVisLeg('leg0','th0');"/>
+<use id="Vis0" x="0" y="0" style="visibility:visible; fill:white" xlink:href="#Seen" onclick="makeInVisLeg('leg0','th0');"/>
+<text x="20" y="0" class="SVGlegHead">Type</text>
+<g id="th0" transform="translate(0,20)" style="visibility:visible">
+<use id="legtrue" x="2" y="0" xlink:href="#lineKast" class="th0leg0M"/>
+<text id="legfalse"  x="36" y="0" class="SVGlegText">Main line</text>
+<use id="legtrue" x="2" y="16" xlink:href="#lineKast" class="th0leg1M"/>
+<text id="legfalse"  x="36" y="16" class="SVGlegText">Branch line</text>
+<use id="legtrue" x="2" y="32" xlink:href="#lineKast" class="th0leg2M"/>
+<text id="legfalse"  x="36" y="32" class="SVGlegText">Tramway</text>
+</g>
+<g id="leg1" transform="translate(0,78)">
+<use id="NotVis1" x="0" y="0" xlink:href="#NotSeen" onclick="makeInVisLeg('leg1','th1');"/>
+<use id="Vis1" x="0" y="0" style="visibility:visible; fill:white" xlink:href="#Seen" onclick="makeInVisLeg('leg1','th1');"/>
+<text x="20" y="0" class="SVGlegHead">Current stations</text>
+<g id="th1" transform="translate(0,20)" style="visibility:visible">
+<text id="legtrue" x="14" y="6" class="th1leg0M0">&quot;</text>
+<text id="legfalse"  x="36" y="0" class="SVGlegText"></text>
+</g>
+<g id="leg2" transform="translate(0,46)">
+<use id="NotVis2" x="0" y="0" xlink:href="#NotSeen" onclick="makeInVisLeg('leg2','th2');"/>
+<use id="Vis2" x="0" y="0" style="visibility:visible; fill:white" xlink:href="#Seen" onclick="makeInVisLeg('leg2','th2');"/>
+<text x="20" y="0" class="SVGlegHead">Current towns</text>
+<g id="th2" transform="translate(0,20)" style="visibility:visible">
+<use id="legtrue" x="2" y="0" xlink:href="#polyKast" class="th2leg0M"/>
+<text id="legfalse"  x="36" y="0" class="SVGlegText"></text>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>
