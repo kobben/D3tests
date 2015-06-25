@@ -30,7 +30,7 @@
             ;
 
     var minX = 21300, maxX = 71930,
-            minY = -50000, maxY = -7700
+            minY = -50000, maxY = -3700
             ;
 
     var height = maxY - minY,
@@ -46,6 +46,13 @@
                     .attr("width", SvgWidth)
                     .attr("height", SvgHeight)
             ;
+
+    var tooltip = d3.select("body")
+            .append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+    tooltip.append("div")
+            .attr("class", "tooltip-text");
 
     function AffineTransformation(a, b, c, d, tx, ty) {
         return {
@@ -113,27 +120,27 @@
                 .data(json.features)
                 .enter()
                 .append("path")
-                .attr("id", function (d, i) {
-                    return "RR_" + i
-                })
                 .attr("class", function (d) {
                     return d.properties.railwaytype
                 })
-                .attr("yr_opened", function (d) {
-                    return d.properties.yr_opened
-                })
-                .attr("yr_closed", function (d) {
-                    return d.properties.yr_closed
-                })
                 .attr("visibility", "hidden")
                 .attr("d", geoPath)
-                .on("click", function (d) {
-                    alert(infoTextFromData(d));
+                .on("mouseenter", function(d) {
+                    tooltip.transition()
+                            .duration(200)
+                            .style("opacity", 1);
+                    tooltip.select('.tooltip-text')
+                            .text(infoTextFromData(d));
                 })
-                .append("title")
-                .text(function (d) {
-                    return infoTextFromData(d);
+                .on("mousemove", function(d) {
+                    tooltip.style("left", (d3.event.pageX+5) + "px")
+                            .style("top", (d3.event.pageY+5) + "px");
                 })
+                .on("mouseleave", function(d) {
+                    tooltip.transition()
+                            .duration(200)
+                            .style("opacity", 0);
+                });
         ;
 
         showJaar(1928);
@@ -165,11 +172,11 @@
     function infoTextFromData(d) {
         var theStr = "";
         if (d.properties.railwaytype == "hoofdspoorweg") {
-            theStr += "Main line ";
+            theStr += "MAIN LINE ";
         } else if (d.properties.railwaytype == "lokaalspoorweg") {
-            theStr += "Branch line ";
+            theStr += "BRANCH LINE ";
         } else {
-            theStr += "Tramway ";
+            theStr += "TRAMWAY ";
         }
         theStr += "(" + d.properties.yr_opened + "-";
         if (d.properties.yr_closed == "9999") {
@@ -207,7 +214,7 @@
     <input id="jaarSlider" type="range" min="1864" max="2015" step="1" value="1928"
            oninput="setJaarSlider()"/>
 </div>
-<p class="tableHead">HISTORY OF RAILROADS IN
+<p class="bold">HISTORY OF RAILROADS IN
     TWENTE</p>
 <p>This web-map shows the history of the railroads in Twente (a region in
     of Overijssel province, in the Netherlands). Of each railroad segment,
@@ -215,17 +222,17 @@
     Moving the time-slider will show the changes through the years. The map
     starts with the year 1928 selected, the year that the railway system was
     at its most extensive. </p>
-<p>Note that the distinction between &quot;main line&quot; and &quot;branch
-    line&quot; was originally &quot;Hoofdspoorwegen&quot; and &quot;Lokaalspoorwegen&quot;,
+<p>Note that the distinction between &quot;main line&quot;, &quot;branch
+    line&quot; and &quot;tramway&quot; was originally &quot;Hoofdspoorweg&quot;, &quot;Lokaalspoorweg&quot; and &quot;Tramweg&quot;,
     which is a defined by Dutch law, and quite different from American, British
     or other systems!</p>
         <p>
-        <span class="bold">Using
-        the time-slider:</span><br>
+        <span class="bold">INTERACTIVITY:</span><br>
             You can drag the slider left and right
             to change the year (from 1864 - 2015).
             For quick changes, click anywhere on the slider area.
             For precise year-by-year changes, click in the year text and change it to the year desired.
+            Moving the mouse over the railroads show a tooltip with available information
          <p><font size="-2"><strong>Sources: </strong></font><font size="-2">The
             data is based on many publications, the most important being &quot;Lokaalspoorwegen
             in Twente en de Achterhoek&quot; (Evert Heusinkveld) and the &quot;Spoor-

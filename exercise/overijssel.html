@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head><title>The Graphic Web Locations</title>
+<script src="../lib/d3.v3.min.js"></script>
+<style>
+    .municipality {
+        fill: rgb(255,240,214);
+        stroke: rgb(0,159,227);
+    }
+</style>
+
+<script>
+
+
+var SVGwidth = 500, SVGheight = 550;
+var mapDiv, svg, svgpath;
+
+// init everything after the html has loaded:
+function init() {
+
+    // select the mapDiv by id:
+    mapDiv = d3.select("#mapDiv");
+
+    // create an svg of fixed size:
+    svg = mapDiv.append("svg")
+            .attr("id", "theMapSVG")
+            .attr("width", SVGwidth)
+            .attr("height", SVGheight)
+    ;
+
+    // Define Mercator proj to center at data (lon-lat)
+    // scaled and translated to fit svg size:
+    var myProj = d3.geo.mercator()
+            .center([6.5 , 52.4])
+            .scale(20000)
+            .translate([SVGwidth / 2, SVGheight / 2])
+    ;
+
+    //Define svg path generator using the projection
+    svgpath = d3.geo.path()
+            .projection(myProj);
+
+    // asynchronously load geojson:
+    d3.json("./overijssel.json", function (error, myGeoJson) {
+
+        // create new svg paths:
+        svg.selectAll("path")
+            // bind the data:
+                .data(myGeoJson.features).enter()
+            // for each d create a path:
+                .append("path")
+                .attr("class", "municipality")
+                .attr("d", svgpath)
+        ;
+
+    });
+} //end init
+
+</script>
+</head>
+
+<body onload="init()">
+<p>A Map of Overijssel Municipalities</p>
+<div id="mapDiv">
+</div>
+
+</body>
+</html>
+

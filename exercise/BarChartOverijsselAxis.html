@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+.chart rect {
+  fill: steelblue;
+}
+.chart text {
+  fill: white;
+  font: 10px sans-serif;
+  text-anchor: end;
+}
+.axis text {
+  fill: black;
+  font: 10px sans-serif;
+}
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+}
+</style>
+<svg class="chart"></svg>
+<script src="./lib/d3.v3.min.js"></script>
+<script>
+
+var svgwidth = 750,
+    barHeight = 20;
+    
+d3.csv("overijssel_population.csv", 
+		function(error, data) {
+		//start of callback function:
+    
+	var svgheight = barHeight * data.length + 30;
+  
+	var chart = d3.select(".chart") 
+			.attr("width", svgwidth)
+			.attr("height", svgheight);
+		
+	var xScale = d3.scale.linear()
+			.domain([0, d3.max(data, function(d) { 
+					return +d.aant_inw; })])
+			.range([0, svgwidth]);
+			
+  var theAxis = d3.svg.axis()
+    .scale(xScale)
+    .orient("bottom");
+    
+	var bar = chart.selectAll("g")
+			.data(data)
+		.enter().append("g")
+			.attr("transform", function(d, i) { 
+			   	return "translate(0," + i * barHeight + ")"; });
+
+	bar.append("rect")
+			.attr("width", function(d) { 
+					return xScale(d.aant_inw)} )
+			.attr("height", barHeight - 1);
+
+	bar.append("text")
+			.attr("x", function(d) { 
+					return xScale(d.aant_inw)- 3; })
+			.attr("y", barHeight / 2)
+			.attr("dy", ".35em")
+			.text(function(d) { 
+					return d.gm_naam; });
+					
+	chart.append("g")
+    .attr("class", "axis")
+    .attr("transform", "translate(0," + (barHeight * data.length + 3) + ")")
+    .call(theAxis);
+		
+}); //end of callback function
+
+
+</script>

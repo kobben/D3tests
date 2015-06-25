@@ -6,23 +6,34 @@
     <link rel="stylesheet" href="SpringIndex.css">
     <script src="../lib/d3.v3.min.js"></script>
     <!--<script src="http://d3js.org/d3.v3.min.js"></script>-->
-    <script src="SpringIndex.js"></script>
+    <script src="SpringIndex2.js"></script>
 </head>
 <body onload="init()">
 
 <section id="theMap">
     <header><h1>Spring Index in Netherlands test</h1></header>
 <p></p>
-    <canvas id="myCanvas" width="266" height="315" onclick="canvasClick(event)">
+    <canvas id="myCanvas1" class='canvasStyle' width="266" height="315">
         Your browser does not support the HTML5 canvas tag...
-    </canvas><br/>
-    Day: <span id="dayTxt"></span>
+    </canvas>
+    <canvas id="myCanvas2" class='canvasStyle' width="266" height="315">
+        Your browser does not support the HTML5 canvas tag...
+    </canvas>
+    <canvas id="myCanvas3" class='canvasStyle' width="266" height="315">
+        Your browser does not support the HTML5 canvas tag...
+    </canvas>
+    <canvas id="myCanvas4" class='canvasStyle' width="266" height="315">
+        Your browser does not support the HTML5 canvas tag...
+    </canvas>
+    <br/>
     <input type="button" value="|<" onclick="animateBegin()">
     <input type="button" value="<<" onclick="animateBack()">
     <input type="button" value=">>" onclick="animateForward()">
     <input type="button" value=">|" onclick="animateEnd()">
+    Day: <span id="dayTxt"></span>
 </section>
 
+<p></p>
 
 
 <footer>

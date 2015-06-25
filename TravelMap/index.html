@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+    <style>@import url(./styles.css);</style>
+    <script src="../lib/d3.v3.min.js"></script>
+    <script src="../lib/d3.geo.projection.v0.min.js"></script>
+    <script src="../lib/topojson.min.js"></script>
+    <script>
+
+        //global vars:
+        var svg, adminData, countries, countriesVisited, highlightedCountry;
+        var projection;
+        var SVGwidth = 550, SVGheight = 500;
+        var mapDiv, globe, graticule, svgpath;
+
+        //property to use a Key to join geometry with attribute data:
+        var keyName = "adm0_a3";
+
+        var debug;
+
+        function init() {
+
+            mapDiv = d3.select("#mapDiv");
+
+            svg = mapDiv.append("svg")
+                    .attr("id", "theMapSVG")
+                    .attr("width", SVGwidth)
+                    .attr("height", SVGheight)
+            ;
+
+            //Define map projection
+            projection = d3.geo.orthographic()
+                    .scale(250)
+                    .translate([SVGwidth / 2, SVGheight / 2])
+                    .rotate([-6, -52])
+                    .clipAngle(90)
+            ;
+//            projection = d3.geo.robinson()
+//                    .scale(200)
+//                    .translate([SVGwidth / 2, SVGheight / 2])
+//                    .rotate([0,0])
+//                    .precision(.1)
+//                    ;
+
+            svgpath = d3.geo.path()
+                    .projection(projection);
+
+
+            d3.json("../data/cntry_geom.json", function (error, json) {
+
+                globe = {type: "Sphere"},
+                        graticule = d3.geo.graticule()(),
+                        countries = topojson.feature(json, json.objects.cntry_geom)
+                ;
+
+                d3.csv("./cntry_visit.csv", function (error, csv) {
+
+                    //create a map using keyName as key:
+                    admin_data = d3.map(csv, function (d) {
+                        return eval("d." + keyName);
+                    });
+                    countriesVisited = csv.filter(function (d) {
+                        return (d.visited == 1)
+                    });
+                    var theMenu = d3.select("#countryMenu")
+                            .on("change", function () {
+                                var theCode = this.value;
+                                var cntryName = admin_data.get(theCode).name;
+                                countries.features.forEach(function (d) {
+                                    var theKey = eval("d.properties." + keyName);
+                                    if (theKey == theCode) {
+                                        focusOn(d);
+                                    }
+                                });
+                            });
+                    var theOptions = theMenu.selectAll("option")
+                    // put only visited countries in menu:
+                    for (var i = 0; i < countriesVisited.length; i++) {
+                        theMenu.append("option")
+                                .attr("value", eval("countriesVisited[i]." + keyName)) // d.adm0_a3)
+                                .attr("id", "option_" + eval("countriesVisited[i]." + keyName)) // d.adm0_a3
+                                .html(countriesVisited[i].name_long)
+                        ;
+                    }
+                    svg.append("path")
+                            .datum(globe)
+                            .attr("class", "globe")
+                            .attr("d", svgpath)
+                    ;
+                    svg.append("path")
+                            .datum(graticule)
+                            .attr("class", "graticule")
+                            .attr("d", svgpath)
+                    ;
+                    svg.selectAll("path")
+                            .data(countries.features).enter()
+                            .append("path")
+                            .attr("id", function (d) {
+                                return d.properties.adm0_a3;
+                            })
+                            .attr("class", function (d) {
+                                var theKey = eval("d.properties." + keyName);
+                                if (admin_data.get(theKey).visited == 1) {
+                                    return "countriesvisited";
+                                } else {
+                                    return "countries";
+                                }
+                            })
+                            .attr("d", svgpath)
+                            .on("click", function (d) {
+                                focusOn(d);
+                            })
+                    ;
+
+                });//end .csv
+            }) //end .json
+            ;
+
+
+
+        } //init
+
+        function focusOn(country) {
+            //calculateLatLon & rotate
+            var theCentroid = d3.geo.centroid(country);
+            reproject(theCentroid[0], theCentroid[1], 250);
+            var countryKey = eval("country.properties." + keyName);
+            highlight(countryKey);
+            console.log(countryKey);
+        } //focusOn
+
+        function highlight(countryKey) {
+            //first reset highlight
+            if (highlightedCountry) {
+                highlightedCountry.attr("class", "countriesvisited");
+            }
+            var sel_option = document.getElementById("option_" + countryKey);
+            if (sel_option) {
+                sel_option.selected = true;
+                highlightedCountry = d3.select("#" + countryKey);
+                highlightedCountry.attr("class", "highlight");
+            } else {
+                sel_option = document.getElementById("option_none").selected = true;
+            }
+        } //focusOn
+
+        function reproject(lon, lat, scale) {
+            scale = scale || 250;
+
+            //first reset highlight
+            if (highlightedCountry) {
+                highlightedCountry.attr("class", "countriesvisited");
+            }
+            //change projection:
+            projection.rotate([-lon, -lat]);
+            projection.scale(scale);
+            //redraw:
+            svg.selectAll(".globe")
+                    .datum(globe)
+                    .attr("d", svgpath)
+            ;
+            svg.selectAll(".graticule")
+                    .datum(graticule)
+                    .attr("d", svgpath)
+            ;
+            svg.selectAll(".countries")
+                    .attr("d", svgpath)
+            ;
+            svg.selectAll(".countriesvisited")
+                    .attr("d", svgpath)
+            ;
+//                d3.select("svg")
+//                        .transition().duration(1500)
+//                        .attr("d", svgpath)
+//                ;
+        } //rotateTo
+
+
+    </script>
+</head>
+
+<body onload="init();">
+
+
+<p>
+    <select id="countryMenu">
+        <option value="none" id="option_none" selected>Countries visited...</option>
+    </select>
+</p>
+<div id="mapDiv">
+</div>
+
+
+</body>
+</html>

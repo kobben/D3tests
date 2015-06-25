@@ -1,57 +1,18 @@
+/*
+
+ implemented in HTML5 using Canvas by B Köbben (March 2015)
+ -- only properly tested in Chrome on MAC OSX!
+ */
+
 
 //global constants
+const LEFT = 0, RIGHT = 1;
 const lines = 315, columns = 266;
 const cellSize = 1;
 
-
-var SVGwidth = 266, SVGheight = 315;
-
-
-// RD=RijksDriehoekstelsel=Dutch national projection system bounds:
-var minx = 13600;
-var miny = 306900;
-var maxx = 278000;
-var maxy = 619300;
-// use RD limits to calculate scale and bounds needed for
-// affine transformation of RD coordinates to screen coordinates
-var dataHeight = maxy - miny;
-var dataWidth = maxx - minx;
-
-var scale, y_offset, x_offset, mapDiv, svg;
-
-//choose scale that fills box
-xscale = SVGwidth/dataWidth;
-yscale = SVGheight/dataHeight;
-scale = Math.min(xscale,yscale);
-
-// AffineTransformation as a basic pseudo-projection of RD coords to screen coords
-// http://en.wikipedia.org/wiki/Transformation_matrix#Affine_transformations
-function AffineTransformation(a, b, c, d, tx, ty) {
-    return {
-        //overrides normal D3 projection stream (to avoid adaptive sampling)
-        stream: function(output) {
-            return {
-                point: function(x, y) { output.point(a * x + b * y + tx, c * x + d * y + ty); },
-                sphere: function() { output.sphere(); },
-                lineStart: function() { output.lineStart(); },
-                lineEnd: function() { output.lineEnd(); },
-                polygonStart: function() { output.polygonStart(); },
-                polygonEnd: function() { output.polygonEnd(); }
-            };
-        }
-    };
-}
-
-
 //global vars
-//var gridData = Array(4);
-//var ctx = Array(4);
-var gridData = Array;
-var ctx = Array;
+var gridData;
 var minDay = 36, day = minDay; maxDay = 54;
-var noDataCol = 'rgb(240,240,255)',
-    backgroundCol = 'rgb(200,200,200)',
-    dataCol = 'rgb(100,200,100)';
 
 var animationRunning, beingSetUp;
 var currentStep;
@@ -66,75 +27,28 @@ for (var i = 0; i <=columns; i++) {
 }
 
 
-var colourScale = d3.scale.linear()
-    .domain([minDay, maxDay])
-    .range([255, 150]);
-
-
+//var colourScale = d3.scale.linear()
+//    .domain([minDay, day])
+//    .range([255, 100]);
 
 function init() {
 
     dayText = document.getElementById("dayTxt");
 
-    for (var i = 1; i < 1; i++) {
-        var year = 2005 + i;
-        d3.text('SIx_' + year + '.csv', function (error, data) {
-            gridData = d3.csv.parseRows(data);
-            ctx = document.getElementById('myCanvas'+i).getContext('2d');
+    d3.text('SIx_2008.csv', function (error, data) {
+        gridData = d3.csv.parseRows(data);
+        //alert("data loaded...");
 
-            alert("data " + i + " loaded...");
+        canvas = document.getElementById('myCanvas');
+        ctx = canvas.getContext('2d');
 
-            //draw cells of NL
-            drawGrid(ctx, 0, 0, noDataCol, dataCol, backgroundCol);
-            //dayText.innerHTML = day;
-        });
-    }
+        //set styles for cells
+        ctx.fillStyle = 'rgb(240,240,255)';
+        ctx.strokeStyle = '#BBBBBB';
 
-    mapDiv = d3.select("#myCanvas");
-
-    //svg = mapDiv.append("svg")
-    //    .attr("id", "theMapSVG")
-    //    .attr("width", SVGwidth)
-    //    .attr("height", SVGheight)
-    //;
-    //
-    ////choose scale that fills box
-    //xscale = SVGwidth/dataWidth;
-    //yscale = SVGheight/dataHeight;
-    //scale = Math.min(xscale,yscale);
-    //
-    //y_offset = (maxy * scale);
-    //x_offset = -(minx * scale);
-    //
-    //var RDpath = d3.geo.path().projection(AffineTransformation(scale, 0, 0, -scale, x_offset, y_offset));
-    //d3.json("../data/nl_rd.json", function(json) {
-    //    // nl_rd.json = small map of Netherlands, using RD (EPSG:28992)
-    //    // RD = Rijksdriehoeksstelsel = Double-Stereographic projection on the Bessel ellipsoid
-    //    nl=json;
-    //    svg.selectAll("path")
-    //        .data(nl.features)
-    //        .enter()
-    //        .append("path")
-    //        .attr("class", "boundary")
-    //        .attr("d", RDpath)
-    //    ;
-    //});
-    //
-    //svg.append("rect")
-    //    .attr("class", "svgFrame")
-    //    .attr("x1", 0)
-    //    .attr("y1", 0)
-    //    .attr("width", SVGwidth)
-    //    .attr("height", SVGheight)
-    //;
-    //
-    //d3.select("#width").attr("value", SVGwidth);
-    //d3.select("#height").attr("value", SVGheight);
-    //d3.select("#mapscale").html(Math.round(100000*scale)/100000);
-    //d3.select("#xoffset").html(Math.round(x_offset));
-    //d3.select("#yoffset").html(Math.round(y_offset));
-
-
+        //draw cells
+            drawGrid();
+    });
 
 } //end init()
 
@@ -166,20 +80,18 @@ function init() {
     };
 }());
 
-
-function drawGrid(ctx, noDataVal, dayVal, noDataCol, dataCol, backgroundCol) {
+//draw cells
+function drawGrid() {
     for (var x = 0; x < columns; x++) {
         for (var y = 0; y < lines; y++) {
-            var theVal = +gridData[y][x];
-            if (theVal == noDataVal) {
-                rgbStr = noDataCol;
+            theVal = +gridData[y][x];
+            if (theVal == 0) {
+                rgbStr = 'rgb(240,240,255)';
             } else {
-                if (dayVal >= theVal) {
-                    var greenVal = Math.round(colourScale(theVal));
-                    var dataCol = 'rgb(100,' + greenVal + ',100)';
-                    rgbStr = dataCol;
+                if (theVal > day) {
+                    rgbStr = 'rgb(200,200,200)';
                 } else {
-                    rgbStr = backgroundCol;
+                    rgbStr = 'rgb(100,200,100)';
                 }
             }
             ctx.fillStyle = rgbStr;
@@ -187,6 +99,7 @@ function drawGrid(ctx, noDataVal, dayVal, noDataCol, dataCol, backgroundCol) {
             //ctx.strokeRect(x * cellSize, y * cellSize, cellSize, cellSize);
         }
     }
+    dayText.innerHTML = day;
 }
 
 
@@ -196,8 +109,7 @@ function animateForward() {
     }  else {
         day++;
     }
-    drawGrid(0, day, noDataCol, dataCol, backgroundCol);
-    dayText.innerHTML = day;
+    drawGrid();
 }
 
 function animateBack() {
@@ -206,24 +118,149 @@ function animateBack() {
     }  else {
         day--;
     }
-    drawGrid(0, day, noDataCol, dataCol, backgroundCol);
-    dayText.innerHTML = day;
+    drawGrid();
 }
 
 function animateBegin() {
     day = minDay;
-    drawGrid(0, day, noDataCol, dataCol, backgroundCol);
-    dayText.innerHTML = day;
+    drawGrid();
 }
 
 function animateEnd() {
     day = maxDay;
-    drawGrid(0, day, noDataCol, dataCol, backgroundCol);
-    dayText.innerHTML = day;
+    drawGrid();
 }
 
 
+function colourCell(x, y) {
+  if (cells[x][y] > 0) {
+    ctx.fillStyle = 'red';
+  } else { // (cells[x][y] == 0)
+    ctx.fillStyle = 'white';
+  }
+  ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+  ctx.strokeRect(x * cellSize, y * cellSize, cellSize, cellSize);
+}
 
+function switchState(x, y) {
+  if (cells[x][y] == ON) {
+    cells[x][y] = OFF;
+  } else { // (cells[x, y] == OFF) {
+    cells[x][y] = ON;
+  }
+  colourCell(x, y);
+}
+
+function turn(direction) {
+  if (direction == RIGHT) {
+    switch (currentAntDirection) {
+      case NORTH:
+        currentAntDirection=EAST; break;
+      case SOUTH:
+        currentAntDirection=WEST; break;
+      case EAST:
+        currentAntDirection=SOUTH; break;
+      case WEST:
+        currentAntDirection=NORTH; break;
+    }
+  } else { //direction == LEFT
+    switch (currentAntDirection) {
+      case NORTH:
+        currentAntDirection=WEST; break;
+      case SOUTH:
+        currentAntDirection=EAST; break;
+      case EAST:
+        currentAntDirection=NORTH; break;
+      case WEST:
+        currentAntDirection=SOUTH; break;
+    }
+  }
+}
+
+function moveForward() {
+  switch (currentAntDirection) {
+    case NORTH:
+      currentLine--; break;
+    case SOUTH:
+      currentLine++; break;
+    case EAST:
+      currentColumn++; break;
+    case WEST:
+      currentColumn--; break;
+  }
+}
+
+
+function doStepAnt() {
+  currentStep++;
+  if (currentLine < 1 || currentLine > lines || currentColumn < 1 || currentColumn > columns) {
+    step_display.innerHTML = "Out of Bounds...";
+    return;
+  } else {
+    if (cells[currentColumn][currentLine] == OFF) { //white square
+      turn(RIGHT);
+    } else {  // (cells[currentColumn][currentLine] == ON) // red square
+      turn(LEFT);
+    }
+    switchState(currentColumn, currentLine);
+    moveForward();
+    step_display.innerHTML = currentStep;
+  }
+  if (animationRunning) window.requestAnimationFrame(doStepAnt);
+}
+
+function startDir(dir) {
+  currentAntDirection = dir;
+  switch (currentAntDirection) {
+    case NORTH:
+      document.getElementById("dir_display").innerHTML = "NORTH"; break;
+    case SOUTH:
+      document.getElementById("dir_display").innerHTML = "SOUTH"; break;
+    case EAST:
+      document.getElementById("dir_display").innerHTML = "EAST"; break;
+    case WEST:
+      document.getElementById("dir_display").innerHTML = "WEST"; break;
+  }
+}
+
+function setUpReady() {
+  document.getElementById("instructions").style.display = "none";
+  document.getElementById("running").style.display = "inline";
+  beingSetUp = false;
+}
+
+function startAnt() {
+  if (!animationRunning) {
+    animationRunning = true;
+    window.requestAnimationFrame(doStepAnt);
+  }
+}
+
+function stepAnt() {
+  animationRunning = false;
+  doStepAnt();
+}
+
+function resetAnt() {
+  window.cancelAnimationFrame;
+  init();
+  document.getElementById("instructions").style.display = "inline";
+  document.getElementById("running").style.display = "none";
+  currentStep = 0;
+  step_display.innerHTML = currentStep;
+}
+
+function canvasClick(evt) {
+
+
+  //if (beingSetUp) { //only work in setup mode
+  //  var mousePos = getMousePos(canvas, evt);
+  //  var cellX = Math.round(mousePos.x/cellSize)-1;
+  //  var cellY = Math.round(mousePos.y/cellSize)-1;
+  //  switchState(cellX,cellY);
+  //}
+
+}
 function getMousePos(canvas, evt) {
   // get canvas position
   var obj = canvas;

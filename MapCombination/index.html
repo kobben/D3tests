@@ -1,0 +1,250 @@
+<html>
+<head>
+    <meta charset="utf-8">
+
+
+    <title>National Atlas [0.5]</title>
+
+    <script src="../lib/d3.v3.min.js"></script>
+    <script src="../lib/colorbrewer.js"></script>
+
+    <link href="../lib/colorbrewer.css" rel="stylesheet" type="text/css">
+    <link href="./natatlas.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+    /*add to map.css*/
+        #mapDiv1 {
+            position: absolute;
+            left: 150px;
+            top: 5px;
+            width: 250px;
+            height: 350px;
+            padding: 2px;
+            overflow: visible;
+            border: 1px solid red;
+            background: #ccddf2;
+            opacity: 1;
+        }
+        #mapDiv2 {
+            position: absolute;
+            left: 410px;
+            top: 5px;
+            width: 250px;
+            height: 350px;
+            padding: 2px;
+            overflow: hidden;
+            border: 1px solid red;
+            background: #ccddf2;
+            opacity: 1;
+        }
+
+    </style>
+
+    <script>
+
+        function init() {
+            theBody = d3.select("body");
+            xSliderElem = document.getElementById("xSlider");
+            oSliderElem = document.getElementById("oSlider");
+            wSliderElem = document.getElementById("wSlider");
+            bCheckElem = document.getElementById("bCheck");
+            map1 = document.getElementById("mapDiv");
+            map2 = document.getElementById("mapDiv2");
+            bg2 = null; //starts empty!
+            xScale = d3.scale.linear()
+                    .range([150, 410])
+                    .domain([0, 1]);
+            wScale = d3.scale.linear()
+                    .range([0, 250])
+                    .domain([0, 100]);
+            oScale = d3.scale.linear()
+                    .range([0, 1])
+                    .domain([0, 100]);
+        }
+
+        function xSlider() {
+            map2.style.left = xScale(xSliderElem.value);
+            if (xScale(xSliderElem.value) == 150) {
+                oSliderElem.disabled = false;
+                wSliderElem.disabled = false;
+            } else {
+                oSliderElem.disabled = true;
+                wSliderElem.disabled = true;
+            }
+        }
+        function wSlider() {
+            map2.style.width = wScale(wSliderElem.value);
+        }
+        function oSlider() {
+            map2.style.opacity = oScale(oSliderElem.value);
+        }
+        function bCheck() {
+            bg2 = document.getElementById("backgroundMap2");
+            if (bCheckElem.checked) {
+                bg2.style.display = "inline";
+                map2.style.background = "#ccddf2";
+            } else {
+                bg2.style.display = "none";
+                map2.style.background = "none";
+            }
+        }
+
+        function selectMap(place, map) {
+            if (map == 1) {
+                createMap(place, 1, 1);
+            } else if (map == 2) {
+                createMap(place, 1, 2);
+            } else if (map == 3) {
+                createMap(place, 2, 3);
+            } else if (map == 4) {
+                createMap(place, 2, 4);
+            }
+        }
+
+        function createMap(place, bg, fg) {
+            if (place == 1) {
+                theSVG = d3.selectAll("#svgMap1");
+                theSVG.selectAll("*").remove();
+            } else { //place == 2
+                theSVG = d3.selectAll("#svgMap2");
+                theSVG.selectAll("*").remove();
+            }
+            var bgG = theSVG.append("g")
+                    .attr("id", "backgroundMap" + place);
+            if (bg == 1) { // choro BG
+                bgG.append("path")
+                        .attr("class", "buitenland")
+                        .attr("d", "M10,10 L240,10 L240,340 L10,340 L10,10 z")
+                ;
+            } else { // bg == 2 // prop BG
+                bgG.append("path")
+                        .attr("class", "buitenland")
+                        .attr("d", "M10,10 L240,10 L240,340 L10,340 L10,10 z")
+                ;
+                bgG.append("path")
+                        .attr("class", "nederland")
+                        .attr("d", "M10,20 L140,20 L140,160 L10,160 L10,20 z")
+                ;
+                bgG.append("path")
+                        .attr("class", "nederland")
+                        .attr("d", "M140,20 L240,20 L240,160 L140,160 L140,20 z")
+                ;
+                bgG.append("path")
+                        .attr("class", "nederland")
+                        .attr("d", "M10,160 L240,160 L240,310 L10,310 L10,160 z")
+                ;
+            }
+            var fgG = theSVG.append("g")
+                    .attr("id", "foregroundMap" + place);
+            if (fg == 1) { //choro 1
+                fgG.append("path")
+                        .attr("style", "fill:rgb(229,245,224);")
+                        .attr("d", "M10,20 L140,20 L140,160 L10,160 L10,20 z")
+                ;
+                fgG.append("path")
+                        .attr("style", "fill:rgb(161,217,155);")
+                        .attr("d", "M140,20 L240,20 L240,160 L140,160 L140,20 z")
+                ;
+                fgG.append("path")
+                        .attr("style", "fill:rgb(116,196,118);")
+                        .attr("d", "M10,160 L240,160 L240,310 L10,310 L10,160 z")
+                ;
+            } else if (fg == 2) { // choro 2
+                fgG.append("path")
+                        .attr("style", "fill:rgb(107,174,214);")
+                        .attr("d", "M10,20 L140,20 L140,160 L10,160 L10,20 z")
+                ;
+                fgG.append("path")
+                        .attr("style", "fill:rgb(239,243,255);")
+                        .attr("d", "M140,20 L240,20 L240,160 L140,160 L140,20 z")
+                ;
+                fgG.append("path")
+                        .attr("style", "fill:rgb(8,81,156);")
+                        .attr("d", "M10,160 L240,160 L240,310 L10,310 L10,160 z")
+                ;
+            } else if (fg == 3) { // prop 1
+                fgG.append("circle")
+                        .attr("class", "circles")
+                        .attr("cx", "80")
+                        .attr("cy", "100")
+                        .attr("r", "30")
+                ;
+                fgG.append("circle")
+                        .attr("class", "circles")
+                        .attr("cx", "190")
+                        .attr("cy", "100")
+                        .attr("r", "40")
+                ;
+                fgG.append("circle")
+                        .attr("class", "circles")
+                        .attr("cx", "130")
+                        .attr("cy", "230")
+                        .attr("r", "50")
+                ;
+            } else { //fg == 4 // prop 2
+                fgG.append("circle")
+                        .attr("class", "circles")
+                        .attr("cx", "80")
+                        .attr("cy", "100")
+                        .attr("r", "50")
+                ;
+                fgG.append("circle")
+                        .attr("class", "circles")
+                        .attr("cx", "190")
+                        .attr("cy", "100")
+                        .attr("r", "30")
+                ;
+                fgG.append("circle")
+                        .attr("class", "circles")
+                        .attr("cx", "130")
+                        .attr("cy", "230")
+                        .attr("r", "20")
+                ;
+            }
+        }
+
+    </script>
+
+</head>
+
+
+<!-- init with  language = 1 = English -->
+<body id="mainWindow" onload="init()">
+
+<div id="mapDiv1">
+    <svg id="svgMap1" width="250" height="350">
+    </svg>
+</div>
+
+<div id="mapDiv2">
+    <svg id="svgMap2" width="250" height="350">
+    </svg>
+</div>
+
+Main Map:<br>
+<select id="mainMap" onchange="selectMap(1,this.value)">
+    <option value="0"></option>
+    <option value="1">Choropleth 1</option>
+    <option value="2">Choropleth 2</option>
+    <option value="3">Proportional 1</option>
+    <option value="4">Proportional 2</option>
+</select><br><br>
+Compare with:<br>
+<select id="compareMap" onchange="selectMap(2,this.value)">
+    <option value="0"></option>
+    <option value="1">Choropleth 1</option>
+    <option value="2">Choropleth 2</option>
+    <option value="3">Proportional 1</option>
+    <option value="4">Proportional 2</option>
+</select><br><br>
+X-Position:<br>
+<input id="xSlider" type="range"  min="0" max="1" step="1" value="1"
+       oninput="xSlider()"/><br>
+Opacity:<br>
+<input id="oSlider" type="range" disabled="disabled" min="0" max="100" step="1" value="100"
+       oninput="oSlider()"/><br>
+Swipe:<br>
+<input id="wSlider" type="range" disabled="disabled" min="0" max="100" step="1" value="100"
+       oninput="wSlider()"/><br>
+<input id="bCheck" type="checkbox" checked onchange="bCheck()">Overlay Background
+</body>
+</html>
