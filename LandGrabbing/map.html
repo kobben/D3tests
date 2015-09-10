@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+    <title>Map of land grabbing</title>
+    <script src="../lib/d3.min.js"></script>
+    <script src="../lib/d3.geo.projection.min.js"></script>
+    <script src="../lib/topojson.min.js"></script>
+    <style type="text/css">
+        svg {
+            border: none;
+        }
+
+        .land {
+            fill: rgb(255,240,214);
+            stroke: rgb(0,159,227);
+        }
+        .globe {
+            fill: rgb(216,228,246);
+            stroke: rgb(0,159,227);
+        }
+        .borders {
+            fill: none;
+            stroke: rgb(204,114,117);
+            stroke-width: .3px;
+        }
+        .graticule {
+            fill: none;
+            stroke: rgb(0,159,227);
+            stroke-opacity: 1;
+            stroke-width: .2px;
+        }
+
+        #arcs path {
+            fill: none;
+            stroke-opacity: .9;
+        }
+        .tooltip {
+            position: absolute;
+            z-index: 10;
+            pointer-events: none;
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid #ddd;
+            padding: 5px 12px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 2px rgba(120, 120, 120, 0.65);
+            text-shadow: 0 1px 0 #eee;
+        }
+
+        text, body, .tooltip-text {
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+            font-size: 10px;
+            color: #000;
+            margin-bottom: 3px;
+        }
+
+
+    </style>
+</head>
+</head>
+<body>
+<p>
+    Kleinste hoeveelheid afgebeeld:
+    <input id="xSlider" type="range"  min="1" max="1000" step="1" value="1000"
+           oninput="xSlider()"/>
+    <span id="smallestShown">1000</span> ha.
+</p>
+<div id="chart"></div>
+<script type="text/javascript">
+
+    var w = 960, h = 500;
+
+    var smallestShown = 1000;
+
+    var xSliderElem = document.getElementById("xSlider"),
+            sliderTxt = document.getElementById("smallestShown");
+    var xScale = d3.scale.linear()
+            .range([1, 1000])
+            .domain([1, 1000]);
+
+    var arcNodes; //global to be used by slider
+
+    function xSlider() {
+        smallestShown = Math.round(xScale(xSliderElem.value));
+        sliderTxt.innerHTML = Math.round(smallestShown);
+    arcNodes.attr("visibility", function(d) { return d.magnitude > smallestShown ? "visible" : "hidden"})
+    }
+
+    var useGreatCircles = true;
+
+    var tooltip;
+
+    //create tooltip divs:
+    tooltip = d3.select("body")
+            .append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0)
+    ;
+    tooltip.append("div")
+            .attr("class", "tooltip-text")
+    ;
+
+    function toolTipMove(d) {
+        tooltip.style("left", (d.pageX + 7) + "px")
+                .style("top", (d.pageY + 12) + "px");
+    }
+    function toolTipHide() {
+        tooltip.transition()
+                .duration(250)
+                .style("opacity", 0);
+    }
+    function toolTipShow(txt) {
+        tooltip.transition()
+                .duration(250)
+                .style("opacity", 1);
+        tooltip.select('.tooltip-text')
+                .text(txt);
+    }
+
+    var formatNumber = d3.format(",.0f"),
+            formatHa = function(d) { return formatNumber(d).replace(/,/g , ".") + " ha."; };
+
+    d3.loadData = function () {
+        var loadedCallback = null;
+        var toload = {};
+        var data = {};
+        var loaded = function (name, d) {
+            delete toload[name];
+            data[name] = d;
+            return notifyIfAll();
+        };
+        var notifyIfAll = function () {
+            if ((loadedCallback != null) && d3.keys(toload).length === 0) {
+                loadedCallback(data);
+            }
+        };
+        var loader = {
+            json: function (name, url) {
+                toload[name] = url;
+                d3.json(url, function (d) {
+                    return loaded(name, d);
+                });
+                return loader;
+            },
+            csv: function (name, url) {
+                toload[name] = url;
+                d3.csv(url, function (d) {
+                    return loaded(name, d);
+                });
+                return loader;
+            },
+            onload: function (callback) {
+                loadedCallback = callback;
+                notifyIfAll();
+            }
+        };
+        return loader;
+    };
+
+    var projection = d3.geo.robinson()
+            .scale(160)
+            .translate([w / 2, h / 2])
+            .precision(.1);
+
+    var path = d3.geo.path()
+            .projection(projection);
+
+    var arc = d3.geo.greatArc().precision(3) //3);
+
+    var svg = d3.select("body").append("svg")
+            .attr("width", w)
+            .attr("height", h);
+
+    var countries = svg.append("g").attr("id", "countries");
+    var arcs = svg.append("g").attr("id", "arcs");
+
+    svg.append("text")
+            .attr("id", "loading")
+            .attr("x", 5)
+            .attr("y", 17)
+            .attr("font-size", "9pt")
+            .attr("font-family", "arial")
+            .text("Loading...");
+
+    d3.loadData()
+            .json('countries', '../data/world-110m.json')
+            .csv('nodes', 'grabbing-nodes.csv')
+            .csv('flows', 'grabbing-flows.csv')
+            .onload(function (data) {
+
+                d3.select("#loading").attr("visibility", "hidden");
+
+                var nodeDataByName = {}, links = [];
+                var maxMagnitude =
+                        d3.max(data.flows, function (d) {
+                            return parseFloat(d.ha) //ha
+                        });
+
+                var arcWidth = d3.scale.linear().domain([1, maxMagnitude]).range([1,25]);
+//                var minColor = '#f0f0f0', maxColor = 'rgb(8, 48, 107)';
+                var minColor = 'rgb(8, 48, 107)', maxColor = 'rgb(8, 48, 107)';
+                var arcColor = d3.scale.log().domain([1, maxMagnitude]).range([minColor, maxColor]);
+                var arcOpacity = d3.scale.log().domain([1, maxMagnitude]).range([1, 1]);
+
+
+                var globe = {type: "Sphere"};
+                var graticule = d3.geo.graticule()();
+                var land = topojson.feature(data.countries, data.countries.objects.land);
+                var borders = topojson.mesh(data.countries, data.countries.objects.countries);
+
+                countries.append("path")
+                        .datum(globe)
+                        .attr("class", "globe")
+                        .attr("d", path)
+                ;
+                countries.append("path")
+                        .datum(graticule)
+                        .attr("class", "graticule")
+                        .attr("d", path)
+                ;
+                countries.append("path")
+                        .datum(land)
+                        .attr("class", "land")
+                        .attr("d", path)
+                        .attr("class", "land")
+                ;
+                countries.append("path")
+                        .datum(borders)
+                        .attr("class", "borders")
+                        .attr("d", path)
+                ;
+
+                function nodeCoords(node) {
+                    var lon = parseFloat(node.lon), lat = parseFloat(node.lat);
+                    if (isNaN(lon) || isNaN(lat)) return null;
+                    return [lon, lat];
+                }
+
+                data.nodes.forEach(function (node) {
+                    node.coords = nodeCoords(node);
+                    node.projection = node.coords ? projection(node.coords) : undefined;
+                    nodeDataByName[node.name] = node;
+                });
+
+
+                data.flows.forEach(function (flow) {
+                        var o = nodeDataByName[flow.Origin];
+                    var co = o.coords, po = o.projection;
+                        var d = nodeDataByName[flow.Dest];
+                    var cd = d.coords, pd = d.projection;
+                    var magnitude = parseFloat(flow.ha);
+//                    console.log(o.name + "->" + d.name + " = " + magnitude);
+                    if (co && cd && !isNaN(magnitude)) {
+                        links.push({
+                            source: co, target: cd,
+                            magnitude: magnitude,
+                            origin: o, dest: d,
+                            originp: po, destp: pd
+                        });
+                    }
+                });
+
+
+                function splitPath(path) {
+                    var avgd = 0, i, d;
+                    var c, pc, dx, dy;
+                    var points = path.split("L");
+                    if (points.length < 2) return path;
+                    var newpath = [points[0]];
+                    var coords = points.map(function (d, i) {
+                        return d.substr(i > 0 ? 0 : 1).split(","); // remove M and split
+                    });
+
+                    // calc avg dist between points
+                    for (i = 1; i < coords.length; i++) {
+                        pc = coords[i - 1];
+                        c = coords[i];
+                        dx = c[0] - pc[0];
+                        dy = c[1] - pc[1];
+                        d = Math.sqrt(dx * dx + dy * dy);
+                        c.push(d);  // push dist as last elem of c
+                        avgd += d;
+                    }
+                    avgd /= coords.length - 1;
+
+                    // for points with long dist from prev use M instead of L
+                    for (i = 1; i < coords.length; i++) {
+                        c = coords[i];
+                        newpath.push((c[2] > 5 * avgd ? "M" : "L") + points[i]);
+                    }
+                    return newpath.join("");
+                }
+
+
+                var defs = svg.append("svg:defs");
+
+                // see http://apike.ca/prog_svg_patterns.html
+                defs.append("marker")
+                        .attr("id", "arrowHead")
+                        .attr("viewBox", "0 0 10 10")
+                        .attr("refX", 5)
+                        .attr("refY", 5)
+                        .attr("orient", "auto")
+                    .attr("markerUnits", "strokeWidth")
+//                        .attr("markerUnits", "userSpaceOnUse")
+                        .attr("markerWidth", (4 * 2) / 2)
+                        .attr("markerHeight", (3 * 2) /2)
+                        .append("polyline")
+                        .attr("points", "0,0 10,5 0,10 1,5")
+                        .attr("fill", "blue")
+                    //.attr("opacity", 0.5)
+                ;
+
+
+
+                arcNodes = arcs.selectAll("path")
+                        .data(links)
+                        .enter().append("path")
+                    .attr("visibility", function(d) { return d.magnitude > smallestShown ? "visible" : "hidden"})
+                    .attr("stroke", "red")
+                    .attr("opacity", ".5")
+                        .attr("stroke-linecap", "round")
+                        .attr("stroke-width", function (d) {
+                            return arcWidth(d.magnitude);
+                        })
+                        .attr("d", function (d) {
+                            if (useGreatCircles)
+                                return splitPath(path(arc(d)));
+                            else
+                                return path({
+                                    type: "LineString",
+                                    coordinates: [d.source, d.target]
+                                });
+                        })
+                        .on("mousemove", function (d) {
+                            d3.select(this)
+                                    .attr("stroke", "blue")
+                                    .attr("marker-end", "url(#arrowHead)")
+                            ;
+                            toolTipMove(d3.event)
+                        })
+                        .on("mouseleave", function () {
+                            d3.select(this)
+                                    .attr("stroke", "red")
+                                    .attr("marker-end", "none")
+                            ;
+                            toolTipHide()
+                        })
+                        .on("mouseenter", function (d) {
+                            toolTipShow(d.origin.name + " -> " + d.dest.name + ": " + formatHa(d.magnitude));
+                        })
+                        .sort(function (a, b) {
+                            var a = a.magnitude, b = b.magnitude;
+                            if (isNaN(a)) if (isNaN(b)) return 0; else return -1;
+                            if (isNaN(b)) return 1;
+                            return d3.ascending(a, b);
+                        });
+
+
+
+            });
+
+</script>
+
+<p><a href="index.html">OVERZICHT</a> -- KAART -- <a href="flowdiagram.html">STROOMDIAGRAM</a> -- <a href="odmatrix.html">MATRIX</a>
+</p>
+</body>
+</html>

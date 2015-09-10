@@ -1,0 +1,279 @@
+Origin,Dest,ha
+UAE,Algeria,31
+China,Angola,2
+Portugal,Angola,45
+UK,Angola,25
+Brazil,Argentina,7
+Denmark,Argentina,12433
+France,Argentina,5810
+Germany,Argentina,20
+Saudi Arabia,Argentina,12506
+Singapore,Argentina,17
+South Korea,Argentina,20894
+USA,Argentina,242
+Brazil,Australia,1876
+Canada,Australia,507
+China,Australia,1708
+Denmark,Australia,18
+Germany,Australia,27
+Qatar,Australia,750
+Singapore,Australia,3
+South Korea,Australia,216
+Sweden,Australia,16
+UK,Australia,3200047
+USA,Australia,75
+Italy,Benin,250
+Nigeria,Benin,2
+Argentina,Bolivia,17
+China,Bolivia,13
+Argentina,Brazil,455
+Canada,Brazil,97124
+France,Brazil,61681
+India,Brazil,133
+Japan,Brazil,100
+New Zealand,Brazil,850
+Portugal,Brazil,29528
+UK,Brazil,30
+USA,Brazil,854
+Bulgaria,Bulgaria,21
+UK,Bulgaria,4
+USA,Bulgaria,29438
+India,Cambodia,20
+South Korea,Cambodia,8
+Thailand,Cambodia,20
+China,Cameroon,10
+France,Cameroon,12
+India,Cameroon,200
+USA,Cameroon,73
+Singapore,China,145
+Argentina,Colombia,1
+Brazil,Colombia,13
+Israel,Colombia,10
+Spain,Colombia,60
+USA,Colombia,90
+Italy,Congo Brazzaville,114
+Malaysia,Congo Brazzaville,470
+South Africa,Congo Brazzaville,80
+Singapore,Ivory Coast,47
+Canada,Congo,110
+China,Congo,100
+Germany,Congo,25
+China,Congo,2800000
+Australia,Congo,3
+Israel,Congo,2000000
+China,Congo,208
+Unknown,Congo,3000000
+Saudi Arabia,Egypt,74
+UAE,Egypt,69
+China,Ethiopia,25
+Djibouti,Ethiopia,5
+Netherlands,Ethiopia,1
+Egypt,Ethiopia,20
+Germany,Ethiopia,56
+India,Ethiopia,609
+Italy,Ethiopia,30
+Saudi Arabia,Ethiopia,140
+China,Ethiopia,115182
+Belgium,Gabon,107
+Singapore,Gabon,300
+Spain,Gambia,200
+Brazil,Ghana,5
+France,Ghana,4
+Germany,Ghana,22
+Singapore,Ghana,6157
+Spain,Ghana,10
+UAE,Ghana,10
+UK,Ghana,104
+USA,Ghana,4364
+UK,Guinea,106415
+Germany,Hungary,11
+India,Indonesia,56
+Singapore,Indonesia,233
+China,Indonesia,33
+India,Indonesia,2079847
+Malaysia,Indonesia,643397
+Qatar,Indonesia,500
+Singapore,Indonesia,139814
+UK,Indonesia,500
+USA,Indonesia,355
+Unknown,Indonesia,3091434
+China,Jamaica,18
+USA,Kenya,7
+China,Laos,50
+Thailand,Laos,70
+Ivory Coast,Liberia,9
+Libya,Liberia,15
+Malaysia,Liberia,220
+Singapore,Liberia,220
+USA,Liberia,17
+UK,Liberia,169
+Germany,Lithuania,8
+Ireland,Lithuania,582
+China,Madagascar,10
+India,Madagascar,159
+UK,Madagascar,200
+China,Mali,20
+Libya,Mali,100
+UK,Mali,37
+USA,Mali,22471
+Saudi Arabia,Mauritania,2
+UAE,Morocco,700
+China,Mozambique,1
+France,Mozambique,100
+India,Mozambique,24
+Italy,Mozambique,9
+Libya,Mozambique,20
+Portugal,Mozambique,39
+Singapore,Mozambique,227
+South Africa,Mozambique,1031178
+Sweden,Mozambique,15
+UK,Mozambique,197
+USA,Mozambique,10
+Portugal,Mozambique,24234
+UK,Namibia,40
+Australia,New Zealand,13691
+China,New Zealand,8615
+Denmark,New Zealand,14461
+Germany,New Zealand,1473
+Italy,New Zealand,16666
+Switzerland,New Zealand,8484
+UK,New Zealand,22
+USA,New Zealand,2
+China,Nigeria,6
+Italy,Nigeria,11292
+Saudi Arabia,Nigeria,1
+UK,Nigeria,300
+USA,Nigeria,30
+Vietnam,Nigeria,10
+Vietnam,Nigeria,14
+UAE,Pakistan,324
+Malaysia,Papua New Guinea,281
+South Korea,Papua New Guinea,33
+Argentina,Paraguay,164
+France,Paraguay,2859
+USA,Peru,14
+Japan,Philippines,11
+Saudi Arabia,Philippines,50
+South Korea,Philippines,194
+UK,Philippines,5
+Brunei,Philippines,20
+China,Philippines,45
+UK,Philippines,707
+Japan,Philippines,211
+South Korea,Philippines,344
+Kuwait,Philippines,20
+Oman,Philippines,10
+Qatar,Philippines,100
+Saudi Arabia,Philippines,286
+USA,Philippines,10
+South Korea,Philippines,174
+Saudi Arabia,Philippines,273
+Japan,Philippines,45
+New Zealand,Philippines,45
+Unknown,Philippines,20
+India,Philippines,10
+China,Philippines,240
+Saudi Arabia,Philippines,232
+Singapore,Philippines,100
+South Korea,Philippines,100011
+Unknown,Philippines,740
+Ireland,Poland,1119
+Sweden,Poland,6705
+Denmark,Romania,8632
+Germany,Romania,12
+Italy,Romania,5
+Portugal,Romania,25244
+China,Russia,426667
+Czech Republic,Russia,164
+France,Russia,67
+Germany,Russia,203
+Kazakhstan,Russia,667
+Singapore,Russia,60
+South Korea,Russia,10
+Sweden,Russia,689
+UK,Russia,33870
+USA,Russia,350
+Denmark,Russia,120626
+Lithuania,Russia,40
+China,Senegal,60
+France,Senegal,570
+Nigeria,Senegal,40
+Ireland,Serbia,12
+China,Sierra Leone,38
+France,Sierra Leone,12
+Germany,Sierra Leone,3
+India,Sierra Leone,80
+Iran,Sierra Leone,10
+Malaysia,Sierra Leone,3
+Portugal,Sierra Leone,126
+Switzerland,Sierra Leone,16
+UK,Sierra Leone,131
+Germany,Slovakia,5167
+UK,South Africa,14
+Canada,South Sudan,12
+Egypt,South Sudan,105
+Saudi Arabia,South Sudan,105
+Sudan,South Sudan,162
+USA,South Sudan,1000
+UAE,Spain,5
+Brazil,Sudan,100
+China,Sudan,10
+Djibouti,Sudan,4
+Egypt,Sudan,532
+Philippines,Sudan,25
+Qatar,Sudan,100
+Saudi Arabia,Sudan,9407
+South Korea,Sudan,690
+UAE,Sudan,1500105
+UAE,Sudan,38
+UK,Swaziland,1386
+China,Tajikistan,40
+Germany,Tanzania,5
+UK,Tanzania,5923
+Sweden,Tanzania,798
+South Korea,Tanzania,100
+Netherlands,Tanzania,4
+Belgium,Tanzania,10
+Unknown,Tanzania,50
+Sweden,Tanzania,50
+Unknown,Tanzania,9294
+UK,Tanzania,6218
+Unknown,Tanzania,31
+South Africa,Tanzania,7
+Indonesia,Tanzania,8
+Sweden,Tanzania,219
+USA,Tanzania,50
+UK,Tanzania,5818
+Malaysia,Tanzania,40
+USA,Tanzania,80562
+Netherlands,Tanzania,10
+Kenya,Tanzania,10
+Netherlands,Tanzania,13
+Unknown,Tanzania,11015
+China,Uganda,4
+Egypt,Uganda,800
+Iceland,Uganda,270
+India,Uganda,15
+Singapore,Uganda,40
+Denmark,Ukraine,55
+France,Ukraine,51
+Germany,Ukraine,13
+Russia,Ukraine,250
+Sweden,Ukraine,93
+UK,Ukraine,21
+USA,Ukraine,719
+Argentina,Uruguay,245
+Denmark,Uruguay,20
+France,Uruguay,13618
+Singapore,Uruguay,34
+USA,Uruguay,9
+Canada,USA,93
+Denmark,USA,1427
+Ireland,USA,1
+Germany,Zambia,27
+India,Zambia,100
+Saudi Arabia,Zambia,5
+Singapore,Zambia,57
+South Africa,Zambia,15
+UK,Zambia,2533
+UK,Zimbabwe,9913

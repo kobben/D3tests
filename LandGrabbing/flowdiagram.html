@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<title>Flow Diagram of Landgrabbing</title>
+<style>
+
+
+#chart {
+  height: 620px;
+}
+
+.node rect {
+  cursor: move;
+  fill-opacity: .9;
+  shape-rendering: crispEdges;
+}
+
+.node text, p {
+    font-family : Helvetica, Arial, sans-serif;
+    font-size: 10px;
+}
+
+.titles {
+    font-family : Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    pointer-events: none;
+}
+
+.link {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: .2;
+}
+
+.link:hover {
+    stroke: #f00;
+  stroke-opacity: .5;
+}
+
+.tooltip {
+    position: absolute;
+    z-index: 10;
+    pointer-events: none;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid #ddd;
+    padding: 5px 12px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px rgba(120, 120, 120, 0.65);
+    text-shadow: 0 1px 0 #eee;
+}
+
+.tooltip-text {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    color: #000;
+    margin-bottom: 3px;
+}
+
+</style>
+<body>
+
+<p id="chart">
+
+<script src="../lib/d3.v3.min.js"></script>
+<script src="../lib/sankey.js"></script>
+<script>
+
+var margin = {top: 25, right: 80, bottom: 1, left: 80},
+    width = 800 - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom;
+
+function toolTipMove(d) {
+    tooltip.style("left", (d.pageX + 7) + "px")
+            .style("top", (d.pageY + 12) + "px");
+}
+function toolTipHide() {
+    tooltip.transition()
+            .duration(250)
+            .style("opacity", 0);
+}
+function toolTipShow(txt) {
+    tooltip.transition()
+            .duration(250)
+            .style("opacity", 1);
+    tooltip.select('.tooltip-text')
+            .text(txt);
+}
+
+
+var formatNumber = d3.format(",.0f"),
+        formatHa = function(d) { return formatNumber(d).replace(/,/g , ".") + " ha."; },
+    color = d3.scale.category20();
+
+var svg = d3.select("#chart").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var sankey = d3.sankey()
+    .nodeWidth(50)
+    .nodePadding(10)
+    .size([width, height]);
+
+var path = sankey.link();
+
+var tooltip;
+
+//create tooltip divs:
+tooltip = d3.select("body")
+        .append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0)
+;
+tooltip.append("div")
+        .attr("class", "tooltip-text")
+;
+
+d3.json("grabbing-flow.json", function(grabbing) {
+
+  sankey
+      .nodes(grabbing.nodes)
+      .links(grabbing.links)
+      .layout(1);
+
+    var link = svg.append("g").selectAll(".link")
+        .data(grabbing.links)
+        .enter().append("path")
+        .attr("class", "link")
+        .attr("d", path)
+        .style("stroke-width", function (d) {
+            return Math.max(1, d.dy);
+        })
+        .sort(function (a, b) {
+            return b.dy - a.dy;
+        })
+        .on("mousemove", function () {
+            toolTipMove(d3.event)
+        })
+        .on("mouseleave", function () {
+            toolTipHide()
+        })
+        .on("mouseenter", function (d) {
+            toolTipShow(d.source.name + " -> " + d.target.name + ": " + formatHa(d.value));
+        })
+        ;
+
+  var titles = svg.append("g").attr("class", "titles");
+    titles.append("text")
+      .attr("x", 0 - margin.left)
+      .attr("y", -15 )
+      .attr("dy", ".35em")
+      .attr("text-anchor", "start")
+      .attr("transform", null)
+      .text("'GRABBERS':")
+      ;
+    titles.append("text")
+        .attr("x", width/2)
+        .attr("y", -15 )
+        .attr("dy", ".35em")
+        .attr("text-anchor", "middle")
+        .attr("transform", null)
+        .text("(sleep landen-blokken om ze te verplaatsen)")
+    ;
+    titles.append("text")
+      .attr("x", width + margin.right)
+      .attr("y", -15 )
+      .attr("dy", ".35em")
+      .attr("text-anchor", "end")
+      .attr("transform", null)
+      .text("'GRABBED':")
+    ;
+
+  var node = svg.append("g").selectAll(".node")
+      .data(grabbing.nodes)
+    .enter().append("g")
+      .attr("class", "node")
+      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+      .on("mousemove", function () {
+          toolTipMove(d3.event)
+      })
+      .on("mouseleave", function () {
+          toolTipHide()
+      })
+      .on("mouseenter", function (d) {
+          toolTipShow(d.name + ": " + formatHa(d.value));
+      })
+    .call(d3.behavior.drag()
+      .origin(function(d) { return d; })
+      .on("dragstart", function() { this.parentNode.appendChild(this); })
+      .on("drag", dragmove));
+
+  node.append("rect")
+      .attr("height", function(d) { return d.dy; })
+      .attr("width", sankey.nodeWidth())
+      .style("fill", function(d) { return d.color = color(d.name.replace(/ .*/, "")); })
+      .style("stroke", function(d) { return d3.rgb(d.color).darker(2); })
+  ;
+
+  node.append("text")
+      .attr("x", 60)
+      .attr("y", function(d) { return d.dy / 2; })
+      .attr("dy", ".35em")
+      .attr("text-anchor", "start")
+      .attr("transform", null)
+      .text(function(d) { return d.name; })
+    .filter(function(d) { return d.x < width / 2; })
+      .attr("x", -60 + sankey.nodeWidth())
+      .attr("text-anchor", "end");
+
+  function dragmove(d) {
+    d3.select(this).attr("transform", "translate(" + d.x + "," + (d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))) + ")");
+    sankey.relayout();
+    link.attr("d", path);
+  }
+});
+
+////Encode the SVG DOM for saving
+//function doSave() {
+//    var serializer = new XMLSerializer();
+//        var xmlString = serializer.serializeToString(d3.select('svg').node());
+////    var xmlString = serializer.serializeToString(document.getElementById("chart"));
+//    SVGDownload = 'data:image/svg+xml;base64,' + btoa(xmlString);
+//    document.getElementById("downloadLink").href = SVGDownload;
+//}
+</script>
+</p>
+<!--<a id="downloadLink" href="" download='download'>Download</a>-->
+
+<p><a href="index.html">OVERZICHT</a> -- <a href="map.html">KAART</a> -- STROOMDIAGRAM -- <a href="odmatrix.html">MATRIX</a>
+</p>
+</body></html>
