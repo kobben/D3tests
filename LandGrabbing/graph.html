@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="./styles.css">
+<style>
+
+    .link {
+        stroke: blue;
+        stroke-opacity: .2;
+        stroke-linecap: round;
+    }
+
+    .node text {
+        pointer-events: none;
+        font-size: 10px;
+        font-family: Arial, sans-serif;
+        font-style: normal;
+    }
+    .node circle {
+        fill: black;
+    }
+
+    .tooltip {
+        position: absolute;
+        z-index: 10;
+        pointer-events: none;
+        background: rgba(255, 255, 255, 0.85);
+        border: 1px solid #ddd;
+        padding: 5px 12px;
+        border-radius: 5px;
+        box-shadow: 2px 2px 2px rgba(120, 120, 120, 0.65);
+        text-shadow: 0 1px 0 #eee;
+    }
+
+    .tooltip-text {
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        color: #000;
+        margin-bottom: 3px;
+    }
+
+</style>
+<body>
+<script src="../lib/d3.min.js"></script>
+<p>Mouse-over om de data te zien, sleep landen om layout the veranderen, herlaad pagina voor re-initialisatie...</p>
+<script>
+    var width = 1000,
+    height = 800;
+
+var dScale = d3.scale.linear()
+        .domain([0, 3000000])
+        .range([75, 150])
+    ;
+
+var force = d3.layout.force()
+        .charge(function (d) {
+            W = d.weight * -500;
+            return W;
+        })
+        .chargeDistance(250)
+        .linkDistance(function (d) {
+            D = dScale(d.value);
+            return D;
+        })
+        .size([width, height]);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+    var defs = svg.append("svg:defs");
+
+// see http://apike.ca/prog_svg_patterns.html
+defs.append("marker")
+        .attr("id", "arrowHeadBlue")
+        .attr("viewBox", "0 0 10 10")
+        .attr("refX", 15)
+        .attr("refY", 5)
+        .attr("orient", "auto")
+        .attr("markerUnits", "userSpaceOnUse")
+        .attr("markerWidth", 10)
+        .attr("markerHeight", 10)
+        .append("polyline")
+        .attr("points", "0,0 10,5 0,10 1,5")
+        .attr("fill", "blue")
+        .attr("opacity", 0.5)
+;
+defs.append("marker")
+        .attr("id", "arrowHeadRed")
+        .attr("viewBox", "0 0 10 10")
+        .attr("refX", 10)
+        .attr("refY", 5)
+        .attr("orient", "auto")
+        .attr("markerUnits", "userSpaceOnUse")
+        .attr("markerWidth", 25)
+        .attr("markerHeight", 25)
+        .append("polyline")
+        .attr("points", "0,0 10,5 0,10 1,5")
+        .attr("fill", "red")
+        .attr("opacity", 1)
+;
+
+var formatNumber = d3.format(",.0f"),
+        formatHa = function(d) { return formatNumber(d).replace(/,/g , ".") + " ha."; };
+
+var tooltip;
+
+//create tooltip divs:
+tooltip = d3.select("body")
+        .append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0)
+;
+tooltip.append("div")
+        .attr("class", "tooltip-text")
+;
+
+function toolTipMove(evt) {
+    tooltip.style("left", (evt.pageX + 7) + "px")
+            .style("top", (evt.pageY + 12) + "px");
+}
+function toolTipHide() {
+    tooltip.transition()
+            .duration(250)
+            .style("opacity", 0);
+}
+function toolTipShow(txt) {
+    tooltip.transition()
+            .duration(250)
+            .style("opacity", 1);
+    tooltip.select('.tooltip-text')
+            .text(txt);
+}
+
+
+d3.json("grabbing-graph.json", function(error, graph) {
+  if (error) throw error;
+
+  var nodeById = d3.map();
+
+  graph.nodes.forEach(function(node) {
+    nodeById.set(node.id, node);
+  });
+
+  graph.links.forEach(function(link) {
+      link.source = nodeById.get(link.source);
+//      console.log("source: " + link.source.id + "=" + nodeById.get(link.source));
+      link.target = nodeById.get(link.target);
+//      console.log("target: " + link.target.id + "=" + nodeById.get(link.target));
+  });
+
+  force
+      .nodes(graph.nodes)
+      .links(graph.links)
+      .start();
+
+    var link = svg.selectAll(".link")
+                .data(graph.links)
+                .enter()
+                .append("line")
+                    .attr("class", "link")
+                    .style("stroke-width", function (d) {
+                        var W = d.value / 50000;
+                        if (W < 0.5) W = 1;
+                        return W;
+                    })
+                    .on("mousemove", function (d) {
+                        toolTipMove(d3.event)
+                    })
+                    .on("mouseleave", function (d) {
+                        d3.select(this)
+                                .style("stroke", "blue")
+                                .style("stroke-opacity", ".2")
+                                .attr("marker-end", "url(#arrowHeadBlue)")
+                        ;
+                        toolTipHide()
+                    })
+                    .on("mouseenter", function (d) {
+                        d3.select(this)
+                                .style("stroke", "red")
+                                .style("stroke-opacity", ".5")
+                                .attr("marker-end", "url(#arrowHeadRed)")
+                        ;
+                        toolTipShow(d.source.id + " -> " + d.target.id + ": " + formatHa(d.value));
+                    })
+            ;
+
+
+    var node = svg.selectAll(".node")
+            .data(graph.nodes)
+            .enter().append("g")
+            .attr("class", "node")
+            .call(force.drag);
+
+    node.append("circle")
+            .attr("cx", 0)
+            .attr("cy", 0)
+            .attr("r", 6)
+    ;
+
+    node.append("text")
+            .attr("dx", 12)
+            .attr("dy", ".35em")
+            .text(function(d) { return d.id });
+
+    force.on("tick", function() {
+        link.attr("x1", function(d) { return d.source.x; })
+                .attr("y1", function(d) { return d.source.y; })
+                .attr("x2", function(d) { return d.target.x; })
+                .attr("y2", function(d) { return d.target.y; })
+        ;
+
+        node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+        link.attr("marker-end", "url(#arrowHeadBlue)")
+        ;
+    });
+});
+
+</script>
+
+<p><a href="index.html">OVERZICHT</a> -- <a href="map.html">KAART</a> -- <a href="flowdiagram.html">STROOMDIAGRAM</a>
+    -- NETWERK -- <a href="odmatrix.html">MATRIX</a>
+</p>
