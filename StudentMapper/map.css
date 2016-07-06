@@ -18,6 +18,7 @@ h1, h2, h3 {
 
 svg {
     background: #eee;
+    overflow: hidden;
 }
 
 .sphere {
