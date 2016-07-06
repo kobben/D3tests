@@ -1,0 +1,154 @@
+#topDiv {
+  padding: 40px 0px;
+  text-align: center;
+  color: #E6E6E6;
+}
+
+.navBox, .navBoxActive {
+  display: inline-block;
+  text-decoration: none;
+  color: #404040;
+  width: 170px;
+  padding: 10px 0px;
+  margin: 5px;
+  text-align: center;
+  font-family: "Open Sans Condensed", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.navBox {
+    background-color: #ccc;
+}
+
+.navBoxActive {
+    background-color: #fff;
+}
+
+#container {
+  display: block;
+  position: relative;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1300px;
+  height: 600px;
+  border: 1px solid #c8c8c8;
+}
+
+#mapDiv {
+  background-color: #ffffff;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 1000px;
+  height: 600px;
+}
+
+#infoDiv {
+  position: absolute;
+  left: 1000px;
+  top: 0px;
+  width: 270px;
+  height: 495px;
+  padding: 15px 15px 90px 15px;
+  background-color: #f2f2f2;
+  text-align: left;
+  color: #000;
+}
+
+#linkDiv {
+  display: block;
+  text-decoration: none;
+  color: #EBF4FA;
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  width: 270px;
+  padding: 10px 0px;
+  margin: 15px;
+  text-align: center;
+  font-family: "Open Sans Condensed", sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+#textDiv {
+  display: block;
+  left: 0;
+  right: 0;
+  margin: 40px auto;
+  margin-right: auto;
+  padding: 20px;
+  width: 700px;
+  color: #EBF4FA;
+  border: 1px solid #c8c8c8;
+}
+
+body {
+  background: #404040;
+  font-size: 1em;
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1 { 
+  font-size: 2em;
+  margin-top: 0em;
+  margin-bottom: 0em;
+  margin-left: 0;
+  margin-right: 0;
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+
+h2 {
+  font-size: 1.2em;
+  margin-top: 0em;
+  margin-bottom: 0.1em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+
+a {
+  color: currentColor;
+}
+
+sub {
+  font-size: 0.83em;
+  vertical-align: sub;
+  line-height: 0;
+}
+
+.choice {
+  display: inline-block;
+  text-decoration: none;
+  color: #404040;
+  width: 170px;
+  padding: 10px 0px;
+  margin: 5px;
+  text-align: center;
+  font-family: "Open Sans Condensed", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+input[type="checkbox"] {
+    display:none;
+}
+
+
+input[type="checkbox"]:checked + label {
+  display: inline-block;
+  text-decoration: none;
+  color: #404040;
+  width: 170px;
+  padding: 10px 0px;
+  margin: 5px;
+  text-align: center;
+  font-family: "Open Sans Condensed", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+}

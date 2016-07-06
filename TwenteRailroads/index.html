@@ -9,7 +9,7 @@
 
 <body>
 
-
+<div id="map">
 <script type="text/javascript">
 
     function showJaar(jaar) {
@@ -25,9 +25,7 @@
 
     var minJaar = 1864, maxJaar = 2015;
 
-    var SvgWidth = 700,
-            SvgHeight = 580
-            ;
+    var SvgWidth = 700, SvgHeight = 580;
 
     var minX = 21300, maxX = 71930,
             minY = -50000, maxY = -3700
@@ -208,12 +206,12 @@
     }
 
 </script>
+</div>
 <div id="controls">
-    <input size="4" id="jaarBox" type="text" value="1928" onchange="setJaarBox()" />
+    <input size="4" id="jaarBox" type="text" value="1928" onchange="setJaarBox()"/>
     <br/>
     <input id="jaarSlider" type="range" min="1864" max="2015" step="1" value="1928"
-           oninput="setJaarSlider()"/>
-</div>
+           onchange="setJaarSlider()" oninput="setJaarSlider()">
 <p class="bold">HISTORY OF RAILROADS IN
     TWENTE</p>
 <p>This web-map shows the history of the railroads in Twente (a region in
@@ -227,11 +225,11 @@
     which is a defined by Dutch law, and quite different from American, British
     or other systems!</p>
         <p>
-        <span class="bold">INTERACTIVITY:</span><br>
+        <span class="bold">HOW TO USE:</span><br>
             You can drag the slider left and right
             to change the year (from 1864 - 2015).
             For quick changes, click anywhere on the slider area.
-            For precise year-by-year changes, click in the year text and change it to the year desired.
+            For precise year-by-year changes, use the arrow keys, or change the text to the year desired.
             Moving the mouse over the railroads show a tooltip with available information
          <p><font size="-2"><strong>Sources: </strong></font><font size="-2">The
             data is based on many publications, the most important being &quot;Lokaalspoorwegen
@@ -239,5 +237,6 @@
             en tramwegkaart van het Koninkrijk der Nederlanden&quot; (map 1:400.000
             of 1931)</font><br>
         </p>
+</div>
 </body>
 </html>

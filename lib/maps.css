@@ -183,3 +183,7 @@ svg {
     text-align: left;
     text-anchor: start;
 }
+
+td {
+    padding-right: 25px;
+}

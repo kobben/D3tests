@@ -1,0 +1,8 @@
+{"name":"centroids","type":"FeatureCollection"
+,"features":[
+{"type":"Feature","geometry":{"type":"Point","coordinates":[95.7503726784575,44.947893224763]},"properties":{"CONTINENT":"Asia"}}
+,{"type":"Feature","geometry":{"type":"Point","coordinates":[28.2490403487618,55.854069295846]},"properties":{"CONTINENT":"Europe"}}
+,{"type":"Feature","geometry":{"type":"Point","coordinates":[18.2766152761761,6.42611720528685]},"properties":{"CONTINENT":"Africa"}}
+,{"type":"Feature","geometry":{"type":"Point","coordinates":[135.832753230392,-26.1688517526893]},"properties":{"CONTINENT":"Australia"}}
+,{"type":"Feature","geometry":{"type":"Point","coordinates":[-100.0761145606403,35.4442337725868]},"properties":{"CONTINENT":"America"}}
+]}

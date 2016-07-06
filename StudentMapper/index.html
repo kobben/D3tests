@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html lang="en‐GB">
+<head><title>The Graphic Web Locations</title>
+    <script src="../lib/d3.v3.min.js"></script>
+    <script src="../lib/d3.geo.projection.min.js"></script>
+    <script src="../lib/topojson.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="./map.css">
+</head>
+
+<body>
+
+<h2 id="theTitle">STUDENT LOCATIONS</h2>
+
+<div id="mapDiv">
+    <script>
+
+        var width = 800,
+                height = 480;
+
+
+        var tooltip;
+
+        //create tooltip divs:
+        tooltip = d3.select("body")
+                .append("div")
+                .attr("class", "tooltip")
+                .style("opacity", 0)
+        ;
+        tooltip.append("div")
+                .attr("class", "tooltip-text")
+        ;
+
+        function toolTipMove(d) {
+            tooltip.style("left", (d.pageX + 7) + "px")
+                    .style("top", (d.pageY + 12) + "px");
+        }
+        function toolTipHide() {
+            tooltip.transition()
+                    .duration(250)
+                    .style("opacity", 0);
+        }
+        function toolTipShow(txt) {
+            tooltip.transition()
+                    .duration(250)
+                    .style("opacity", 1);
+            tooltip.select('.tooltip-text')
+                    .text(txt);
+        }
+
+
+        //Define map projection
+        var projection = d3.geo.robinson()
+                .scale(140)
+                .translate([width / 2, height / 2])
+                .precision(.1);
+
+        var zoom = d3.behavior.zoom()
+                .scaleExtent([1, 8])
+                .on("zoom", zoomed);
+
+        var path = d3.geo.path()
+                .projection(projection);
+
+        var svg = d3.select("body").append("svg")
+                .attr("width", width)
+                .attr("height", height)
+                .append("g");
+
+        var zoomGroup = svg.append("g");
+
+        zoomGroup.append("rect")
+                .attr("class", "overlay")
+                .attr("width", width)
+                .attr("height", height)
+        ;
+
+        zoomGroup
+                .call(zoom)
+                .call(zoom.event);
+
+
+        d3.csv("get_students.py", function (error, students) {
+            if (error) alert(error);
+//            console.log(students);
+
+            d3.json("./world-50m.json", function (error, world) {
+                if (error) throw error;
+
+                zoomGroup.append("path")
+                        .datum({type: "Sphere"})
+                        .attr("class", "sphere")
+                        .attr("d", path);
+
+                zoomGroup.append("path")
+                        .datum(topojson.merge(world, world.objects.countries.geometries))
+                        .attr("class", "land")
+                        .attr("d", path);
+
+                zoomGroup.append("path")
+                        .datum(topojson.mesh(world, world.objects.countries, function (a, b) {
+                            return a !== b;
+                        }))
+                        .attr("class", "boundary")
+                        .attr("d", path);
+
+                var coordPair = [];
+
+                zoomGroup.append("g")
+                        .attr("id", "students")
+                        .selectAll("path")
+                        .data(students)
+                        .enter().append("circle")
+                        .attr("class", "normalcity")
+                        .attr("cx", function (d) {
+                            coordPair[0] = d.lon;
+                            coordPair[1] = d.lat;
+//                        console.log(d.id + " : " + coordPair[0] + ", " + coordPair[1]);
+                            return projection(coordPair)[0];
+                        }) // transform the supplied lon to svg "cx"
+                        .attr("cy", function (d) {
+                            coordPair[0] = d.lon;
+                            coordPair[1] = d.lat;
+                            return projection(coordPair)[1];
+                        }) // transform the supplied lat to svgto svg "cy"
+                        .attr("r", 4)
+                        .on("mousemove", function (d) {
+                            toolTipMove(d3.event);
+                        })
+                        .on("mouseleave", function () {
+                            toolTipHide()
+                        })
+                        .on("mouseenter", function (d) {
+                            toolTipShow(d.name + " (" + d.country + ")");
+                        })
+                ;
+
+
+            })
+        })
+        ;
+
+
+        function zoomed() {
+            zoomGroup.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+//        console.log(4 / d3.event.scale);
+            d3.selectAll(".normalcity").attr("r", (4 / (d3.event.scale)));
+        }
+
+
+    </script>
+
+
+</div>
+<div>
+    <FORM ACTION="add_student.py" METHOD="POST">
+        Name: <INPUT TYPE="TEXT" NAME="name">
+        Country: <INPUT TYPE="TEXT" NAME="country">
+        Longitude: <INPUT TYPE="TEXT" NAME="lon">
+        Latitude: <INPUT TYPE="TEXT" NAME="lat">
+        <INPUT TYPE=SUBMIT NAME="Submit" VALUE="Add Me">
+    </FORM>
+</div>
+
+</body>
+</html>

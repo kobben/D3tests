@@ -7,13 +7,11 @@
 <body>
 
 <svg id="svg" height="100%" width="100%">
-  <circle cx="40" cy="60" r="10"></circle>
-  <circle cx="80" cy="60" r="10"></circle>
-  <circle cx="120" cy="60" r="10"></circle>
 </svg>
 <script>
-  var circle = d3.selectAll("circle");
+  var svg = d3.selectAll("svg");
   circle.data([500,150,1000]);
+  circle.enter().append("circle")
   circle.attr("fill", "steelblue");
   circle.attr("r", function(d) { return Math.sqrt(d); });
   circle.attr("cx", function(d, i) { return  i * 100 + 40; });

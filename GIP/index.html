@@ -1,0 +1,267 @@
+<html>
+<head>
+    <meta charset="utf-8">
+
+
+    <title>GIP STAMP</title>
+
+    <script src="../lib/d3.min.js"></script>
+    <link href="./style.css" rel="stylesheet" type="text/css">
+
+    <script>
+
+        function init() {
+
+            show("#dataorganization",500,500);
+            show("#cloudandcrowd",1000,500);
+            show("#modelling",1500,500);
+            show("#analytics",2000,500);
+            show("#geovisualization",2500,500);
+            show("#problem",3500,500);
+            show("#tools",4000,500);
+            show("#solution",4500,500);
+            show("#legend",5500,500);
+
+            show("#f1",5500,500);
+            show("#f2",6000,500);
+            show("#f3",6500,500);
+            show("#f4",7000,500);
+            show("#f5",7500,500);
+            show("#f6",8000,500);
+
+            show("#f7",9500,500);
+            show("#f8",10000,500);
+            show("#f9",10500,500);
+            show("#f10",11000,500);
+            show("#f11",11500,500);
+        }
+
+        function show(g, d, ms) {
+            d3.select(g)
+                    .transition()
+                    .delay(d)
+                    .duration(ms)
+                    .style("opacity",1)
+            ;
+        }
+
+
+    </script>
+
+</head>
+
+
+<!-- init -->
+<body id="mainWindow" onload="init()">
+
+
+<!-- THE SVG FROM THE ORIGINAL GRAPHIC, only added id's -->
+
+<svg version="1.1" id="GIPsvg"
+	 xmlns="http://www.w3.org/2000/svg"
+	 viewBox="0 0 517 213"  xml:space="preserve" >
+
+        <filter  filterUnits="userSpaceOnUse" id="Shadow_2">
+	<feGaussianBlur  in="SourceAlpha" result="blur" stdDeviation=".872"></feGaussianBlur>
+	<feOffset  in="blur" result="offset" dx="1.4173228" dy="1.4173228"></feOffset>
+	<feFlood  result="flood" flood-color="black" flood-opacity=".5"></feFlood>
+	<feComposite  in="flood" result="color" in2="offset" operator="in"></feComposite>
+	<feMerge>
+		<feMergeNode  in="color"></feMergeNode>
+		<feMergeNode  in="SourceGraphic"></feMergeNode>
+	</feMerge>
+</filter>
+<filter  filterUnits="userSpaceOnUse" id="Shadow">
+	<feGaussianBlur  in="SourceAlpha" result="blur" stdDeviation="1.308"></feGaussianBlur>
+	<feOffset  in="blur" result="offset" dx="1.4173228" dy="1.4173228"></feOffset>
+	<feFlood  result="flood" flood-color="black" flood-opacity=".5"></feFlood>
+	<feComposite  in="flood" result="color" in2="offset" operator="in"></feComposite>
+	<feMerge>
+		<feMergeNode  in="color"></feMergeNode>
+		<feMergeNode  in="SourceGraphic"></feMergeNode>
+	</feMerge>
+</filter>
+
+<defs>
+</defs>
+
+
+
+<g id="domaincircle" class="showFromStart">
+	<circle style="fill:#FFFFFF; stroke:#cccccc; stroke-width:6px;" cx="196.47" cy="109.11" r="69.53"/>
+</g>
+
+
+<g id="workflows" >
+
+    <g id="f1" class="hideOnStart">
+<line style="fill:none;stroke:#6876E7;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.49;" x1="61.1" y1="111.25" x2="112.2" y2="111"/>
+<path style="fill:#6876E7;fill-opacity:0.51;" d="M78.76,111.24l-1.52-1.53c-0.29-0.35-0.26-0.85,0.07-1.16
+	c0.33-0.29,0.82-0.26,1.13,0.07l2.37,2.62l-2.38,2.62c-0.3,0.33-0.8,0.34-1.12,0.06c-0.33-0.3-0.37-0.81-0.07-1.16L78.76,111.24z"/>
+    </g>
+
+       <g id="f2" class="hideOnStart">
+<path style="fill:none;stroke:#6876E7;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.49;" d="
+	M112.47,110c0-45.25,35.84-82.37,81.07-83.95"/>
+<path style="fill:#6876E7;fill-opacity:0.51;" d="M158.41,35.03l-2.09-0.54c-0.43-0.16-0.65-0.6-0.52-1.04
+	c0.14-0.42,0.58-0.64,1.01-0.51l3.37,1.06l-0.72,3.46c-0.09,0.44-0.52,0.7-0.93,0.62c-0.44-0.09-0.73-0.51-0.65-0.96L158.41,35.03z"
+	/>
+           </g>
+
+       <g id="f3" class="hideOnStart">
+    <line style="fill:none;stroke:#6876E7;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.49;" x1="209.87" y1="33" x2="260.97" y2="177"/>
+	<path style="fill:#6876E7;fill-opacity:0.51;" d="M251.65,150.75l0.87-1.97c0.22-0.4,0.7-0.55,1.11-0.35
+		c0.39,0.2,0.54,0.67,0.34,1.08l-1.57,3.16l-3.31-1.25c-0.42-0.16-0.61-0.62-0.47-1.02c0.16-0.42,0.62-0.64,1.05-0.49L251.65,150.75
+		z"/>
+           </g>
+
+<g id="f4" class="hideOnStart">
+<path style="fill:none;stroke:#6876E7;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.49;" d="
+	M287.02,100.5c1.8,25.79-8.37,50.98-27.59,68.28"/>
+<path style="fill:#6876E7;fill-opacity:0.51;" d="M284.98,126.1l-1.99,0.84c-0.43,0.14-0.88-0.08-1.05-0.5
+	c-0.14-0.41,0.07-0.86,0.49-1.02l3.31-1.22l1.55,3.18c0.2,0.4,0.02,0.87-0.36,1.06c-0.4,0.2-0.89,0.04-1.11-0.36L284.98,126.1z"/>
+    </g>
+
+      <g id="f5" class="hideOnStart">
+<path style="fill:none;stroke:#6876E7;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.49;" d="
+	M303.8,99.5L345,105l0,0"/>
+<path style="fill:#6876E7;fill-opacity:0.51;" d="M334.08,103.56l-1.46-1.59c-0.27-0.36-0.22-0.86,0.12-1.16
+	c0.34-0.28,0.83-0.22,1.12,0.12l2.26,2.71l-2.47,2.53c-0.31,0.32-0.81,0.31-1.12,0.02c-0.32-0.31-0.34-0.82-0.03-1.16L334.08,103.56
+	z"/>
+          </g>
+
+
+     <g id="f6" class="hideOnStart">
+<path style="fill:none;stroke:#6876E7;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.49;" d="
+	M413.5,110.23h49h2.1"/>
+<path transform="translate(360,-1)"
+      style="fill:#6876E7;fill-opacity:0.51;" d="M78.76,111.24l-1.52-1.53c-0.29-0.35-0.26-0.85,0.07-1.16
+	c0.33-0.29,0.82-0.26,1.13,0.07l2.37,2.62l-2.38,2.62c-0.3,0.33-0.8,0.34-1.12,0.06c-0.33-0.3-0.37-0.81-0.07-1.16L78.76,111.24z"/>
+         </g>
+
+
+    <g id="f7" class="hideOnStart">
+<path style="fill:none;stroke:#F87B57;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.47;" d="
+	M56.37,118h49h2.1 M129,169 c-12.33-14.18-19.85-31.91-21.49-50.63"/>
+<path style="fill:#F87B57;fill-opacity:0.5;" d="M117.19,152.28l0.43-2.11c0.13-0.43,0.57-0.68,1.01-0.58
+	c0.42,0.12,0.67,0.54,0.56,0.98l-0.87,3.42l-3.5-0.52c-0.44-0.06-0.73-0.47-0.67-0.89c0.07-0.44,0.47-0.76,0.92-0.71L117.19,152.28z
+	"/>
+        </g>
+
+    <g id="f8" class="hideOnStart">
+<path style="fill:none;stroke:#F87B57;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.47;" d="
+	M254.86,178.92c-37.1,32.25-93.31,28.32-125.56-8.78"/>
+<path style="fill:#F87B57;fill-opacity:0.5;" d="M226.29,195.39l-2.12-0.42c-0.44-0.13-0.69-0.56-0.59-1
+	c0.11-0.42,0.54-0.67,0.98-0.57l3.43,0.85l-0.5,3.5c-0.06,0.44-0.47,0.73-0.89,0.68c-0.44-0.06-0.76-0.46-0.71-0.92L226.29,195.39z"
+	/>
+        </g>
+
+      <g id="f9" class="hideOnStart">
+<path style="fill:none;stroke:#F87B57;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.5;" d="
+	M252.93,175.38c-30.38,26.17-74.97,28.1-107.54,4.65"/>
+<path style="fill:#F87B57;fill-opacity:0.5;" d="M168.24,191.78l0.52,2.09c0.07,0.45-0.22,0.86-0.66,0.96
+	c-0.43,0.08-0.84-0.2-0.93-0.64l-0.69-3.46l3.38-1.04c0.43-0.13,0.86,0.12,0.99,0.52c0.13,0.43-0.09,0.89-0.53,1.04L168.24,191.78z"
+	/>
+<path style="fill:#F87B57;fill-opacity:0.5;" d="M214.77,194.11l-1.91-0.99c-0.38-0.25-0.5-0.73-0.28-1.13
+	c0.23-0.38,0.7-0.49,1.1-0.27l3.05,1.78l-1.46,3.22c-0.18,0.41-0.66,0.57-1.04,0.4c-0.41-0.18-0.6-0.66-0.42-1.08L214.77,194.11z"/>
+          </g>
+
+
+<g id="f10" class="hideOnStart">
+<line id="f10" style="fill:none;stroke:#F87B57;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.5;" x1="253.72" y1="171.54" x2="378.24" y2="115.5"/>
+<path transform="translate(100,-57)"
+      style="fill:#F87B57;fill-opacity:0.5;" d="M226.29,195.39l-2.12-0.42c-0.44-0.13-0.69-0.56-0.59-1
+	c0.11-0.42,0.54-0.67,0.98-0.57l3.43,0.85l-0.5,3.5c-0.06,0.44-0.47,0.73-0.89,0.68c-0.44-0.06-0.76-0.46-0.71-0.92L226.29,195.39z"
+	/>
+    </g>
+
+      <g id="f11" class="hideOnStart">
+<path style="fill:none;stroke:#F87B57;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.5;" d="
+	M409.72,115.5h49h2.1"/>
+<path style="fill:#F87B57;fill-opacity:0.5;" d="M441.89,115.5l-1.52-1.53c-0.29-0.35-0.25-0.85,0.08-1.16
+	c0.33-0.29,0.82-0.26,1.13,0.07l2.37,2.62l-2.38,2.62c-0.3,0.33-0.8,0.34-1.12,0.06c-0.33-0.3-0.37-0.81-0.08-1.16L441.89,115.5z"/>
+          </g>
+
+
+</g>
+
+
+<g id="uses" >
+    <g id="problem" class="hideOnStart" style="filter:url(#Shadow);">
+        <path style="fill:#CCCCCC;" d="M6.61,91.25h44.87c5.31,0,9.61,9.18,9.61,20.5s-4.31,20.5-9.61,20.5H6.61
+            c-5.31,0-9.61-9.18-9.61-20.5S1.31,91.25,6.61,91.25"/>
+        <text transform="matrix(1 0 0 1 10.4304 115.75)" class="largeText" >Problem</text>
+    </g>
+
+    <g  id="tools"class="hideOnStart" style="filter:url(#Shadow_2);">
+        <path style="fill:#CCCCCC;" d="M368.1,83.46h30.8l23.1,16.81v22.42l-23.1,16.81h-30.8L345,122.69v-22.42L368.1,83.46z"/>
+        <g transform="translate(0,4)">
+        <text class="largeText"  transform="matrix(1 0 0 1 355.4309 103.4805)" >Usable Geo-</text>
+        <text class="largeText" transform="matrix(1 0 0 1 354.0413 115.4805)" >information &amp; </text>
+        <text class="largeText" transform="matrix(1 0 0 1 371.8274 127.4805)" >Tools</text>
+            </g>
+    </g>
+    <g id="solution"class="hideOnStart"  style="filter:url(#Shadow);">
+        <path style="fill:#CCCCCC;" d="M463.85,90.23h41.3c4.89,0,8.85,9.18,8.85,20.5s-3.96,20.5-8.85,20.5h-41.3
+            c-4.89,0-8.85-9.18-8.85-20.5S458.96,90.23,463.85,90.23"/>
+        <text class="largeText" transform="matrix(1 0 0 1 466.4309 114.7324)" >Solution</text>
+    </g>
+</g>
+
+
+<g id="domains" >
+
+
+	<g id="modelling" class="hideOnStart"><rect x="109.15" y="155.65" style="fill:#FFFFFF;" width="56.69" height="28.35"/>
+	<rect x="109.15" y="155.65" style="fill:#FFEA18;fill-opacity:0.5;" width="56.69" height="28.35"/>
+		<rect x="109.15" y="155.65" style="fill:none;stroke:#FFEA18;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;" width="56.69" height="28.35"/>
+	<text transform="matrix(1 0 0 1 120.3748 172.8262)" class="normalText" >Modelling</text>
+	<rect x="166.97" y="15.14" style="fill:#DC54AD;fill-opacity:0.5;" width="56.69" height="28.35"/>
+        </g>
+
+		<g id="dataorganization" class="hideOnStart">
+	<rect x="166.97" y="15.14" style="fill:#FFFFFF;" width="56.69" height="28.35"/>
+            <rect x="166.97" y="15.14" style="fill:#DC54AD;fill-opacity:0.5;stroke:#DC54AD;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;" width="56.69" height="28.35"/>
+	<text transform="matrix(1 0 0 1 186.8669 27.3154)" class="normalText"  >Data </text>
+	<text transform="matrix(1 0 0 1 173.5232 37.3154)" class="normalText"  >Organization</text>
+        </g>
+
+		<g id="geovisualization" class="hideOnStart">
+	<rect x="249.46" y="74.67" style="fill:#FFFFFF;" width="56.69" height="28.35"/>
+            <rect x="249.46" y="74.25" style="fill:#FF7518;fill-opacity:0.5;stroke:#FF7518;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;" width="56.69" height="28.35"/>
+	<text transform="matrix(1 0 0 1 268.9182 86.4258)" class="normalText"  >Geo-</text>
+	<text transform="matrix(1 0 0 1 256.0217 96.4258)" class="normalText"  >visualization</text></g>
+
+		<g id="analytics" class="hideOnStart">
+	<rect x="222.71" y="155.65" style="fill:#FFFFFF;" width="56.69" height="28.35"/>
+            <rect x="222.37" y="155.65" style="fill:#5FBD71;fill-opacity:0.5;stroke:#5FBD71;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;" width="56.69" height="28.35"/>
+	<text transform="matrix(1 0 0 1 234.7126 172.8262)" class="normalText"  >Analytics</text>
+        </g>
+
+		<g id="cloudandcrowd" class="hideOnStart">
+	<rect x="79.39" y="73.25" style="fill:#FFFFFF;" width="56.69" height="28.35"/>
+            <rect x="79.39" y="73.25" style="fill:#5B87F2;fill-opacity:0.5;stroke:#5B87F2;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;" width="56.69" height="28.35"/>
+	<text transform="matrix(1 0 0 1 93.5017 85.4258)"  class="normalText" >Cloud &amp; </text>
+	<text transform="matrix(1 0 0 1 96.1736 95.4258)"  class="normalText" >Crowd</text></g>
+</g>
+
+<g id="legend" class="hideOnStart">
+<path style="fill:none;stroke:#6876E7;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.49;" d="
+	M411.83,188.13h13.59H426"/>
+<path style="fill:#6876E7;fill-opacity:0.51;" d="M422.65,188.13l-1.52-1.53c-0.29-0.35-0.26-0.85,0.08-1.16
+	c0.33-0.29,0.82-0.26,1.13,0.07l2.36,2.62l-2.38,2.62c-0.3,0.33-0.8,0.34-1.12,0.06c-0.33-0.3-0.37-0.81-0.08-1.16L422.65,188.13z"
+	/>
+<path style="fill:none;stroke:#F87B57;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.5;" d="
+	M412.05,195.39h13.59h0.58"/>
+<path style="fill:#F87B57;fill-opacity:0.5;" d="M422.65,195.39l-1.52-1.53c-0.29-0.35-0.26-0.85,0.08-1.16
+	c0.33-0.29,0.82-0.26,1.13,0.07l2.36,2.62l-2.38,2.62c-0.3,0.33-0.8,0.34-1.12,0.06c-0.33-0.3-0.37-0.81-0.08-1.16L422.65,195.39z"
+	/>
+<text transform="matrix(1 0 0 1 432.3967 193.1279)" class="normalText"  >potential workflows</text>
+</g>
+
+
+
+</svg>
+
+</body>
+</html>

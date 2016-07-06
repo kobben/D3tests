@@ -6,59 +6,96 @@
 </head>
 <body>
 <h2>Site for HTML5 (SVG, Canvas) and D3 experiments, tests and examples:</h2>
+<table>
+    <tr>
+        <td>
+            <dl>
+                <dt><b>Standard D3 Maps (using lon-lat geographic coordinates)</b>:</dt>
+                <dd>The standard way the D3 geo methods work is with data in lon-lat geographic coordinates, being
+                    projected by
+                    <tt>d3.geo</tt>
+                    functions. Versatile and powerful, especially if using <tt>topojson</tt> data.
+                    <ul>
+                        <li><a href="exercise/map.html">Simplest example (of municipalities of Overijssel province)</a>
+                        </li>
+                        <li><a href="TravelMap/">Interactive rotating globe with travel destinations</a></li>
+                        <li><a href="GraphicalWebCities/zoom.html">Animating through locations (Canvas -- Orthographic
+                            projection)</a></li>
+                    </ul>
+                </dd>
 
-<dl>
-    <dt><b>Standard D3 Maps (using lon-lat geographic coordinates)</b>:</dt>
-    <dd>The standard way the D3 geo methods work is with data in lon-lat geographic coordinates, being projected by <tt>d3.geo</tt>
-        functions. Versatile and powerful, especially if using <tt>topojson</tt> data.
-        <ul>
-            <li><a href="exercise/map.html">Simplest example (of municipalities of Overijssel province)</a></li>
-            <li><a href="TravelMap/">Interactive rotating globe with travel destinations</a></li>
-            <li><a href="GraphicalWebCities/zoom.html">Animating through locations (Canvas -- Orthographic projection)</a></li>
-            <li><a href="MapCombination/">Proof of Concept on combining thematic maps</a></li>
-        </ul>
-    </dd>
-
-    <dt><a href="RDproj_test/"><b>Maps using projected meter coordinates</b>:</a></dt>
-    <dd>Map a geojson with cartesian coordinates, instead of lat-lon's (in this case the Dutch RD) --
-        Uses an override of standard D3 geo projection behaviour:
-        don't perform a full projection and resampling, but only a 1st order (affine) translation and
-        scaling to transform real-world XY-coordinates into SVG screen coordinates...<br/>
-        Includes auto-scaling (responsive) example.
-    </dd>
-
-
-    <dt><a href="LandGrabbing/index.html"><b>Land Grabbing [Dutch]</b>:</a></dt>
-    <dd>Three different ways to visualise trans-national land-grabbing (for the Dutch magazine Geografie): as a map, as a flow diagram and as an OD-matrix... </dd>
-
-    <dt><a href="distancePerception/index_en.html"><b>Distance Perception</b>:</a></dt>
-    <dd>Distances in Europe, as perceived by 1st year Geography students --
-        Students overestimate distances to eastern-European cities compared to Southern-European ones...</dd>
-
-    <dt><b><a href="tracksViewer/index.html">Tool to explore tracks withs stops</a></b>:</dt>
-    <dd>Shows stops and distance travelled in different ways -- as map, as time and
-        distance equally scaled, as time scaled dependent of distance and as distance scaled dependent of time. Currently the following tracks can be viewed:
-    </dd>
-
-    <dt><a href="TwenteRailroads/"><b>History of railroads in Twente</b>:</a></dt>
-    <dd>This web-map shows the history of the railroads in Twente (a region in of Overijssel province, in the Netherlands).
-        Moving the time-slider will show the changes through the years.</dd>
-
-    <dt><a href="azimuth-distance/"><b>Measuring Distance &amp; Azimuth</b>:</a></dt>
-    <dd>Explains how a Plate-Carr&eacute; projection can serve as a nifty tool
-        to show bearing and distance from a location on Earth., where you would normally use a equidistant projection....</dd>
-
-    <dt><a href="testFilter/"><b>D3 and Javascript data filter test</b>:</a></dt>
-    <dd>Explains difference between JavaScript standard Array.filter() and d3.filter() function...</dd>
-
-    <dt><a href="LangstonsAnt/"><b>Langton's Ant</b>:</a></dt>
-    <dd>This is an implementation of Langton's Ant using HTML5 Canvas --
-        Langton's ant is a two-dimensional
-        Turing machine with a very simple set of rules but complicated emergent behaviour...</dd>
+                <dt><a href="RDproj_test/"><b>Maps using projected meter coordinates</b>:</a></dt>
+                <dd>Map a geojson with cartesian coordinates, instead of lat-lon's (in this case the Dutch RD) --
+                    Uses an override of standard D3 geo projection behaviour:
+                    don't perform a full projection and resampling, but only a 1st order (affine) translation and
+                    scaling to transform real-world XY-coordinates into SVG screen coordinates...<br/>
+                    Includes auto-scaling (responsive) example.
+                </dd>
 
 
-</dl>
+                <dt><a href="LandGrabbing/index.html"><b>Land Grabbing [Dutch]</b>:</a></dt>
+                <dd>Experimenting with different ways to visualise trans-national land-grabbing (for the Dutch magazine
+                    Geografie):
+                    as a map, as a flow diagram, a force-directed graph and as an OD-matrix...
+                </dd>
 
+                <dt><a href="distancePerception/index_en.html"><b>Distance Perception</b>:</a></dt>
+                <dd>Distances in Europe, as perceived by 1st year Geography students --
+                    Students overestimate distances to eastern-European cities compared to Southern-European ones...
+                </dd>
+
+
+                <dt><a href="MapCombination/"><b>Proof of Concept for combining thematic maps</b></a>:</dt>
+                <dd>A test with different ways to compare thematic maps (side-by-side, tranparent overlay, wipe). Made
+                    for the experimental <a href="http://kartoweb.itc.nl/NatAtlas/NatAtlasViewer/" target="_blank">National Atlas of
+                        the Netherlands</a>...
+                    </dd>
+
+
+            </dl>
+
+        </td>
+        <td>
+
+            <dl>
+
+                <dt><b><a href="tracksViewer/index.html">Tool to explore tracks withs stops</a></b>:</dt>
+                <dd>Shows stops and distance travelled in different ways -- as map, as time and
+                    distance equally scaled, as time scaled dependent of distance and as distance scaled dependent of
+                    time. Currently the following tracks can be viewed:
+                </dd>
+
+                <dt><a href="TwenteRailroads/"><b>History of railroads in Twente</b>:</a></dt>
+                <dd>This web-map shows the history of the railroads in Twente (a region in of Overijssel province, in
+                    the Netherlands).
+                    Moving the time-slider will show the changes through the years.
+                </dd>
+
+                <dt><a href="azimuth-distance/"><b>Measuring Distance &amp; Azimuth</b>:</a></dt>
+                <dd>Explains how a Plate-Carr&eacute; projection can serve as a nifty tool
+                    to show bearing and distance from a location on Earth., where you would normally use a equidistant
+                    projection....
+                </dd>
+
+                <dt><a href="testFilter/"><b>D3 and Javascript data filter test</b>:</a></dt>
+                <dd>Explains difference between JavaScript standard Array.filter() and d3.filter() function...</dd>
+
+                <dt><a href="LangstonsAnt/"><b>Langton's Ant</b>:</a></dt>
+                <dd>This is an implementation of Langton's Ant using HTML5 Canvas --
+                    Langton's ant is a two-dimensional
+                    Turing machine with a very simple set of rules but complicated emergent behaviour...
+                </dd>
+
+
+            </dl>
+        </td>
+    </tr>
+</table>
 <p class="breadcrumbs">Code can be found <a href="https://github.com/kobben/D3tests">on GitHub</a></p>
+<dl><dt><a href="http://geoserver.itc.nl/NatAtlas/NatAtlasViewer/"><b>NatAtlas Viewer</b>:</a></dt>
+                <dd>Explains difference between JavaScript standard Array.filter() and d3.filter() function...
+Most of my D3 work ends up in the NatAtlas Viewer. This is a HTML5/SVG webapplication that uses the D3 Javascript API
+to create  National Atlas webmapping in the framework of the Dutch National GeoData Infrastructure.
+</dd></dl>
 </body>
 </html>

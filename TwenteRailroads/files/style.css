@@ -1,10 +1,23 @@
+#map {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 700px;
+}
+#controls {
+    position: absolute;
+    top: 0px;
+    left: 700px;
+    padding: 10px;
+    margin: 10px;
+}
+
+
 svg {
     border: none;
     padding: 0px;
     margin: 0px
 }
-
-
 
 input[type=range] {
     width: 275px;
@@ -13,8 +26,9 @@ input[type=range] {
 }
 input[type=text] {
     font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 24px;
+    font-size: 48px;
     font-weight: bold;
+    border: none;
     color: #000000
 }
 
@@ -63,8 +77,6 @@ a:hover {
     color: #000000;
     text-decoration: none
 }
-
-
 
 .mapBorder {
     border: 1px solid black;
