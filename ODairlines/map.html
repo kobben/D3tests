@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+    <title>Map</title>
+
+    <link rel="stylesheet" type="text/css" href="map.css">
+
+    <script src="../lib/d3.v4.min.js"></script>
+    <script src="../lib/topojson.min.js"></script>
+
+    <script src="map.js"></script>
+
+</head>
+<body onload="initMap()">
+<div id="mapDiv"></div>
+<div id="directDiv">
+    <p><b>DATA FILTERS:</b></p>
+    <input id="directCheck" type="checkbox" checked onchange="directCheck()">Only direct flights
+</div>
+<div id="zoomDiv">
+    <input class="zoombutton" type="button" value="+" onclick="doZoom(75)"/>
+    <input class="zoombutton" type="button" value="-"  onclick="doZoom(-75)"/>
+</div>
+<div id="yearsDiv"></div>
+<div id="timesDiv"></div>
+</body>
+</html>
