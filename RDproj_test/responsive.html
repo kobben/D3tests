@@ -2,7 +2,7 @@
 <meta charset="utf-8">
 <html>
 <head><title>Responsive RD map</title>
-<script src="../lib/d3.v3.min.js"></script>
+<script src="../lib/d3.v4.min.js"></script>
 <!--<script src="http://d3js.org/d3.v3.min.js"></script>-->
 <style>
     .boundary {
@@ -24,7 +24,7 @@ var maxy = 619300;
 // affine transformation of RD coordinates to screen coordinates
 var dataHeight = maxy - miny;
 var dataWidth = maxx - minx;
-var nlData, scale, y_offset, x_offset, mapDiv, svg;
+var nlData, scale, y_offset, x_offset, mapDiv, mapSVG;
 
 // AffineTransformation as a basic pseudo-projection of RD coords to screen coords
 // http://en.wikipedia.org/wiki/Transformation_matrix#Affine_transformations
@@ -55,8 +55,8 @@ function init() {
 }
 
 function fitToBox(pathData) {
-    if (svg != null) {svg.remove();}
-    svg = mapDiv.append("svg")
+    if (mapSVG != null) {mapSVG.remove();}
+    mapSVG = mapDiv.append("svg")
         .attr("id", "theMapSVG")
         .attr("width", SVGwidth)
         .attr("height", SVGheight)
@@ -69,8 +69,9 @@ function fitToBox(pathData) {
     scale = Math.min(xscale,yscale);
     y_offset = (maxy * scale);
     x_offset = -(minx * scale);
-    var projectedPath = d3.geo.path().projection(AffineTransformation(scale, 0, 0, -scale, x_offset, y_offset));
-    svg.selectAll("path")
+    var projectedPath = d3.geoPath()
+        .projection(AffineTransformation(scale, 0, 0, -scale, x_offset, y_offset));
+    mapSVG.selectAll("path")
         .data(pathData.features)
         .enter().append("path")
         .attr("class", "boundary")

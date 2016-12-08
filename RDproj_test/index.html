@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <html>
-<head><title>world map</title>
-    <script src="../lib/d3.v3.min.js"></script>
-    <!--<script src="http://d3js.org/d3.v3.min.js"></script>-->
+<head><title>responsive world map</title>
+    <script src="../lib/d3.v4.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../lib/maps.css">
     <style>
         .boundary {
@@ -35,7 +34,7 @@
         var dataHeight = maxy - miny;
         var dataWidth = maxx - minx;
 
-        var scale, y_offset, x_offset, mapDiv, svg;
+        var scale, y_offset, x_offset, mapDiv, mapSVG;
 
         //choose scale that fills box
         xscale = SVGwidth/dataWidth;
@@ -62,9 +61,11 @@
 
         function init() {
 
-            mapDiv = d3.select("#mapDiv");
 
-            svg = mapDiv.append("svg")
+			mapDiv = d3.select("#mapDiv");
+
+
+            mapSVG = mapDiv.append("svg")
                     .attr("id", "theMapSVG")
                     .attr("width", SVGwidth)
                     .attr("height", SVGheight)
@@ -78,13 +79,13 @@
             y_offset = (maxy * scale);
             x_offset = -(minx * scale);
 
-            var RDpath = d3.geo.path().projection(AffineTransformation(scale, 0, 0, -scale, x_offset, y_offset));
+            var RDpath = d3.geoPath().projection(AffineTransformation(scale, 0, 0, -scale, x_offset, y_offset));
 
              d3.json("../data/nl_rd.json", function(json) {
                 // nl_rd.json = small map of Netherlands, using RD (EPSG:28992)
                 // RD = Rijksdriehoeksstelsel = Double-Stereographic projection on the Bessel ellipsoid
                 nl=json;
-                svg.selectAll("path")
+                mapSVG.selectAll("path")
                         .data(nl.features)
                         .enter()
                         .append("path")
@@ -93,7 +94,7 @@
                 ;
             });
 
-            svg.append("rect")
+            mapSVG.append("rect")
                     .attr("class", "svgFrame")
                     .attr("x1", 0)
                     .attr("y1", 0)
@@ -101,8 +102,8 @@
                     .attr("height", SVGheight)
             ;
 
-            d3.select("#width").attr("value", SVGwidth);
-            d3.select("#height").attr("value", SVGheight);
+            d3.select("#theWidth").attr("value", SVGwidth);
+            d3.select("#theHeight").attr("value", SVGheight);
             d3.select("#mapscale").html(Math.round(100000*scale)/100000);
             d3.select("#xoffset").html(Math.round(x_offset));
             d3.select("#yoffset").html(Math.round(y_offset));
@@ -111,9 +112,10 @@
 
 
         function fitToBox() {
-            SVGwidth = d3.select("#width")[0][0].value;
-            SVGheight = d3.select("#height")[0][0].value;
-            svg.remove();
+            SVGwidth =  d3.select("#theWidth").property("value");
+            SVGheight =  d3.select("#theHeight").property("value");
+//			console.log(SVGwidth + " , " + SVGheight);
+            mapSVG.remove();
             init();
         }
 
@@ -127,18 +129,20 @@
     don't perform a full projection and resampling, but only a 1st order (affine) translation and
     scaling to transform real-world XY-coordinates into SVG screen coordinates...</p>
 
-map width: <input id="width" type="number" size="5" value="" />
-map height: <input id="height" type="number" size="5" value="" />
-<input type="button" value="RESCALE" onclick="fitToBox()" />
+<div id="mapDiv">
+</div>
+
+map width: <input id="theWidth" type="number" size="5" value="" />
+map height: <input id="theHeight" type="number" size="5" value="" />
+<input type="button" value="RESCALE" onclick="fitToBox()" /><p>
 map scale=<span id="mapscale" >scale</span> px/mapunit;
 x offset=<span id="xoffset" >x offset</span> px;
 y offset=<span id="yoffset" >y offset</span> px;
+</p><p>
 <input type="button" value="Test in auto-scaling (responsive) window..."
        onclick="window.open('responsive.html','test','toolbar=no,location=no,directories=no,status=no,scrollbars=no,resizable=yes,copyhistory=no,width=300,height=350')" />
+</p>
 
-
-<div id="mapDiv">
-</div>
 
 
 
