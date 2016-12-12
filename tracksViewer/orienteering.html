@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <title>TRACKING GEOGRAPHY &amp; TIME</title>
-  <script type="text/javascript" src="../lib/d3.v3.min.js"></script>
-  <script src="../lib/d3.geo.projection.v0.min.js"></script>
+  <script type="text/javascript" src="../lib/d3.v4.min.js"></script>
+  <script src="../lib/d3-geo-projection.v1.min.js"></script>
   <script src="../lib/queue.min.js"></script>
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
@@ -30,7 +30,7 @@
   var mapScale = 2200000;
   // format string for date an/or time formatter
   // see https://github.com/mbostock/d3/wiki/Time-Formatting
-  var dateFormat = d3.time.format("%H:%M:%S");
+  var parseMyDate = d3.timeParse("%H:%M:%S");
   // lowest and highest time/date values found in data:
 
   var earliestTimeStr = ["00:00:00", "00:00:00"];
@@ -44,10 +44,8 @@
   var distUnLabelledTicksValue = 100;
   var distSlicesLabelledTicksValue = 2;
   var distSlicesUnLabelledTicksValue = 10;
-  var timeLabelledTicksUnit = d3.time.minutes;
-  var timeLabelledTicksValue = 2;
-  var timeUnLabelledTicksUnit = d3.time.seconds;
-  var timeUnLabelledTicksValue = 20;
+  var timeLabelledTicks = d3.timeMinute.every(2);
+  var timeUnLabelledTicks = d3.timeSecond.every(20);
   // circle sizes used in Map:
   var stopSize = 4;
   var noStopSize = 1;

@@ -3,10 +3,8 @@
 <head>
     <meta charset="utf-8">
     <title>TRACKING GEOGRAPHY &amp; TIME</title>
-    <script type="text/javascript" src="../lib/d3.v3.min.js"></script>
-    <script src="../lib/d3.geo.projection.v0.min.js"></script>
-    <!--<script src="../lib/topojson.v1.min.js"></script>-->
-    <!--<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script> -->
+    <script type="text/javascript" src="../lib/d3.v4.min.js"></script>
+    <script src="../lib/d3-geo-projection.v1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
@@ -29,7 +27,7 @@ var mapCenterLon = 31, mapCenterLat = 55;
 var mapScale = 2000;
 // format string for date an/or time formatter
 // see https://github.com/mbostock/d3/wiki/Time-Formatting
-var dateFormat = d3.time.format("%d-%m-%Y");
+var parseMyDate = d3.timeParse("%d-%m-%Y");
 // lowest and highest time/date values found in data:
 var earliestTimeStr = "30-06-1812";
 var latestTimeStr = "12-12-1812";
@@ -41,10 +39,8 @@ var distLabelledTicksValue = 20;
 var distUnLabelledTicksValue = 200;
 var distSlicesLabelledTicksValue = 1;
 var distSlicesUnLabelledTicksValue = 5;
-var timeLabelledTicksUnit = d3.time.months;
-var timeLabelledTicksValue = 1;
-var timeUnLabelledTicksUnit = d3.time.days;
- var timeUnLabelledTicksValue = 20;
+var timeLabelledTicks = d3.timeMonth.every(1);
+var timeUnLabelledTicks = d3.timeDay.every(20);
     // circle sizes used in Map:
     var stopSize = 4;
     var noStopSize = 1.5;

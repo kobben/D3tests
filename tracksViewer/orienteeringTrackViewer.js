@@ -7,7 +7,8 @@
  @author Barend Kobben <b.j.kobben@utwente.nl>
 
  **** IMPROVISED version for multiple bus tracks ****
- @version 0.1.0 [May 2014]
+ @version 0.2 [December 2016] -- updated to d3.v4
+ version 0.1 [May 2014]
  */
 
 
@@ -20,14 +21,14 @@
 var mapWidth = 500;
 var mapHeight = 600;
 //Define map projection
-var projection = d3.geo.mercator()
+var projection = d3.geoMercator()
   .rotate([0,0]) //lon,lat]
   .center([mapCenterLon,mapCenterLat]) //[lon,lat]
   .translate([mapWidth/2, mapHeight/2])
   .precision(0.1)
   .scale([mapScale]);
 //Define path generator
-var path = d3.geo.path()
+var path = d3.geoPath()
   .projection(projection);
 
 //Create SVG element for Map paneL:
@@ -77,13 +78,13 @@ for (i=0; i < numTimeSeries; i++) {
 svgMapPanel
   .on("mousedown", function (d) {
     svgBackgroundMap.transition().duration(1000).attr("opacity", "0");
-    svgMap[0].transition().ease("elastic").duration(1500).attr("transform","translate(-20,-20)")
-    svgMap[1].transition().ease("elastic").duration(1500).attr("transform","translate(20,20)")
+    svgMap[0].transition().ease(d3.easeElasticInOut).duration(1500).attr("transform","translate(-20,-20)")
+    svgMap[1].transition().ease(d3.easeElasticInOut).duration(1500).attr("transform","translate(20,20)")
   } )
   .on("mouseup", function (d) {
     svgBackgroundMap.transition().duration(1000).attr("opacity", "1");
-    svgMap[0].transition().ease("elastic").duration(1500).attr("transform","translate(0,0)")
-    svgMap[1].transition().ease("elastic").duration(1500).attr("transform","translate(0,0)")
+    svgMap[0].transition().ease(d3.easeElasticInOut).duration(1500).attr("transform","translate(0,0)")
+    svgMap[1].transition().ease(d3.easeElasticInOut).duration(1500).attr("transform","translate(0,0)")
   } )
 ;
 
@@ -103,7 +104,7 @@ var rectHeight = 6; //for rects in scales
 // DATE & TIME FIDDLING:
 //first use original date format to parse,
 // gets dates wrt 1900/1/1 :
-var nullTime = dateFormat.parse("00:00:00");
+var nullTime = parseMyDate("00:00:00");
 var T_nullTime = +nullTime;
 var earliestTime = new Array;
 var latestTime = new Array;
@@ -113,8 +114,8 @@ var LTmax = -999999999999999;
 
 // synchronise & harmonise times
 for (i=0; i < numTimeSeries; i++) {
-  earliestTime[i] = dateFormat.parse(earliestTimeStr[i]);
-  latestTime[i] = dateFormat.parse(latestTimeStr[i]);
+  earliestTime[i] = parseMyDate(earliestTimeStr[i]);
+  latestTime[i] = parseMyDate(latestTimeStr[i]);
   ET[i] = +earliestTime[i]; //convert to milliseconds
   LT[i] = +latestTime[i];
   earliestTime[i] = new Date(T_nullTime);
@@ -123,25 +124,25 @@ for (i=0; i < numTimeSeries; i++) {
 }
 
 //parses datestring to D3 Date object
-function parseMyDate(DateStr, TimeSeries) {
-  if (TimeSeries == undefined ||TimeSeries < 0 || TimeSeries > numTimeSeries-1) {
-    console.log("invalid TimeSeries [" + TimeSeries + "] in parseMyDate(DateStr, TimeSeries)")
-    return NaN;
-  } else {
-    var T = dateFormat.parse(DateStr).getTime();
-    var TT = new Date(T_nullTime + (T - ET[TimeSeries]));
-    return TT;
-  }
-}
+// function parseMyDate(DateStr, TimeSeries) {
+//   if (TimeSeries == undefined ||TimeSeries < 0 || TimeSeries > numTimeSeries-1) {
+//     console.log("invalid TimeSeries [" + TimeSeries + "] in parseMyDate(DateStr, TimeSeries)")
+//     return NaN;
+//   } else {
+//     var T = dateFormat.parse(DateStr).getTime();
+//     var TT = new Date(T_nullTime + (T - ET[TimeSeries]));
+//     return TT;
+//   }
+// }
 
 LTmax = new Date(LTmax);
-LTmaxStr = dateFormat(LTmax);
+LTmaxStr = parseMyDate(LTmax);
 
 //domains for the scales
-var timeScale = d3.time.scale()
+var timeScale = d3.scaleTime()
   .domain([earliestTime[0], latestTime[1]])//TODO: latest should be found automatically!
   .range([0, scaleLength]);
-var distScale = d3.scale.linear()
+var distScale = d3.scaleLinear()
     .domain([smallestDist[0], largestDist[0]])//TODO: latest should be found automatically!
     .range([0, scaleLength]);
 
@@ -216,9 +217,8 @@ for (i=0; i < numTimeSeries; i++) {
 //create generalized axes for all...
 var distAxisGen = new Array(numTimeSeries);
 for (i=0; i < numTimeSeries; i++) {
-  distAxisGen[i] = d3.svg.axis()
+  distAxisGen[i] = d3.axisTop()
     .scale(distScale)
-    .orient("top")
     .ticks(distLabelledTicksValue)
     .tickSize(6, 0);
   ;
@@ -264,17 +264,15 @@ for (i=0; i < numTimeSeries; i++) {
 
 //TIME
 //create generalized axis...
-var timeAxisGen = d3.svg.axis()
+var timeAxisGen = d3.axisBottom()
     .scale(timeScale)
-    .orient("bottom")
-    .ticks(timeLabelledTicksUnit, timeLabelledTicksValue)
+    .ticks(timeLabelledTicks)
     .tickSize(10, 0)
   ;
 //create detailed axis...
-var timeAxisDet = d3.svg.axis()
+var timeAxisDet = d3.axisBottom()
     .scale(timeScale)
-    .orient("bottom")
-    .ticks(timeUnLabelledTicksUnit, timeUnLabelledTicksValue)
+    .ticks(timeUnLabelledTicks)
     .tickSize(6, 0)
   ;
 
@@ -644,15 +642,14 @@ function drawGeo2TimePanel(data, series) {
     var startX = (distScale(data[j].properties.distance))  + xMargin ;
     // ...to start of next stop...
     var endX = (distScale(data[j+1].properties.distance)) + xMargin ;
-    timeScales[j] = d3.time.scale()
+    timeScales[j] = d3.scaleTime()
       .domain([earliestTime, latestTime])
       .range([startX, endX])
     ;
     // create detailed axis...
-    timeAxes[j] = d3.svg.axis()
+    timeAxes[j] = d3.axisBottom()
       .scale(timeScales[j] )
-      .orient("bottom")
-      .ticks(timeUnLabelledTicksUnit, timeUnLabelledTicksValue)
+      .ticks(timeUnLabelledTicks)
       .tickSize(6, 6)
     ;
     //...and draw it without labels
@@ -662,10 +659,9 @@ function drawGeo2TimePanel(data, series) {
       .call(timeAxes[j])
     ;
     // create generalized axis...
-    timeAxes2[j] = d3.svg.axis()
+    timeAxes2[j] = d3.axisBottom()
       .scale(timeScales[j] )
-      .orient("bottom")
-      .ticks(timeLabelledTicksUnit, timeLabelledTicksValue)
+      .ticks(timeLabelledTicks)
       .tickSize(10, 0)
     ;
     // .. and draw it  with labels

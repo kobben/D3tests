@@ -5,10 +5,9 @@
  Licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License.
  see http://creativecommons.org/licenses/by-nc-sa/3.0/
  @author Barend Kobben <b.j.kobben@utwente.nl>
- @version 0.1.0 [February 2014]
+ @version 0.2 [December 2016] -- updated to d3.v4
+ version 0.1 [February 2014]
  */
-
-
 
 
 // *******************
@@ -18,14 +17,14 @@
 var mapWidth = 500;
 var mapHeight = 538;
 //Define map projection
-var projection = d3.geo.mercator()
+var projection = d3.geoMercator()
   .rotate([0,0]) //lon,lat]
   .center([mapCenterLon,mapCenterLat]) //[lon,lat]
   .translate([mapWidth/2, mapHeight/2])
   .precision(0.1)
   .scale([mapScale]);
 //Define path generator
-var path = d3.geo.path()
+var path = d3.geoPath()
   .projection(projection);
 
 //Create SVG element for Map paneL:
@@ -60,19 +59,15 @@ var xMargin = 10, yT = 125, yD = 70;
 var scaleLength=600;
 var track, lines;
 var rectHeight = 6; //for rects in scales
-//parses string to Date object
-function parseMyDate(DateStr) {
-  return dateFormat.parse(DateStr);
-}
 earliestTime = parseMyDate(earliestTimeStr);
 latestTime = parseMyDate(latestTimeStr);
 
 
 //vars domain for the scales
-var timeScale = d3.time.scale()
+var timeScale = d3.scaleTime()
   .domain([earliestTime, latestTime])
   .range([0, scaleLength]);
-var distScale = d3.scale.linear()
+var distScale = d3.scaleLinear()
   .domain([smallestDist, largestDist])
   .range([0, scaleLength]);
 
@@ -139,9 +134,8 @@ svgGeo2Time.append("text")
 //DISTANCE
 
 //create detailed axis...
-var distAxis2 = d3.svg.axis()
+var distAxis2 = d3.axisTop()
   .scale(distScale)
-  .orient("top")
   .ticks(distUnLabelledTicksValue)
   .tickSize(6, 0);
 ;
@@ -152,9 +146,8 @@ svgNormal.append("g")
   .call(distAxis2)
 ;
 //create generalized axis...
-var distAxis = d3.svg.axis()
+var distAxis = d3.axisTop()
   .scale(distScale)
-  .orient("top")
   .ticks(distLabelledTicksValue)
   .tickSize(10, 0);
 ;
@@ -216,10 +209,10 @@ svgGeo2Time.append("text")
 
 //TIME
 //create detailed axis...
-var timeAxis2 = d3.svg.axis()
+var timeAxis2 = d3.axisBottom()
     .scale(timeScale)
-    .orient("bottom")
-    .ticks(timeUnLabelledTicksUnit, timeUnLabelledTicksValue)
+		// .ticks(timeUnLabelledTicksUnit, timeUnLabelledTicksValue)
+		.ticks(timeUnLabelledTicks)
     .tickSize(6, 0)
   ;
 //...and draw axes without labels
@@ -229,10 +222,9 @@ svgNormal.append("g")
   .call(timeAxis2)
 ;
 //create generalized axis...
-var timeAxis = d3.svg.axis()
+var timeAxis = d3.axisBottom()
     .scale(timeScale)
-    .orient("bottom")
-    .ticks(timeLabelledTicksUnit, timeLabelledTicksValue)
+    .ticks(timeLabelledTicks)
     .tickSize(10, 0)
   ;
 //...and draw axes with labels
@@ -546,7 +538,7 @@ function drawTime2GeoPanel(data) {
     var startX = (timeScale(parseMyDate(data[i].properties.departure)))  + xMargin ;
     // ...to start of next stop...
     var endX = (timeScale(parseMyDate(data[i+1].properties.arrival))) + xMargin ;
-    distScales[i] = d3.scale.linear()
+    distScales[i] = d3.scaleLinear()
       .domain([smallestDist, largestDist])
       .range([startX, endX])
     ;
@@ -558,9 +550,8 @@ function drawTime2GeoPanel(data) {
       .attr("y2",yD - 6)
     ;
     // create detailed axis...
-    distAxes[i] = d3.svg.axis()
+    distAxes[i] = d3.axisTop()
       .scale(distScales[i] )
-      .orient("top")
       .ticks(distSlicesUnLabelledTicksValue)
       .tickSize(6, 6)
     ;
@@ -571,9 +562,8 @@ function drawTime2GeoPanel(data) {
       .call(distAxes[i])
     ;
     // create generalized axis...
-    distAxes2[i] = d3.svg.axis()
+    distAxes2[i] = d3.axisTop()
       .scale(distScales[i] )
-      .orient("top")
       .ticks(distSlicesLabelledTicksValue)
       .tickSize(10, 0)
     ;
@@ -621,15 +611,14 @@ function drawGeo2TimePanel(data) {
     var startX = (distScale(data[i].properties.distance))  + xMargin ;
     // ...to start of next stop...
     var endX = (distScale(data[i+1].properties.distance)) + xMargin ;
-    timeScales[i] = d3.time.scale()
+    timeScales[i] = d3.scaleTime()
       .domain([earliestTime, latestTime])
       .range([startX, endX])
     ;
     // create detailed axis...
-    timeAxes[i] = d3.svg.axis()
+    timeAxes[i] = d3.axisBottom()
       .scale(timeScales[i] )
-      .orient("bottom")
-      .ticks(timeUnLabelledTicksUnit, timeUnLabelledTicksValue)
+      .ticks(timeUnLabelledTicks)
       .tickSize(6, 6)
     ;
     //...and draw it without labels
@@ -639,10 +628,9 @@ function drawGeo2TimePanel(data) {
       .call(timeAxes[i])
     ;
     // create generalized axis...
-    timeAxes2[i] = d3.svg.axis()
+    timeAxes2[i] = d3.axisBottom()
       .scale(timeScales[i] )
-      .orient("bottom")
-      .ticks(timeLabelledTicksUnit, timeLabelledTicksValue)
+      .ticks(timeLabelledTicks)
       .tickSize(10, 0)
     ;
     // .. and draw it  with labels
