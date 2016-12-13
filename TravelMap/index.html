@@ -2,13 +2,13 @@
 <meta charset="utf-8">
 <head>
     <style>@import url(./styles.css);</style>
-    <script src="../lib/d3.v3.min.js"></script>
-    <script src="../lib/d3.geo.projection.v0.min.js"></script>
-    <script src="../lib/topojson.min.js"></script>
+    <script src="../lib/d3.v4.min.js"></script>
+    <script src="../lib/d3-geo-projection.v1.min.js"></script>
+    <script src="../lib/topojson.v1.min.js"></script>
     <script>
 
         //global vars:
-        var svg, adminData, countries, countriesVisited, highlightedCountry;
+        var mapSVG, adminData, countries, countriesVisited, highlightedCountry;
         var projection;
         var SVGwidth = 550, SVGheight = 500;
         var mapDiv, globe, graticule, svgpath;
@@ -22,14 +22,14 @@
 
             mapDiv = d3.select("#mapDiv");
 
-            svg = mapDiv.append("svg")
+            mapSVG = mapDiv.append("svg")
                     .attr("id", "theMapSVG")
                     .attr("width", SVGwidth)
                     .attr("height", SVGheight)
             ;
 
             //Define map projection
-            projection = d3.geo.orthographic()
+            projection = d3.geoOrthographic()
                     .scale(250)
                     .translate([SVGwidth / 2, SVGheight / 2])
                     .rotate([-6, -52])
@@ -42,14 +42,14 @@
 //                    .precision(.1)
 //                    ;
 
-            svgpath = d3.geo.path()
+            svgpath = d3.geoPath()
                     .projection(projection);
 
 
             d3.json("../data/cntry_geom.json", function (error, json) {
 
                 globe = {type: "Sphere"},
-                        graticule = d3.geo.graticule()(),
+                        graticule = d3.geoGraticule()(),
                         countries = topojson.feature(json, json.objects.cntry_geom)
                 ;
 
@@ -82,17 +82,17 @@
                                 .html(countriesVisited[i].name_long)
                         ;
                     }
-                    svg.append("path")
+                    mapSVG.append("path")
                             .datum(globe)
                             .attr("class", "globe")
                             .attr("d", svgpath)
                     ;
-                    svg.append("path")
+                    mapSVG.append("path")
                             .datum(graticule)
                             .attr("class", "graticule")
                             .attr("d", svgpath)
                     ;
-                    svg.selectAll("path")
+                    mapSVG.selectAll("path")
                             .data(countries.features).enter()
                             .append("path")
                             .attr("id", function (d) {
@@ -122,7 +122,7 @@
 
         function focusOn(country) {
             //calculateLatLon & rotate
-            var theCentroid = d3.geo.centroid(country);
+            var theCentroid = d3.geoCentroid(country);
             reproject(theCentroid[0], theCentroid[1], 250);
             var countryKey = eval("country.properties." + keyName);
             highlight(countryKey);
@@ -155,21 +155,21 @@
             projection.rotate([-lon, -lat]);
             projection.scale(scale);
             //redraw:
-            svg.selectAll(".globe")
+            mapSVG.selectAll(".globe")
                     .datum(globe)
                     .attr("d", svgpath)
             ;
-            svg.selectAll(".graticule")
+            mapSVG.selectAll(".graticule")
                     .datum(graticule)
                     .attr("d", svgpath)
             ;
-            svg.selectAll(".countries")
+            mapSVG.selectAll(".countries")
                     .attr("d", svgpath)
             ;
-            svg.selectAll(".countriesvisited")
+            mapSVG.selectAll(".countriesvisited")
                     .attr("d", svgpath)
             ;
-//                d3.select("svg")
+//                d3.select("mapSVG")
 //                        .transition().duration(1500)
 //                        .attr("d", svgpath)
 //                ;
