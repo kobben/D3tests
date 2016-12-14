@@ -3,11 +3,11 @@
 <html>
 <head>
     <title>Map of land grabbing</title>
-    <script src="../lib/d3.min.js"></script>
-    <script src="../lib/d3.geo.projection.min.js"></script>
+    <script src="../lib/d3.v4.min.js"></script>
+    <script src="../lib/d3-geo-projection.v1.min.js"></script>
     <script src="../lib/topojson.min.js"></script>
     <style type="text/css">
-        svg {
+        mapSVG {
             border: none;
         }
 
@@ -74,7 +74,7 @@
 
     var xSliderElem = document.getElementById("xSlider"),
             sliderTxt = document.getElementById("smallestShown");
-    var xScale = d3.scale.linear()
+    var xScale = d3.scaleLinear()
             .range([1, 1000])
             .domain([1, 1000]);
 
@@ -83,7 +83,7 @@
     function xSlider() {
         smallestShown = Math.round(xScale(xSliderElem.value));
         sliderTxt.innerHTML = Math.round(smallestShown);
-    arcNodes.attr("visibility", function(d) { return d.magnitude > smallestShown ? "visible" : "hidden"})
+        arcNodes.attr("visibility", function(d) { return d.magnitude > smallestShown ? "visible" : "hidden"})
     }
 
     var useGreatCircles = true;
@@ -157,24 +157,26 @@
         return loader;
     };
 
-    var projection = d3.geo.robinson()
+    var projection = d3.geoRobinson()
             .scale(160)
             .translate([w / 2, h / 2])
             .precision(.1);
 
-    var path = d3.geo.path()
+    var path = d3.geoPath()
             .projection(projection);
 
-    var arc = d3.geo.greatArc().precision(3) //3);
+//    function arc(d) {
+//
+//    }
 
-    var svg = d3.select("body").append("svg")
+    var mapSVG = d3.select("body").append("svg")
             .attr("width", w)
             .attr("height", h);
 
-    var countries = svg.append("g").attr("id", "countries");
-    var arcs = svg.append("g").attr("id", "arcs");
+    var countries = mapSVG.append("g").attr("id", "countries");
+    var arcs = mapSVG.append("g").attr("id", "arcs");
 
-    svg.append("text")
+    mapSVG.append("text")
             .attr("id", "loading")
             .attr("x", 5)
             .attr("y", 17)
@@ -196,15 +198,15 @@
                             return parseFloat(d.ha) //ha
                         });
 
-                var arcWidth = d3.scale.linear().domain([1, maxMagnitude]).range([1,25]);
+                var arcWidth = d3.scaleLinear().domain([1, maxMagnitude]).range([1,25]);
 //                var minColor = '#f0f0f0', maxColor = 'rgb(8, 48, 107)';
                 var minColor = 'rgb(8, 48, 107)', maxColor = 'rgb(8, 48, 107)';
-                var arcColor = d3.scale.log().domain([1, maxMagnitude]).range([minColor, maxColor]);
-                var arcOpacity = d3.scale.log().domain([1, maxMagnitude]).range([1, 1]);
+                var arcColor = d3.scaleLog().domain([1, maxMagnitude]).range([minColor, maxColor]);
+                var arcOpacity = d3.scaleLog().domain([1, maxMagnitude]).range([1, 1]);
 
 
                 var globe = {type: "Sphere"};
-                var graticule = d3.geo.graticule()();
+                var graticule = d3.geoGraticule()();
                 var land = topojson.feature(data.countries, data.countries.objects.land);
                 var borders = topojson.mesh(data.countries, data.countries.objects.countries);
 
@@ -292,7 +294,7 @@
                 }
 
 
-                var defs = svg.append("svg:defs");
+                var defs = mapSVG.append("mapSVG:defs");
 
                 // see http://apike.ca/prog_svg_patterns.html
                 defs.append("marker")
@@ -324,13 +326,10 @@
                             return arcWidth(d.magnitude);
                         })
                         .attr("d", function (d) {
-                            if (useGreatCircles)
-                                return splitPath(path(arc(d)));
-                            else
-                                return path({
-                                    type: "LineString",
-                                    coordinates: [d.source, d.target]
-                                });
+                            return path({
+                                type: "LineString",
+                                coordinates: [d.source, d.target]
+                            });
                         })
                         .on("mousemove", function (d) {
                             d3.select(this)

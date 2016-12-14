@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8">
-<title>OD-matrix of land grabbing using SIZE</title>
+<title>OD-matrix of land grabbing using VALUE</title>
 <style>
 #chart {
   height: 720px;
@@ -78,7 +78,7 @@ var margin = {top: 5, right: 5, bottom: 5, left: 5},
 var cellsize = 25, maxR = cellsize;
 
 var origins, destinations, flows;
-var odmatrix;
+var odmatrix, opacityScale;
 
 var tooltip;
 
@@ -141,55 +141,64 @@ d3.json("grabbing-od.json", function(od_data) {
         odmatrix[flows[f].origin][flows[f].destination] = flows[f].value;
     }
 
+    opacityScale = d3.scaleLog()
+        .domain([d3.min(flowvalues), d3.max(flowvalues)])
+        .range([0,1])
+    ;
+
     for (o = 0; o < origins.length; o++) {
         for (d = 0; d < destinations.length; d++) {
             cells.append("rect")
-                    .attr("id", o + "_" + d)
-                    .attr("y", o * cellsize)
-                    .attr("x", d * cellsize)
-                    .attr("width", cellsize)
-                    .attr("height", cellsize)
-                    .on("mousemove", function () {
-                        toolTipMove(d3.event)
-                    })
-                    .on("mouseleave", function () {
-                        toolTipHide()
-                    })
-                    .on("mouseenter", function () {
-                        var od = this.id.split("_");
-                        toolTipShow(od[0],od[1]);
-                    })
+                .attr("id", o + "_" + d)
+                .attr("y", o * cellsize)
+                .attr("x", d * cellsize)
+                .attr("width", cellsize)
+                .attr("height", cellsize)
+				.style("fill", function () {
+					if (odmatrix[o][d] == 0) {return "white"} else {return "red"}
+                })
+				.style("fill-opacity", opacityScale(odmatrix[o][d]))
+                .on("mousemove", function () {
+                    toolTipMove(d3.event)
+                })
+                .on("mouseleave", function () {
+                    toolTipHide()
+                })
+                .on("mouseenter", function () {
+                    var od = this.id.split("_");
+                    toolTipShow(od[0],od[1]);
+                })
             ;
         }
     }
 
-    var rScale = d3.scaleLinear()
-            .domain([d3.min(flowvalues), d3.max(flowvalues)])
-            .range([0.1, maxR]);
-
-
-    for (o = 0; o < origins.length; o++) {
-        for (d = 0; d < destinations.length; d++) {
-            myR = rScale(odmatrix[o][d]);
-            cells.append("circle")
-                    .attr("id",o + "_" + d)
-                    .attr("class", "values")
-                    .attr("cy", o * cellsize + (cellsize/2))
-                    .attr("cx", d * cellsize + (cellsize/2))
-                    .attr("r", myR)
-                    .on("mousemove", function () {
-                        toolTipMove(d3.event)
-                    })
-                    .on("mouseleave", function () {
-                        toolTipHide()
-                    })
-                    .on("mouseenter", function () {
-                        var od = this.id.split("_");
-                        toolTipShow(od[0],od[1]);
-                    })
-            ;
-        }
-    }
+//    var rScale = d3.scaleLinear()
+//            .domain([d3.min(flowvalues), d3.max(flowvalues)])
+//            .range([0.1, maxR]);
+//
+//
+//    for (o = 0; o < origins.length; o++) {
+//        for (d = 0; d < destinations.length; d++) {
+//            myR = rScale(odmatrix[o][d]);
+//            cells.append("circle")
+//                    .attr("id",o + "_" + d)
+//                    .attr("class", "values")
+//                    .attr("cy", o * cellsize + (cellsize/2))
+//                    .attr("cx", d * cellsize + (cellsize/2))
+//                    .attr("r", myR)
+//                    .on("mousemove", function () {
+//                        toolTipMove(d3.event)
+//                    })
+//                    .on("mouseleave", function () {
+//                        toolTipHide()
+//                    })
+//                    .on("mouseenter", function () {
+//                        var od = this.id.split("_");
+//                        toolTipShow(od[0],od[1]);
+//                    })
+//            ;
+//        }
+//    }
 
 
     mapSVG.append("g")
@@ -255,9 +264,9 @@ d3.json("grabbing-od.json", function(od_data) {
 </p>
 <!--<a id="downloadLink" href="" download='download'>Download</a>-->
 De MATRIX is in theorie goed om per land de relaties te zien. Maar als we  de verschillende cellen met de visuele
-variabele <a href="#">GROOTTE</a> onderscheiden (zoals volgens de theorie met dit soort absolute ratio-data moet), spelen de grote
+variabele <a href="odmatrix.html">GROOTTE</a> onderscheiden (zoals volgens de theorie met dit soort absolute ratio-data moet), spelen de grote
 verschillen tussen de hoeveelheden land (in ha.) ons parten, waardoor alle kleine stromen vrijwel onzichtbaar zijn.
-Dit wordt al beter als we de visuele variable <a href="odmatrixValue.html">GRIJSWAARDE</a> gebruiken...
+Dit wordt al beter als we de visuele variable <a href="#">GRIJSWAARDE</a> gebruiken...
 
 <p><a href="index.html">OVERZICHT</a> -- <a href="map.html">KAART</a> -- <a href="flowdiagram.html">STROOMDIAGRAM</a>
     -- <a href="graph.html">NETWERK</a> -- MATRIX

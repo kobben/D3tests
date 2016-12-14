@@ -3,7 +3,7 @@
 <link rel="stylesheet" type="text/css" href="./styles.css">
 <style>
 
-    svg {
+    mapSVG {
         border: solid 1px black;
     }
 
@@ -44,7 +44,7 @@
 
 </style>
 <body>
-<script src="../lib/d3.min.js"></script>
+<script src="../lib/d3.v3.min.js"></script>
 <p>Mouse-over om de data te zien, sleep landen om layout the veranderen, herlaad pagina voor re-initialisatie...</p>
 <script>
     var width = 1000, height = 600;
@@ -57,11 +57,11 @@ var force = d3.layout.force()
         .chargeDistance(250)
         .size([width, height]);
 
-var svg = d3.select("body").append("svg")
+var mapSVG = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-    var defs = svg.append("svg:defs");
+    var defs = mapSVG.append("mapSVG:defs");
 
 // see http://apike.ca/prog_svg_patterns.html
 defs.append("marker")
@@ -147,7 +147,7 @@ d3.json("grabbing-graph.json", function(error, graph) {
       .links(graph.links)
       .start();
 
-    var link = svg.selectAll(".link")
+    var link = mapSVG.selectAll(".link")
                 .data(graph.links)
                 .enter()
                 .append("line")
@@ -179,7 +179,7 @@ d3.json("grabbing-graph.json", function(error, graph) {
             ;
 
 
-    var node = svg.selectAll(".node")
+    var node = mapSVG.selectAll(".node")
             .data(graph.nodes)
             .enter().append("g")
             .attr("class", "node")
