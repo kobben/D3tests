@@ -1,3 +1,6 @@
 D3tests
 =======
-for stand-alone D3 experiments
+Various examples of stand-alone Map & Graph experiments. 
+Created by Barend Köbben (b.j.kobben@utwente.nl)
+Using HTML5, SVG, Canvas, and D3js (v4). 
+
