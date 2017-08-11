@@ -1,0 +1,282 @@
+/* miriam-libre-regular - latin */
+@font-face {
+	font-family: 'Miriam Libre';
+	font-style: normal;
+	font-weight: 400;
+	src: url('../fonts/miriam-libre-v1-latin-regular.eot'); /* IE9 Compat Modes */
+	src: local('Miriam Libre'), local('MiriamLibre-Regular'),
+	url('../fonts/miriam-libre-v1-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	url('../fonts/miriam-libre-v1-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+	url('../fonts/miriam-libre-v1-latin-regular.woff') format('woff'), /* Modern Browsers */
+	url('../fonts/miriam-libre-v1-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+	url('../fonts/miriam-libre-v1-latin-regular.svg#MiriamLibre') format('svg'); /* Legacy iOS */
+}
+/* miriam-libre-700 - latin */
+@font-face {
+	font-family: 'Miriam Libre';
+	font-style: normal;
+	font-weight: 700;
+	src: url('../fonts/miriam-libre-v1-latin-700.eot'); /* IE9 Compat Modes */
+	src: local('Miriam Libre Bold'), local('MiriamLibre-Bold'),
+	url('../fonts/miriam-libre-v1-latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	url('../fonts/miriam-libre-v1-latin-700.woff2') format('woff2'), /* Super Modern Browsers */
+	url('../fonts/miriam-libre-v1-latin-700.woff') format('woff'), /* Modern Browsers */
+	url('../fonts/miriam-libre-v1-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
+	url('../fonts/miriam-libre-v1-latin-700.svg#MiriamLibre') format('svg'); /* Legacy iOS */
+}
+/* sintony-regular - latin-ext_latin */
+@font-face {
+	font-family: 'Sintony';
+	font-style: normal;
+	font-weight: 400;
+	src: url('../fonts/sintony-v4-latin-ext_latin-regular.eot'); /* IE9 Compat Modes */
+	src: local('Sintony'),
+	url('../fonts/sintony-v4-latin-ext_latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	url('../fonts/sintony-v4-latin-ext_latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+	url('../fonts/sintony-v4-latin-ext_latin-regular.woff') format('woff'), /* Modern Browsers */
+	url('../fonts/sintony-v4-latin-ext_latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+	url('../fonts/sintony-v4-latin-ext_latin-regular.svg#Sintony') format('svg'); /* Legacy iOS */
+}
+/* sintony-700 - latin-ext_latin */
+@font-face {
+	font-family: 'Sintony';
+	font-style: normal;
+	font-weight: 700;
+	src: url('../fonts/sintony-v4-latin-ext_latin-700.eot'); /* IE9 Compat Modes */
+	src: local('Sintony Bold'), local('Sintony-Bold'),
+	url('../fonts/sintony-v4-latin-ext_latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	url('../fonts/sintony-v4-latin-ext_latin-700.woff2') format('woff2'), /* Super Modern Browsers */
+	url('../fonts/sintony-v4-latin-ext_latin-700.woff') format('woff'), /* Modern Browsers */
+	url('../fonts/sintony-v4-latin-ext_latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
+	url('../fonts/sintony-v4-latin-ext_latin-700.svg#Sintony') format('svg'); /* Legacy iOS */
+}
+
+
+body {
+	/*background-color: white;*/
+	background-color: #00393F;
+	font-family: 'Sintony', Verdana, sans-serif;
+	color: white;
+	font-size: 1em;
+	text-align: center;
+}
+
+#mapDiv {
+	display: block;
+	position: relative;
+	overflow: hidden;
+	height: 660px;
+	width: 660px;
+	margin: 0 auto;
+}
+
+.container {
+	position: relative;
+    border-radius: 5px;
+	background-color: #4CB05B;
+	margin: 0 auto;
+	text-align: left;
+	overflow-x: hidden;
+}
+
+#expContainer {
+	width: 660px;
+}
+
+
+#expWrapper {
+	min-height: 60px;
+}
+
+#expWrapper h2 {
+	margin-right: 170px;
+}
+
+.infoDivs {
+	display: block;
+	padding: 0 15px;
+}
+
+
+/*dropdown menu*/
+select {
+    margin: 0px;
+    padding: 5px 35px 5px 5px;
+    font-size: 1em;
+    color: white;
+    height: 34px;
+    width: 200px;
+    display: block;
+    position: absolute;
+    bottom: 5px;
+    left: 0px;
+    font-family: 'Sintony', Verdana, sans-serif;
+    color: white;
+    font-size: 1em;
+    background:  #91908F;
+    border-radius: 5px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    box-shadow: none !important;
+-webkit-autofill { color: #91908F !important; }
+-moz-autofill { color: #91908F !important; }
+}
+
+
+.tooltip {
+    position: absolute;
+    z-index: 10;
+    pointer-events: none;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid #ddd;
+    padding: 5px 12px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px rgba(120, 120, 120, 0.65);
+}
+
+.tooltip-text {
+    font-family: 'Sintony', Verdana, sans-serif;
+    color: black;
+    font-size: .8em;
+    margin-bottom: 3px;
+}
+
+b {
+	font-weight: 700;
+}
+.hidden {
+	display: none !important;
+}
+
+/*headings*/
+h1 {
+	text-align: center;
+	font-family: 'Miriam Libre', Verdana, sans-serif;
+	color: white;
+	font-size: 55px;
+	margin: 25px 0 35px 0;
+	text-decoration: none;
+	font-weight: 400;
+}
+
+h2, h3 {
+	font-family: 'Miriam Libre', Verdana, sans-serif;
+	color: white;
+	margin-top: 15px;
+	margin-bottom: 10px;
+}
+
+h2 {
+	font-size: 35px;
+}
+
+h3 {
+	font-size: 25px;
+	text-decoration: none;
+	margin-bottom: 10px;
+}
+h4 {
+	font-size: 20px;
+	margin-top: 25px;
+	margin-bottom: 5px;
+}
+
+/*map*/
+.land {
+	fill: rgb(255,240,214);
+	/*fill: #F0F0F1;*/
+	stroke: rgb(0,159,227);
+	/*stroke: #4CB05B;*/
+	stroke-width: .5px;
+}
+
+.ocean {
+	fill: rgb(216,228,246);
+	stroke: rgb(0,159,227);
+}
+
+.boundary {
+	fill: none;
+	stroke: #4CB05B;
+	/*stroke: rgb(204,114,117);*/
+	stroke-width: .3px;
+}
+.graticule {
+	fill: none;
+	stroke: rgb(0,159,227);
+	stroke-width: .1px;
+}
+
+.pin {
+	fill: #4CB05B;
+	fill-opacity: .6;
+	stroke: #fff;
+	stroke-opacity: .6;
+	stroke-width: 2;
+}
+.pin-hidden {
+	display: none;
+}
+
+.selected {
+	fill-opacity: 1;
+	fill: #00393F;
+	stroke-opacity: 1;
+}
+
+
+.weblink {
+    text-decoration: none;
+    color: #000;
+}
+
+.weblink:hover {
+    text-decoration: underline;
+    color: #00f;
+}
+
+
+
+/*on small or narrow screens, adapt to screen size*/
+/*@media screen and (max-width:768px) {
+
+	#mapDiv {
+		height: 100vw;
+		width: 100%;
+	}
+
+	#infoContainer {
+		width: 100%;
+	}
+
+}*/
+
+/*on wide screens, display map and info side by side*/
+/*@media screen and (min-width: 1500px) {
+
+	#mapDiv {
+		height: 750px;
+		width: 750px;
+		position: absolute;
+		right: 50%;
+	}
+
+	#infoContainer {
+		width: 750px;
+		height: 750px;
+		float: left;
+		margin: 0 0 0 50%;
+		overflow-y: scroll;
+	}
+
+	#toTop {
+		display: none;
+	}
+
+	#feedbackButton {
+		margin: 20px 600px;
+	}
+
+}*/
+
