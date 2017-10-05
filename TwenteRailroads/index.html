@@ -3,7 +3,7 @@
 <html>
 <head><title>Railroads in Twente</title>
     <link rel="stylesheet" type="text/css" href="./files/style.css">
-    <script src="../lib/d3.v3.min.js"></script>
+    <script src="../lib/d3.v4.min.js"></script>
 </head>
 
 
@@ -23,7 +23,7 @@
         })
     }
 
-    var minJaar = 1864, maxJaar = 2015;
+    var minJaar = 1864, maxJaar = 2017;
 
     var SvgWidth = 700, SvgHeight = 580;
 
@@ -38,7 +38,7 @@
             xOffset = -(minX * scale)
             ;
 
-    var svg = d3.select("body")
+    var mapSVG = d3.select("body")
                     .append("svg")
                     .attr("id", "theMapSvg")
                     .attr("width", SvgWidth)
@@ -79,10 +79,11 @@
         };
     }
 
-    var geoPath = d3.geo.path().projection(AffineTransformation(scale, 0, 0, -scale, xOffset, yOffset));
+    var geoPath = d3.geoPath().projection(AffineTransformation(scale, 0, 0, -scale, xOffset, yOffset));
+//    var geoPath = d3.geoPath().projection(null));
 
     //twente outline
-    var mapLayerTwente = svg.append("g")
+    var mapLayerTwente = mapSVG.append("g")
             .attr("id", "mapLayerTwente");
     d3.json("./files/twente.geojson", function (json) {
         mapLayerTwente.selectAll("path")
@@ -96,7 +97,7 @@
     ;
 
     //towns
-    var mapLayerTowns = svg.append("g")
+    var mapLayerTowns = mapSVG.append("g")
             .attr("id", "mapLayerTowns");
     d3.json("./files/towns.geojson", function (json) {
         mapLayerTowns.selectAll("path")
@@ -110,7 +111,7 @@
     ;
 
     //railroads
-    var mapLayerRailroads = svg.append("g")
+    var mapLayerRailroads = mapSVG.append("g")
             .attr("id", "mapLayerRailroads");
     var runningID = 0;
     d3.json("./files/railroads.geojson", function (json) {
@@ -146,7 +147,7 @@
 
 
     //townlabels
-    var mapLayerTownlabels = svg.append("g")
+    var mapLayerTownlabels = mapSVG.append("g")
             .attr("id", "mapLayerTownlabels");
     d3.json("./files/townlabels.geojson", function (json) {
         mapLayerTownlabels.selectAll("text")
@@ -171,9 +172,11 @@
         var theStr = "";
         if (d.properties.railwaytype == "hoofdspoorweg") {
             theStr += "MAIN LINE ";
-        } else if (d.properties.railwaytype == "lokaalspoorweg") {
-            theStr += "BRANCH LINE ";
-        } else {
+		} else if (d.properties.railwaytype == "lokaalspoorweg") {
+			theStr += "BRANCH LINE ";
+		} else if (d.properties.railwaytype == "museumspoor") {
+			theStr += "MUSEUM/RECREATION ";
+		} else {
             theStr += "TRAMWAY ";
         }
         theStr += "(" + d.properties.yr_opened + "-";
@@ -198,7 +201,8 @@
         var jaarSlider = document.getElementById("jaarSlider");
         if (jaarBox.value < minJaar) {
             jaarBox.value = minJaar;
-        }if (jaarBox.value > maxJaar) {
+        }
+        if (jaarBox.value > maxJaar) {
             jaarBox.value = maxJaar;
         }
         jaarSlider.value = jaarBox.value;
@@ -210,7 +214,7 @@
 <div id="controls">
     <input size="4" id="jaarBox" type="text" value="1928" onchange="setJaarBox()"/>
     <br/>
-    <input id="jaarSlider" type="range" min="1864" max="2015" step="1" value="1928"
+    <input id="jaarSlider" type="range" min="1864" max="2017" step="1" value="1928"
            onchange="setJaarSlider()" oninput="setJaarSlider()">
 <p class="bold">HISTORY OF RAILROADS IN
     TWENTE</p>

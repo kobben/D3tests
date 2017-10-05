@@ -105,12 +105,20 @@ a:hover {
     stroke: rgb(0, 0, 0);
     stroke-linecap: round;
 }
+.museumspoor {
+    fill: none;
+    stroke-width: 2px;
+    stroke: rgb(0, 0, 0);
+    stroke-linecap: round;
+    stroke-dasharray: 5px, 3px;
+    stroke-linecap: round;
+}
 
 .tramweg {
     fill: none;
     stroke-width: 2px;
     stroke: rgb(0, 0, 0);
-    stroke-dasharray: 4px, 4px;
+    stroke-dasharray: 2px, 3px;
     stroke-linecap: round;
 }
 
