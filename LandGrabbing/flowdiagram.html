@@ -160,7 +160,7 @@ d3.json("grabbing-flow.json", function(grabbing) {
         .attr("dy", ".35em")
         .attr("text-anchor", "middle")
         .attr("transform", null)
-        .text("(sleep landen-blokken om ze te verplaatsen)")
+        .text("(Drag country blocks to change order)")
     ;
     titles.append("text")
       .attr("x", width + margin.right)
@@ -226,8 +226,12 @@ d3.json("grabbing-flow.json", function(grabbing) {
 </script>
 </p>
 <!--<a id="downloadLink" href="" download='download'>Download</a>-->
-
-<p><a href="index.html">OVERZICHT</a> -- <a href="map.html">KAART</a> -- STROOMDIAGRAM
-    -- <a href="graph.html">NETWERK</a> -- <a href="odmatrix.html">MATRIX</a>
+<p> The <a href="flowdiagram.html">FLOWCHART</a> (or Sankey-diagram)  is easiest to read, even the smallest deals are
+    distinguishable, expecially with the interactivity of moving the country blocks around. It is also the only depiction
+    that shows the few countries that are both 'grabber' and 'grabbed'...
+    But the spatial dimension is totally lost to the user.</p>
+<p>
+    <a href="index.html">HOME</a> -- <a href="map.html">MAP</a> -- <a href="flowdiagram.html">FLOWDIAGRAM</a>
+    -- <a href="graph.html">NETWORK</a> -- <a href="odmatrix.html">MATRIX</a>
 </p>
 </body></html>

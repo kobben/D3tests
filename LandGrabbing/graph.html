@@ -45,7 +45,7 @@
 </style>
 <body>
 <script src="../lib/d3.v3.min.js"></script>
-<p>Mouse-over om de data te zien, sleep landen om layout the veranderen, herlaad pagina voor re-initialisatie...</p>
+<p>(Mouse-over to show data, drag countries to change layout)</p>
 <script>
     var width = 1000, height = 600;
 
@@ -210,7 +210,11 @@ d3.json("grabbing-graph.json", function(error, graph) {
 });
 
 </script>
-
-<p><a href="index.html">OVERZICHT</a> -- <a href="map.html">KAART</a> -- <a href="flowdiagram.html">STROOMDIAGRAM</a>
-    -- NETWERK -- <a href="odmatrix.html">MATRIX</a>
+<p>
+    The <a href="graph.html">NETWORK</a> graph is flexible and interactive, but it is difficult to see who's a
+    "grabber" and who is "grabbed". Furthermore, many users interpret the positions of the country dots and their relative
+    distances as relevant, but in such a diagram these have no meaning (it's a purely 'topological' depiction)...</p>
+<p>
+    <a href="index.html">HOME</a> -- <a href="map.html">MAP</a> -- <a href="flowdiagram.html">FLOWDIAGRAM</a>
+    -- <a href="graph.html">NETWORK</a> -- <a href="odmatrix.html">MATRIX</a>
 </p>

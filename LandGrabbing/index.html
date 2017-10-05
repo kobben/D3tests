@@ -1,48 +1,52 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <html>
-<head><title>Landgrabbing: grabbers &amp; grabbed gebieden</title>
-<link rel="stylesheet" type="text/css" href="./styles.css">
-
-
-
+<head><title>Landgrabbers &amp; Grabbed Land</title>
+    <link rel="stylesheet" type="text/css" href="./styles.css">
 
 
 </head>
 <body >
 
-<h1 id="theTitle">Landgrabbing: grabbers &amp; grabbed gebieden</h1>
-
-De afgelopen tien jaar is het aantal grootschalige transnationale landdeals sterk toegenomen.
-Er wordt zelfs gesproken van een global land rush. Veelal zijn het arealen tussen de 10.000 en 200.000 hectare.
-Volgens een schatting van de Wereldbank zou het alleen al tussen 2008 en 2010 gaan om 45 miljoen hectare.
-
-Bij het artikel van Henk Donkers &amp; Bert van Vijfeijken in <b>Geografie 2015-08</b> hebben we data over 'land-grabbing'
-in beeld gebracht, op verschillende manieren. Elke visualisatie heeft zijn sterke en zwakke kanten:
-
+<h1 id="theTitle">Landgrabbers &amp; Grabbed Land </h1>
+<p>
+    The pas ten years the number of large scale transnational landdeals has risen considerably.
+    Some call this the Global Land Rush. It mostly concerns areas of between 10.000 and 200.000 hectares.
+    The World Bank estimates aroun 45 million hectares have been traded between 2008 and 2010 alone...
+    <br>
+    We created several depictions of the same 'land-grabbing' data for the article of Henk Donkers &amp; Bert van Vijfeijken
+    in <b>Geografie 2015-08</b>. Each visulaisation has its strong and weak sides, each tells the story in a different way.
+</p>
 <table>
     <tr>
         <td width=""350px"><a href="map.html"><img src="map.png" width="350px"></a><br>
-            In de <a href="map.html">KAART</a> is de ruimtelijke samenhang het meest expliciet: het is duidelijk waar de betreffend landen liggen. Maar  de onderlinge
-            verhoudingen van de hoeveelheden zijn moeilijk te vergelijken, en je raakt het overzicht kwijt als er teveel relaties worden weergegeven.
+        In the <a href="map.html">MAP</a> the spatial context is explicitly clear. But the amounts of (especially the smaller)
+        deals are difficult to estimate. This becomes even harder when more than just the top few deals are shown...
         </td>
         <td width=""300px"><a href="flowdiagram.html"><img src="diagram.png" width="300px"></a><br>
-            Het <a href="flowdiagram.html">STROOMDIAGRAM</a> is wat dat betreft makkelijker te interpreteren, vooral omdat je de landen-blokken kan verschuiven om zo
-            de 'spaghetti' te ontwarren. Ook zie je hier als enige welke landen zowel 'grabber' zijn als 'ge-grabde'...
+        The <a href="flowdiagram.html">FLOWCHART</a> (or Sankey-diagram)  is easiest to read, even the smallest deals are
+        distinguishable, expecially with the interactivity of moving the country blocks around. It is also the only depiction
+        that shows the few countries that are both 'grabber' and 'grabbed'...
+        But the spatial dimension is totally lost to the user.
         </td>
-        </tr><tr>
-        <td width=""300px"><a href="graph.html"><img src="graph.png" width="300px"></a><br>
-        De <a href="graph.html">NETWERK</a> "graph" is flexibel en interactief, maar het is niet erg duidelijk welke landen de "grabbers" zijn en welke de "ge-gegrabden"....
-        </td>
-        <td width=""300px"><a href="odmatrix.html"><img src="matrix.png" width="300px"></a><br>
-            De <a href="odmatrix.html">MATRIX</a> is in theorie goed om per land de relaties te zien, maar hier spelen de grote verschillen tussen de hoeveelheden land (in ha.)
-            ons parten, waardoor alle kleine stromen vrijwel onzichtbaar zijn.
-        </td>
-    </tr>
+    </tr><tr>
+    <td width=""300px"><a href="graph.html"><img src="graph.png" width="300px"></a><br>
+    The <a href="graph.html">NETWORK</a> graph is flexible and interactive, but it is difficult to see who's a
+    "grabber" and who is "grabbed". Furthermore, many users interpret the positions of the country dots and their relative
+    distances as relevant, but in such a diagram these have no meaning (it's a purely 'topological' depiction)...
+    </td>
+    <td width=""300px"><a href="odmatrix.html"><img src="matrix.png" width="300px"></a><br>
+    The <a href="odmatrix.html">MATRIX</a> in theory serves well to show relations, but in this case the big difference between
+    highest and lowest values makes it impossible to distinguish any but the largest instances, if we use the visual variable
+    <a href="odmatrix.html">SIZE</a> (as the theory tells us to use for such data on an absolute ratio measurement scale)...
+    This can be improved by using the visual variable <a href="odmatrixValue.html">VALUE</a> instead of size.
+    </td>
+</tr>
 </table>
-        <p>OVERZICHT -- <a href="map.html">KAART</a> -- <a href="flowdiagram.html">STROOMDIAGRAM</a>
-            -- <a href="graph.html">NETWERK</a> -- <a href="odmatrix.html">MATRIX</a>
-        </p>
+<p>
+    <a href="index.html">HOME</a> -- <a href="map.html">MAP</a> -- <a href="flowdiagram.html">FLOWDIAGRAM</a>
+    -- <a href="graph.html">NETWORK</a> -- <a href="odmatrix.html">MATRIX</a>
+</p>
 <a>Bron data: <a href="http://www.pnas.org/content/110/3/892" target=""_blank">PNAS vol 110, no.3</a></p>
 <p>[This page is part of the visualisation experiments <a href="../index.html">website</a> of B. Köbben]</p>
 </body>
