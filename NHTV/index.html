@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head><title>Test NHTV</title>
+  <script src="../lib/d3.v4.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/colorbrewer.css">
+  <script src="js/colorbrewer.js"></script>
+  <script src="js/Messages.js"></script>
+  <script src="js/map.js"></script>
+
+</head>
+
+<body onload="init()">
+
+
+
+<div id="mapDiv">
+</div>
+<!--<div id="guiDiv">-->
+  <div id="sliderDiv">
+    <input id="timeSlider" type="range" min="0" max="1000" step="1" value="0"
+           onchange="setTimeSlider(this.value)" oninput="setTimeSlider(this.value)">
+    <!--timeSlider.max will be re-set in code-->
+  </div>
+  <div id="brushDiv">
+  </div>
+<!--</div>-->
+<!--<p>-->
+<!--map width: <input id="theWidth" type="number" size="5" value=""/>-->
+<!--map height: <input id="theHeight" type="number" size="5" value=""/>-->
+<!--<input type="button" value="RESCALE" onclick="fitToBox()"/>-->
+<!--</p>-->
+<!--<p>-->
+  <!--map scale=<span id="mapscale">scale</span> px/mapunit;-->
+  <!--x offset=<span id="xoffset">x offset</span> px;-->
+  <!--y offset=<span id="yoffset">y offset</span> px;-->
+<!--</p>-->
+</body>
+</html>

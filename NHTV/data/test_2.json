@@ -1,0 +1,1552 @@
+[
+  {
+    "reference": "doStreaming",
+    "packet": {
+      "id": "Channel/ObjectGpsDescriptionCalculator",
+      "type": "ObjectGpsDescriptionPacket",
+      "ts": "2017-10-27T23:09:33.095",
+      "meta": 3,
+      "payload": {
+        "Uuid": "203348b5-4299-4d70-a20b-e4b5f762a392",
+        "TimeStart": "2017-10-27T23:09:27.458",
+        "TimeEnd": "2017-10-27T23:09:33.095",
+        "GpsLocations": {
+          "NumberOfGpsLocations": 140,
+          "GpsLocations": [
+            {
+              "Timestamp": "2017-10-27T23:09:27.458",
+              "GpsCoordinate": {
+                "latitude": 51.563576186605928342,
+                "longitude": 5.062061989950312757
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:27.533",
+              "GpsCoordinate": {
+                "latitude": 51.563576738987521253,
+                "longitude": 5.0620586058659791107
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:27.559",
+              "GpsCoordinate": {
+                "latitude": 51.563577015491553368,
+                "longitude": 5.0620570264925586201
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:27.585",
+              "GpsCoordinate": {
+                "latitude": 51.563577291995564167,
+                "longitude": 5.0620554471191194779
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:27.629",
+              "GpsCoordinate": {
+                "latitude": 51.563577568499553649,
+                "longitude": 5.0620538677456607957
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:27.659",
+              "GpsCoordinate": {
+                "latitude": 51.563577563487115185,
+                "longitude": 5.0620520650451972244
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:27.728",
+              "GpsCoordinate": {
+                "latitude": 51.563578116494987569,
+                "longitude": 5.0620489062982017003
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:27.757",
+              "GpsCoordinate": {
+                "latitude": 51.563578672635607347,
+                "longitude": 5.062046874238944838
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:27.790",
+              "GpsCoordinate": {
+                "latitude": 51.563578949139476038,
+                "longitude": 5.0620452948653866798
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:27.825",
+              "GpsCoordinate": {
+                "latitude": 51.563579225016759722,
+                "longitude": 5.0620434901542425976
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:27.867",
+              "GpsCoordinate": {
+                "latitude": 51.563579501520585779,
+                "longitude": 5.0620419107806444714
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:27.921",
+              "GpsCoordinate": {
+                "latitude": 51.563580053901596045,
+                "longitude": 5.0620385266958196624
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:27.961",
+              "GpsCoordinate": {
+                "latitude": 51.563580330405358154,
+                "longitude": 5.0620369473221629164
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:27.991",
+              "GpsCoordinate": {
+                "latitude": 51.563580606909098947,
+                "longitude": 5.0620353679484866305
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:28.035",
+              "GpsCoordinate": {
+                "latitude": 51.563580882786226312,
+                "longitude": 5.062033563237216427
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:28.076",
+              "GpsCoordinate": {
+                "latitude": 51.563581998826485631,
+                "longitude": 5.0620308511435085919
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:28.096",
+              "GpsCoordinate": {
+                "latitude": 51.563581993813691895,
+                "longitude": 5.062029048442872714
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:28.162",
+              "GpsCoordinate": {
+                "latitude": 51.563582827710789047,
+                "longitude": 5.0620258876845536378
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:28.181",
+              "GpsCoordinate": {
+                "latitude": 51.563583103587767198,
+                "longitude": 5.062024082973137773
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:28.265",
+              "GpsCoordinate": {
+                "latitude": 51.56358365534164534,
+                "longitude": 5.0620204735502420945
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:28.275",
+              "GpsCoordinate": {
+                "latitude": 51.563583931845158759,
+                "longitude": 5.0620188941763499813
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:28.309",
+              "GpsCoordinate": {
+                "latitude": 51.563584208348657967,
+                "longitude": 5.0620173148024383281
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:28.358",
+              "GpsCoordinate": {
+                "latitude": 51.563584484225501114,
+                "longitude": 5.06201551009091677
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:28.396",
+              "GpsCoordinate": {
+                "latitude": 51.563584761355585329,
+                "longitude": 5.0620141560545590664
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:28.432",
+              "GpsCoordinate": {
+                "latitude": 51.563585037859013482,
+                "longitude": 5.0620125766805905698
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:28.488",
+              "GpsCoordinate": {
+                "latitude": 51.563585870502386399,
+                "longitude": 5.0620089652465605212
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:28.519",
+              "GpsCoordinate": {
+                "latitude": 51.563586147005743499,
+                "longitude": 5.0620073858725218585
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:28.558",
+              "GpsCoordinate": {
+                "latitude": 51.563586422882437432,
+                "longitude": 5.0620055811608626328
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:28.595",
+              "GpsCoordinate": {
+                "latitude": 51.563586699385751899,
+                "longitude": 5.0620040017867840021
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:28.665",
+              "GpsCoordinate": {
+                "latitude": 51.56358725239232399,
+                "longitude": 5.0620008430385698972
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:28.681",
+              "GpsCoordinate": {
+                "latitude": 51.563587528895574508,
+                "longitude": 5.0619992636644335349
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:28.709",
+              "GpsCoordinate": {
+                "latitude": 51.56358780539880371,
+                "longitude": 5.0619976842902785208
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:28.765",
+              "GpsCoordinate": {
+                "latitude": 51.563588639921711376,
+                "longitude": 5.0619947488685914649
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:28.801",
+              "GpsCoordinate": {
+                "latitude": 51.563588916424883735,
+                "longitude": 5.0619931694943698375
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:28.868",
+              "GpsCoordinate": {
+                "latitude": 51.56358974906765269,
+                "longitude": 5.0619895580596772078
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:28.894",
+              "GpsCoordinate": {
+                "latitude": 51.563590025570753994,
+                "longitude": 5.0619879786853863024
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:28.917",
+              "GpsCoordinate": {
+                "latitude": 51.563590301447142394,
+                "longitude": 5.0619861739734552941
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:28.962",
+              "GpsCoordinate": {
+                "latitude": 51.563590577950201066,
+                "longitude": 5.0619845945991244207
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:29.030",
+              "GpsCoordinate": {
+                "latitude": 51.563591411219391603,
+                "longitude": 5.0619812085017681369
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:29.072",
+              "GpsCoordinate": {
+                "latitude": 51.5635919661054416,
+                "longitude": 5.0619787257658330759
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:29.083",
+              "GpsCoordinate": {
+                "latitude": 51.563592522871537938,
+                "longitude": 5.061976919042730394
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:29.130",
+              "GpsCoordinate": {
+                "latitude": 51.563592799374468711,
+                "longitude": 5.0619753396682662938
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:29.174",
+              "GpsCoordinate": {
+                "latitude": 51.563593076504083967,
+                "longitude": 5.0619739856314156512
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:29.197",
+              "GpsCoordinate": {
+                "latitude": 51.563593352380259205,
+                "longitude": 5.0619721809192794737
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:29.262",
+              "GpsCoordinate": {
+                "latitude": 51.56359418564909447,
+                "longitude": 5.0619687948214888706
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:29.279",
+              "GpsCoordinate": {
+                "latitude": 51.563594462778631566,
+                "longitude": 5.0619674407845574038
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:29.351",
+              "GpsCoordinate": {
+                "latitude": 51.563595296047331829,
+                "longitude": 5.0619640546865980468
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:29.381",
+              "GpsCoordinate": {
+                "latitude": 51.563595849052816789,
+                "longitude": 5.0619608959373003643
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:29.411",
+              "GpsCoordinate": {
+                "latitude": 51.563596405191901795,
+                "longitude": 5.0619588638761747745
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:29.459",
+              "GpsCoordinate": {
+                "latitude": 51.563596681694590984,
+                "longitude": 5.0619572845014664253
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:29.481",
+              "GpsCoordinate": {
+                "latitude": 51.563596959450734403,
+                "longitude": 5.0619561558020427228
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:29.526",
+              "GpsCoordinate": {
+                "latitude": 51.563597235953380959,
+                "longitude": 5.0619545764272979582
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:29.596",
+              "GpsCoordinate": {
+                "latitude": 51.563597788331861693,
+                "longitude": 5.0619511923400946074
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:29.626",
+              "GpsCoordinate": {
+                "latitude": 51.563598344470776169,
+                "longitude": 5.0619491602787638485
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:29.652",
+              "GpsCoordinate": {
+                "latitude": 51.563598341336998487,
+                "longitude": 5.0619480335904682988
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:29.684",
+              "GpsCoordinate": {
+                "latitude": 51.563598896849100583,
+                "longitude": 5.0619457761914121718
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:29.721",
+              "GpsCoordinate": {
+                "latitude": 51.563599173978367673,
+                "longitude": 5.0619444221542009288
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:29.769",
+              "GpsCoordinate": {
+                "latitude": 51.563599449854088164,
+                "longitude": 5.0619426174416428665
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:29.818",
+              "GpsCoordinate": {
+                "latitude": 51.563600002858997584,
+                "longitude": 5.0619394586917971779
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:29.866",
+              "GpsCoordinate": {
+                "latitude": 51.56360027998819362,
+                "longitude": 5.0619381046545139924
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:29.881",
+              "GpsCoordinate": {
+                "latitude": 51.563600835500103869,
+                "longitude": 5.0619358472552411499
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:29.926",
+              "GpsCoordinate": {
+                "latitude": 51.563601111375689356,
+                "longitude": 5.0619340425425658481
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:29.962",
+              "GpsCoordinate": {
+                "latitude": 51.563601387878037485,
+                "longitude": 5.0619324631675421955
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:30.018",
+              "GpsCoordinate": {
+                "latitude": 51.56360166124640898,
+                "longitude": 5.0619297571041235173
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:30.082",
+              "GpsCoordinate": {
+                "latitude": 51.563602497021207682,
+                "longitude": 5.061927272355654317
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:30.101",
+              "GpsCoordinate": {
+                "latitude": 51.563602493887216838,
+                "longitude": 5.061926145667257515
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:30.167",
+              "GpsCoordinate": {
+                "latitude": 51.563602769135854942,
+                "longitude": 5.0619241156167769091
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:30.182",
+              "GpsCoordinate": {
+                "latitude": 51.563603045011255688,
+                "longitude": 5.0619223109039541697
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:30.218",
+              "GpsCoordinate": {
+                "latitude": 51.563603041250409831,
+                "longitude": 5.0619209588778621978
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:30.271",
+              "GpsCoordinate": {
+                "latitude": 51.563603317125767944,
+                "longitude": 5.0619191541650092603
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:30.325",
+              "GpsCoordinate": {
+                "latitude": 51.563603869503218391,
+                "longitude": 5.0619157700769239483
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:30.369",
+              "GpsCoordinate": {
+                "latitude": 51.563603866369120965,
+                "longitude": 5.0619146433884933955
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:30.389",
+              "GpsCoordinate": {
+                "latitude": 51.563604143498025678,
+                "longitude": 5.0619132893509446447
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:30.433",
+              "GpsCoordinate": {
+                "latitude": 51.563604419373270105,
+                "longitude": 5.061911484638001113
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:30.467",
+              "GpsCoordinate": {
+                "latitude": 51.5636046958753127,
+                "longitude": 5.0619099052627261059
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:30.519",
+              "GpsCoordinate": {
+                "latitude": 51.563605528515502385,
+                "longitude": 5.0619062938252561423
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:30.568",
+              "GpsCoordinate": {
+                "latitude": 51.563605526008146285,
+                "longitude": 5.0619053924744799033
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:30.581",
+              "GpsCoordinate": {
+                "latitude": 51.563605522873949383,
+                "longitude": 5.0619042657860102707
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:30.652",
+              "GpsCoordinate": {
+                "latitude": 51.563606077758358026,
+                "longitude": 5.0619017830483663545
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:30.660",
+              "GpsCoordinate": {
+                "latitude": 51.563606354260265618,
+                "longitude": 5.061900203672974996
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:30.695",
+              "GpsCoordinate": {
+                "latitude": 51.563606632015861919,
+                "longitude": 5.0618990749729633194
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:30.766",
+              "GpsCoordinate": {
+                "latitude": 51.563607185646446851,
+                "longitude": 5.0618961415597913955
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:30.789",
+              "GpsCoordinate": {
+                "latitude": 51.563607181258433343,
+                "longitude": 5.0618945641958772441
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:30.831",
+              "GpsCoordinate": {
+                "latitude": 51.56360773739636727,
+                "longitude": 5.0618925321334344858
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:30.864",
+              "GpsCoordinate": {
+                "latitude": 51.56360801389815407,
+                "longitude": 5.0618909527579294405
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:30.898",
+              "GpsCoordinate": {
+                "latitude": 51.563608010136945836,
+                "longitude": 5.0618896007316926955
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:30.960",
+              "GpsCoordinate": {
+                "latitude": 51.563608565021041841,
+                "longitude": 5.0618871179937343641
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:30.991",
+              "GpsCoordinate": {
+                "latitude": 51.563608841522750481,
+                "longitude": 5.0618855386181671463
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:31.026",
+              "GpsCoordinate": {
+                "latitude": 51.563609118024444911,
+                "longitude": 5.0618839592425812768
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:31.071",
+              "GpsCoordinate": {
+                "latitude": 51.56360939389923459,
+                "longitude": 5.0618821545292629338
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:31.122",
+              "GpsCoordinate": {
+                "latitude": 51.563609946902502656,
+                "longitude": 5.061878995777992607
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:31.152",
+              "GpsCoordinate": {
+                "latitude": 51.563610223404104715,
+                "longitude": 5.0618774164023285778
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:31.185",
+              "GpsCoordinate": {
+                "latitude": 51.563610500532583103,
+                "longitude": 5.0618760623643632712
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:31.219",
+              "GpsCoordinate": {
+                "latitude": 51.56361077578034724,
+                "longitude": 5.0618740323132227488
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:31.266",
+              "GpsCoordinate": {
+                "latitude": 51.563611051654980599,
+                "longitude": 5.0618722275997782845
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:31.299",
+              "GpsCoordinate": {
+                "latitude": 51.563611329410299788,
+                "longitude": 5.0618710988994797262
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:31.366",
+              "GpsCoordinate": {
+                "latitude": 51.563611601523426486,
+                "longitude": 5.061867942159654632
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:31.389",
+              "GpsCoordinate": {
+                "latitude": 51.563611879278710148,
+                "longitude": 5.0618668134593152175
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:31.460",
+              "GpsCoordinate": {
+                "latitude": 51.563612432908485061,
+                "longitude": 5.061863880045413211
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:31.481",
+              "GpsCoordinate": {
+                "latitude": 51.563612708782962102,
+                "longitude": 5.0618620753318417371
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:31.510",
+              "GpsCoordinate": {
+                "latitude": 51.563612983403558587,
+                "longitude": 5.061859819942788441
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:31.566",
+              "GpsCoordinate": {
+                "latitude": 51.563613260531830917,
+                "longitude": 5.0618584659046339524
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:31.601",
+              "GpsCoordinate": {
+                "latitude": 51.563613536406222693,
+                "longitude": 5.0618566611909967534
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:31.631",
+              "GpsCoordinate": {
+                "latitude": 51.563613813534459496,
+                "longitude": 5.0618553071528067377
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:31.667",
+              "GpsCoordinate": {
+                "latitude": 51.56361409003574181,
+                "longitude": 5.0618537277768647087
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:31.714",
+              "GpsCoordinate": {
+                "latitude": 51.563614363402287211,
+                "longitude": 5.0618510217122185679
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:31.766",
+              "GpsCoordinate": {
+                "latitude": 51.563614359640617124,
+                "longitude": 5.0618496696857970818
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:31.782",
+              "GpsCoordinate": {
+                "latitude": 51.563614916404716837,
+                "longitude": 5.0618478629602243757
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:31.864",
+              "GpsCoordinate": {
+                "latitude": 51.563615189771127234,
+                "longitude": 5.061845156895493858
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:31.899",
+              "GpsCoordinate": {
+                "latitude": 51.563615185382424499,
+                "longitude": 5.0618435795313070358
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:31.922",
+              "GpsCoordinate": {
+                "latitude": 51.563615460629627307,
+                "longitude": 5.061841549479761504
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:31.961",
+              "GpsCoordinate": {
+                "latitude": 51.563615737130724881,
+                "longitude": 5.0618399701036791427
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:32.027",
+              "GpsCoordinate": {
+                "latitude": 51.563615730861044995,
+                "longitude": 5.0618377167262433858
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:32.060",
+              "GpsCoordinate": {
+                "latitude": 51.563616006735117026,
+                "longitude": 5.061835912012383254
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:32.088",
+              "GpsCoordinate": {
+                "latitude": 51.563616283863112244,
+                "longitude": 5.0618345579739933982
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:32.130",
+              "GpsCoordinate": {
+                "latitude": 51.563616280728226116,
+                "longitude": 5.0618334312852626411
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:32.180",
+              "GpsCoordinate": {
+                "latitude": 51.563616276966349972,
+                "longitude": 5.0618320792587860879
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:32.225",
+              "GpsCoordinate": {
+                "latitude": 51.563616829968268007,
+                "longitude": 5.0618289205064295189
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:32.274",
+              "GpsCoordinate": {
+                "latitude": 51.56361682557935211,
+                "longitude": 5.0618273431421885178
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:32.291",
+              "GpsCoordinate": {
+                "latitude": 51.563617102080257837,
+                "longitude": 5.0618257637659720416
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:32.328",
+              "GpsCoordinate": {
+                "latitude": 51.563617098945286443,
+                "longitude": 5.0618246370772217446
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:32.398",
+              "GpsCoordinate": {
+                "latitude": 51.563617372311156828,
+                "longitude": 5.0618219310122221088
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:32.419",
+              "GpsCoordinate": {
+                "latitude": 51.563617650065992848,
+                "longitude": 5.0618208023114590333
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:32.440",
+              "GpsCoordinate": {
+                "latitude": 51.563617646930978822,
+                "longitude": 5.0618196756226954136
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:32.520",
+              "GpsCoordinate": {
+                "latitude": 51.563617918415701524,
+                "longitude": 5.0618162935443722361
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:32.535",
+              "GpsCoordinate": {
+                "latitude": 51.563618194916458037,
+                "longitude": 5.0618147141680509549
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:32.576",
+              "GpsCoordinate": {
+                "latitude": 51.563618191781380062,
+                "longitude": 5.0618135874792749007
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:32.622",
+              "GpsCoordinate": {
+                "latitude": 51.563618188646294982,
+                "longitude": 5.0618124607904988466
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:32.680",
+              "GpsCoordinate": {
+                "latitude": 51.563618743528749633,
+                "longitude": 5.0618099780510448227
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:32.713",
+              "GpsCoordinate": {
+                "latitude": 51.563619019402395338,
+                "longitude": 5.0618081733368969211
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:32.732",
+              "GpsCoordinate": {
+                "latitude": 51.563619016267253414,
+                "longitude": 5.0618070466481004388
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:32.775",
+              "GpsCoordinate": {
+                "latitude": 51.563619011878039089,
+                "longitude": 5.0618054692837866071
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:32.821",
+              "GpsCoordinate": {
+                "latitude": 51.56361928963271879,
+                "longitude": 5.0618043405828823111
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:32.875",
+              "GpsCoordinate": {
+                "latitude": 51.563619562998120216,
+                "longitude": 5.0618016345176313209
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:32.920",
+              "GpsCoordinate": {
+                "latitude": 51.563619560489954097,
+                "longitude": 5.0618007331665841875
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:32.963",
+              "GpsCoordinate": {
+                "latitude": 51.563619837617544306,
+                "longitude": 5.0617993791278736992
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:32.988",
+              "GpsCoordinate": {
+                "latitude": 51.563620112863979728,
+                "longitude": 5.0617973490758538802
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:33.020",
+              "GpsCoordinate": {
+                "latitude": 51.563620388110372517,
+                "longitude": 5.0617953190238100802
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:33.064",
+              "GpsCoordinate": {
+                "latitude": 51.56362066210262185,
+                "longitude": 5.0617928382962062983
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:09:33.095",
+              "GpsCoordinate": {
+                "latitude": 51.563620939857180758,
+                "longitude": 5.0617917095951838746
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "reference": "doStreaming",
+    "packet": {
+      "id": "Channel/ObjectGpsDescriptionCalculator",
+      "type": "ObjectGpsDescriptionPacket",
+      "ts": "2017-10-27T23:11:03.918",
+      "meta": 3,
+      "payload": {
+        "Uuid": "1746f22b-b1e5-4af8-9fc4-7a688c318f72",
+        "TimeStart": "2017-10-27T23:11:00.916",
+        "TimeEnd": "2017-10-27T23:11:03.918",
+        "GpsLocations": {
+          "NumberOfGpsLocations": 76,
+          "GpsLocations": [
+            {
+              "Timestamp": "2017-10-27T23:11:00.916",
+              "GpsCoordinate": {
+                "latitude": 51.563588263146733937,
+                "longitude": 5.0619602742252061134
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:00.962",
+              "GpsCoordinate": {
+                "latitude": 51.563588539022696011,
+                "longitude": 5.0619584695131782937
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:00.983",
+              "GpsCoordinate": {
+                "latitude": 51.56358909516174549,
+                "longitude": 5.0619564374523511319
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:01.030",
+              "GpsCoordinate": {
+                "latitude": 51.563589371037650722,
+                "longitude": 5.0619546327402664687
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:01.065",
+              "GpsCoordinate": {
+                "latitude": 51.563589926549880715,
+                "longitude": 5.0619523753417379197
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:01.101",
+              "GpsCoordinate": {
+                "latitude": 51.563590762951918123,
+                "longitude": 5.0619501159319488792
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:01.156",
+              "GpsCoordinate": {
+                "latitude": 51.56359159433983308,
+                "longitude": 5.0619460538210709899
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:01.199",
+              "GpsCoordinate": {
+                "latitude": 51.563592988760838409,
+                "longitude": 5.0619424383627986685
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:01.248",
+              "GpsCoordinate": {
+                "latitude": 51.563593264636530478,
+                "longitude": 5.0619406336504750854
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:01.261",
+              "GpsCoordinate": {
+                "latitude": 51.563593821402037065,
+                "longitude": 5.0619388269268545955
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:01.333",
+              "GpsCoordinate": {
+                "latitude": 51.563594652789561223,
+                "longitude": 5.0619347648154970898
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:01.349",
+              "GpsCoordinate": {
+                "latitude": 51.563595208301407524,
+                "longitude": 5.0619325074164631673
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:01.403",
+              "GpsCoordinate": {
+                "latitude": 51.563595484803734337,
+                "longitude": 5.0619309280416358021
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:01.426",
+              "GpsCoordinate": {
+                "latitude": 51.56359604156909171,
+                "longitude": 5.0619291213178083666
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:01.495",
+              "GpsCoordinate": {
+                "latitude": 51.563596873583080082,
+                "longitude": 5.0619252845437268107
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:01.524",
+              "GpsCoordinate": {
+                "latitude": 51.563597148831703976,
+                "longitude": 5.0619232544934931184
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:01.552",
+              "GpsCoordinate": {
+                "latitude": 51.563597427214325819,
+                "longitude": 5.0619223511315043496
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:01.582",
+              "GpsCoordinate": {
+                "latitude": 51.563598261108531062,
+                "longitude": 5.0619191903701565849
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:01.631",
+              "GpsCoordinate": {
+                "latitude": 51.563598536357048374,
+                "longitude": 5.0619171603198234166
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:01.691",
+              "GpsCoordinate": {
+                "latitude": 51.563599368370638842,
+                "longitude": 5.0619133235453128705
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:01.732",
+              "GpsCoordinate": {
+                "latitude": 51.563599644245883269,
+                "longitude": 5.061911518832559409
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:01.753",
+              "GpsCoordinate": {
+                "latitude": 51.563600199757274822,
+                "longitude": 5.0619092614329934676
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:01.789",
+              "GpsCoordinate": {
+                "latitude": 51.5636004756324553,
+                "longitude": 5.0619074567201831627
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:01.824",
+              "GpsCoordinate": {
+                "latitude": 51.563600751507600251,
+                "longitude": 5.0619056520073506533
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:01.861",
+              "GpsCoordinate": {
+                "latitude": 51.563602698304315197,
+                "longitude": 5.0618986524589058007
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:01.917",
+              "GpsCoordinate": {
+                "latitude": 51.563603530317301704,
+                "longitude": 5.06189481568370514
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:01.954",
+              "GpsCoordinate": {
+                "latitude": 51.563603804938523467,
+                "longitude": 5.0618925602953037668
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:02.002",
+              "GpsCoordinate": {
+                "latitude": 51.563604361076421867,
+                "longitude": 5.061890528232988018
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:02.023",
+              "GpsCoordinate": {
+                "latitude": 51.563604636324441799,
+                "longitude": 5.0618884981822089841
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:02.067",
+              "GpsCoordinate": {
+                "latitude": 51.563604911572419098,
+                "longitude": 5.0618864681314059695
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:02.131",
+              "GpsCoordinate": {
+                "latitude": 51.563606023221083774,
+                "longitude": 5.0618821786687808739
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:02.151",
+              "GpsCoordinate": {
+                "latitude": 51.563606298468954492,
+                "longitude": 5.0618801486178774951
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:02.183",
+              "GpsCoordinate": {
+                "latitude": 51.563606854606639729,
+                "longitude": 5.0618781165552979573
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:02.231",
+              "GpsCoordinate": {
+                "latitude": 51.563607130481329932,
+                "longitude": 5.0618763118420346814
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:02.274",
+              "GpsCoordinate": {
+                "latitude": 51.563608243383427521,
+                "longitude": 5.0618724730543656065
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:02.323",
+              "GpsCoordinate": {
+                "latitude": 51.563608518631134814,
+                "longitude": 5.0618704430033041319
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:02.353",
+              "GpsCoordinate": {
+                "latitude": 51.563609072887913953,
+                "longitude": 5.0618677349273744071
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:02.398",
+              "GpsCoordinate": {
+                "latitude": 51.563609629025378922,
+                "longitude": 5.0618657028645195339
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:02.430",
+              "GpsCoordinate": {
+                "latitude": 51.56360990552679624,
+                "longitude": 5.0618641234887853386
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:02.461",
+              "GpsCoordinate": {
+                "latitude": 51.563610459783433271,
+                "longitude": 5.0618614154126957416
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:02.501",
+              "GpsCoordinate": {
+                "latitude": 51.563610736911726917,
+                "longitude": 5.0618600613746265182
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:02.554",
+              "GpsCoordinate": {
+                "latitude": 51.563611568923441553,
+                "longitude": 5.0618562245980420755
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:02.590",
+              "GpsCoordinate": {
+                "latitude": 51.563611844170857523,
+                "longitude": 5.0618541945467336873
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:02.624",
+              "GpsCoordinate": {
+                "latitude": 51.563611840409222964,
+                "longitude": 5.0618528425203876964
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:02.691",
+              "GpsCoordinate": {
+                "latitude": 51.563612671793755737,
+                "longitude": 5.0618487804058496238
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:02.732",
+              "GpsCoordinate": {
+                "latitude": 51.563612947667998299,
+                "longitude": 5.0618469756921777858
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:02.753",
+              "GpsCoordinate": {
+                "latitude": 51.56361322291525795,
+                "longitude": 5.0618449456407521581
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:02.801",
+              "GpsCoordinate": {
+                "latitude": 51.563613498162482074,
+                "longitude": 5.0618429155893025495
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:02.827",
+              "GpsCoordinate": {
+                "latitude": 51.563613774036632265,
+                "longitude": 5.0618411108755623218
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:02.892",
+              "GpsCoordinate": {
+                "latitude": 51.563614325784854486,
+                "longitude": 5.0618375014480161411
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:02.932",
+              "GpsCoordinate": {
+                "latitude": 51.563614599777999103,
+                "longitude": 5.0618350207209967806
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:02.940",
+              "GpsCoordinate": {
+                "latitude": 51.563614875652028502,
+                "longitude": 5.0618332160071650705
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:02.998",
+              "GpsCoordinate": {
+                "latitude": 51.563615152153012389,
+                "longitude": 5.0618316366310525112
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:03.032",
+              "GpsCoordinate": {
+                "latitude": 51.563615147764132018,
+                "longitude": 5.0618300592668692417
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:03.065",
+              "GpsCoordinate": {
+                "latitude": 51.563615701392983226,
+                "longitude": 5.061827125852309095
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:03.117",
+              "GpsCoordinate": {
+                "latitude": 51.563616253767769138,
+                "longitude": 5.0618237417621871899
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:03.150",
+              "GpsCoordinate": {
+                "latitude": 51.563616527760622432,
+                "longitude": 5.0618212610349795355
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:03.194",
+              "GpsCoordinate": {
+                "latitude": 51.563617084524281609,
+                "longitude": 5.0618194543089733983
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:03.218",
+              "GpsCoordinate": {
+                "latitude": 51.563617359771065196,
+                "longitude": 5.0618174242571978283
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:03.262",
+              "GpsCoordinate": {
+                "latitude": 51.563617635017806151,
+                "longitude": 5.0618153942053973893
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:03.317",
+              "GpsCoordinate": {
+                "latitude": 51.563618189900324751,
+                "longitude": 5.0618129114660090906
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:03.354",
+              "GpsCoordinate": {
+                "latitude": 51.563618464519976214,
+                "longitude": 5.0618106560763882484
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:03.408",
+              "GpsCoordinate": {
+                "latitude": 51.56361901877536269,
+                "longitude": 5.0618079479991378022
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:03.425",
+              "GpsCoordinate": {
+                "latitude": 51.563619016894278957,
+                "longitude": 5.0618072719858595576
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:03.485",
+              "GpsCoordinate": {
+                "latitude": 51.563619567387384279,
+                "longitude": 5.0618032118819638043
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:03.533",
+              "GpsCoordinate": {
+                "latitude": 51.563619845142042664,
+                "longitude": 5.0618020831810319748
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:03.548",
+              "GpsCoordinate": {
+                "latitude": 51.563620399397230187,
+                "longitude": 5.0617993751035950112
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:03.592",
+              "GpsCoordinate": {
+                "latitude": 51.563620117253300634,
+                "longitude": 5.0617989264402059035
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:03.618",
+              "GpsCoordinate": {
+                "latitude": 51.563620673389571891,
+                "longitude": 5.0617968943760160982
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:03.692",
+              "GpsCoordinate": {
+                "latitude": 51.563620388110372517,
+                "longitude": 5.0617953190238100802
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:03.725",
+              "GpsCoordinate": {
+                "latitude": 51.563620387483325658,
+                "longitude": 5.061795093686043856
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:03.753",
+              "GpsCoordinate": {
+                "latitude": 51.563620387483325658,
+                "longitude": 5.061795093686043856
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:03.791",
+              "GpsCoordinate": {
+                "latitude": 51.563620942992464791,
+                "longitude": 5.0617928362840265422
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:03.827",
+              "GpsCoordinate": {
+                "latitude": 51.563620942365410826,
+                "longitude": 5.0617926109462585416
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:03.893",
+              "GpsCoordinate": {
+                "latitude": 51.563620658967337818,
+                "longitude": 5.0617917116073707362
+              }
+            },
+            {
+              "Timestamp": "2017-10-27T23:11:03.918",
+              "GpsCoordinate": {
+                "latitude": 51.563620934213638236,
+                "longitude": 5.0617896815552683165
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]
