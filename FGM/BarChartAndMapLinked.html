@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+	<style>
+		.chart {
+			background-color: rgb(245,245,245);
+			padding: 5px;
+		}
+		.chart rect {
+			fill: steelblue;
+		}
+		.chart text {
+			fill: white;
+			font: 9px sans-serif;
+			text-anchor: end;
+		}
+		.axis text {
+			fill: black;
+			font: 10px sans-serif;
+		}
+		.axis path,
+		.axis line {
+			fill: none;
+			stroke: #000;
+		}
+		#mapDiv {
+			position: absolute;
+			left: 520px;
+			top: 8px;
+		}
+		#infoDiv {
+			background-color: rgb(245,245,245);
+			position: absolute;
+			left: 520px;
+			top: 360px;
+			width: 390px;
+			height: 180px;
+			padding: 5px;
+			font: 18px sans-serif;
+		}
+		.mapSVG {
+			background-color: rgb(245,245,245);
+		}
+		.municipality {
+			fill: rgb(255,240,214);
+			stroke: rgb(255,159,227);
+		}
+	</style>
+	<svg class="chart"></svg>
+	<script src="../lib/d3.v3.min.js"></script>
+</head><body>
+
+<div id="mapDiv"></div>
+<div id="infoDiv"></div>
+
+<script>
+
+	var svgwidth = 500,
+			barHeight = 20;
+
+	var mapWidth = 400, mapHeight = 350;
+	var mapDiv, infoDiv, mapSVG, svgpath;
+
+	// select the divs by id:
+	mapDiv = d3.select("#mapDiv");
+	infoDiv = d3.select("#infoDiv");
+
+	d3.csv("../data/overijssel_population.csv",
+			function(error, data) {
+				//start of callback function:
+
+				var svgheight = barHeight * data.length + 30;
+
+				var chart = d3.select(".chart")
+						.attr("width", svgwidth)
+						.attr("height", svgheight);
+
+				var xScale = d3.scale.linear()
+						.domain([0, d3.max(data, function(d) {
+							return +d.aant_inw; })])
+						.range([0, svgwidth]);
+
+				var theAxis = d3.svg.axis()
+						.scale(xScale)
+						.orient("bottom");
+
+				var bar = chart.selectAll("g")
+								.data(data)
+								.enter().append("g")
+								.attr("transform", function(d, i) {
+									return "translate(0," + i * barHeight + ")";
+								})
+						;
+
+				bar.append("rect")
+						.attr("id", function(d) {return "bar_" + d.gm_code})
+						.attr("width", function(d) {
+							return xScale(d.aant_inw)} )
+						.attr("height", barHeight - 1)
+						.on("mouseover", function(d) {
+							var gmCode = d.gm_code;
+							var gmName = d.gm_naam;
+							var gmPop = d.aant_inw;
+							doHighlights(gmCode, gmName, gmPop, 1);
+						})
+						.on("mouseout", function(d) {
+							var gmCode = d.gm_code;
+							doHighlights(gmCode, null, null, 0);
+						})
+				;
+
+				bar.append("text")
+						.attr("x", function(d) {
+							return xScale(d.aant_inw)- 3; })
+						.attr("y", barHeight / 2)
+						.attr("dy", ".35em")
+						.text(function(d) {
+							return d.gm_naam; })
+				;
+
+				chart.append("g")
+						.attr("class", "axis")
+						.attr("transform", "translate(0," + (barHeight * data.length + 3) + ")")
+						.call(theAxis)
+				;
+
+			}); //end of callback function
+
+
+	// create an svg of fixed size:
+	mapSVG = mapDiv.append("svg")
+			.attr("class", "mapSVG")
+			.attr("width", mapWidth)
+			.attr("height", mapHeight)
+	;
+
+	// Define Mercator proj to center at data (lon-lat)
+	// scaled and translated to fit svg size:
+	var myProj = d3.geo.mercator()
+					.center([6.4 , 52.5])
+					.scale(15000)
+					.translate([mapWidth / 2, mapHeight / 2])
+			;
+
+	//Define svg path generator using the projection
+	svgpath = d3.geo.path()
+			.projection(myProj);
+
+	// asynchronously load geojson:
+	d3.json("../data/overijssel.json", function (error, myGeoJson) {
+
+		// create new svg paths:
+		mapSVG.selectAll("path")
+			// bind the data:
+				.data(myGeoJson.features).enter()
+			// for each d create a path:
+				.append("path")
+				.attr("class", "municipality")
+				.attr("id", function(d) {return "poly_" + d.properties.gm_code})
+				.attr("d", svgpath)
+				.on("mouseover", function(d) {
+					var gmCode = d.properties.gm_code;
+					var gmName = d.properties.gm_naam;
+					var gmPop = d.properties.aant_inw;
+					doHighlights(gmCode, gmName, gmPop, 1);
+				})
+				.on("mouseout", function(d) {
+					var gmCode = d.properties.gm_code;
+					doHighlights(gmCode, null, null, 0);
+				})
+		;
+
+	});
+
+	function doHighlights(gmCode, gmName, gmPop, onOff) {
+		if (onOff ==1 ) {
+			d3.select("#bar_" + gmCode).style("fill", "red");
+			d3.select("#poly_" + gmCode).style("fill", "red");
+			infoDiv.html(gmCode + ": " + gmName + "<br>" + gmPop + " inhabitants.");
+		} else {
+			d3.select("#bar_" + gmCode).style("fill", "steelblue");
+			d3.select("#poly_" + gmCode).style("fill", "rgb(255,240,214)");
+			infoDiv.html("");
+		}
+	}
+
+</script>
+</body>
+</html>

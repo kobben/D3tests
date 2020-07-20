@@ -1,3 +1,71 @@
+@charset "UTF-8";
+/* Webfont: Agrofont-Bold */@font-face {
+  font-family: 'Agrofont';
+  src: url('Agrofont/Agrofont-Bold.eot'); /* IE9 Compat Modes */
+  src: url('Agrofont/Agrofont-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('Agrofont/Agrofont-Bold.woff') format('woff'), /* Modern Browsers */
+  url('Agrofont/Agrofont-Bold.ttf') format('truetype'); /* Safari, Android, iOS */
+  font-style: normal;
+  font-weight: bold;
+  text-rendering: optimizeLegibility;
+}
+/* Webfont: Agrofont-Italic */@font-face {
+  font-family: 'Agrofont';
+  src: url('Agrofont/Agrofont-Italic.eot'); /* IE9 Compat Modes */
+  src: url('Agrofont/Agrofont-Italic.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('Agrofont/Agrofont-Italic.woff') format('woff'), /* Modern Browsers */
+  url('Agrofont/Agrofont-Italic.ttf') format('truetype'); /* Safari, Android, iOS */
+  font-style: italic;
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+}
+@font-face {
+  font-family: 'Agrofont';
+  src: url('Agrofont/Agrofont-Normal.eot'); /* IE9 Compat Modes */
+  src: url('Agrofont/Agrofont-Normal.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('Agrofont/Agrofont-Normal.woff') format('woff'), /* Modern Browsers */
+  url('Agrofont/Agrofont-Normal.ttf') format('truetype'); /* Safari, Android, iOS */
+  font-style: normal;
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+}
+@font-face {
+  font-family: 'Branding';
+  src: url('Branding/Branding-Semibold.eot'); /* IE9 Compat Modes */
+  src: url('Branding/Branding-Semibold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('Branding/Branding-Semibold.woff') format('woff'), /* Modern Browsers */
+  url('Branding/Branding-Semibold.ttf') format('truetype'); /* Safari, Android, iOS */
+  font-style: normal;
+  font-weight: bold;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin-top: 0px;
+  font-family: "Agrofont", serif;
+    font-size: 0.9em;
+  line-height: 1.1em;
+}
+
+p.cite {
+  text-align: right;
+  font-size: small;
+  font-style: italic;
+}
+
+p.cite, p.cite a {
+  color: #666;
+}
+
+
+h1, h2, h3 {
+  font-family: "Branding", serif;
+  font-weight: 300;
+}
+
+h1 {
+  font-size: 2.5em;
+}
 .breadcrumbs {
   font-size: small;
   text-align: center;
@@ -5,8 +73,8 @@
   padding: 5px 0;
   margin: 0px;
   font-style: italic;
-    border-top: solid #eee 1px;
-    border-bottom: solid #eee 1px;
+  border-top: solid #eee 1px;
+  border-bottom: solid #eee 1px;
   color: #000;
 }
 .breadcrumbs a {
@@ -20,34 +88,7 @@
   color: #000;
 }
 
-p.cite {
-  text-align: right;
-  font-size: small;
-  font-style: italic;
-}
 
-p.cite, p.cite a {
-  color: #666;
-}
-
-body {
-  margin-top: 0px;
-  font-family: Georgia, serif;
-    font-size: 14px;
-  /*text-align: center;*/
-}
-
-p {
-  line-height: 1.5em;
-}
-
-h1, h2, h3 {
-  font-weight: 300;
-}
-
-h1 {
-  font-size: 2.5em;
-}
 .thumb {
     float: left;
     vertical-align: middle;

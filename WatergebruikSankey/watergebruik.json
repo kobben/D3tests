@@ -1,0 +1,38 @@
+{
+  "nodes":[
+    {"name":"Totaal watergebruik"},
+    {"name":"Leidingwater"},
+    {"name":"Grondwater"},
+    {"name":"Oppervlaktewater"},
+    {"name":"Particulere huishoudens"},
+    {"name":"Overige economische activiteiten"},
+    {"name":"Landbouw, bosbouw, visserij"},
+    {"name":"Delfstoffenwinning"},
+    {"name":"Industrie"},
+    {"name":"Energievoorziening"},
+    {"name":"Waterbedrijven en afvalbeheer"}
+  ],
+  "links":[
+    {"source":	0, "target":	1	,"value":	1067.9	},
+    {"source":	0, "target":	2	,"value":	957.7	},
+    {"source":	0, "target":	3	,"value":	14364.3	},
+    {"source":	3, "target":	6	,"value":	21.9	},
+    {"source":	3, "target":	7	,"value":	0.6	},
+    {"source":	3, "target":	8	,"value":	3004.4 },
+    {"source":	3, "target":	9	,"value":	10358.9 },
+    {"source":	3, "target":	10	,"value":	978.5 },
+    {"source":	1, "target":	4	,"value":	783.3	},
+    {"source":	1, "target":	5	,"value":	103.9	},
+    {"source":	1, "target":	6	,"value":	41.9	},
+    {"source":	1, "target":	7	,"value":	2.4	},
+    {"source":	1, "target":	8	,"value":	130.8	},
+    {"source":	1, "target":	9	,"value":	3.1	},
+    {"source":	1, "target":	10	,"value":	2.5	},
+    {"source":	2, "target":	6	,"value":	60.8	},
+    {"source":	2, "target":	8	,"value":	133.8	},
+    {"source":	2, "target":	9	,"value":	4.0	},
+    {"source":	2, "target":	10	,"value":	758.9	}
+    
+    
+  ]
+}

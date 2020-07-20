@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="c3eafc3a-3ffe-4ca9-9f1d-c1ff9ba5d3e1" name="D3tests_remote" url="http://kartoweb.itc.nl/kobben/d3tests/">
+        <fileTransfer host="kartoweb.itc.nl" port="21" rootFolder="/adminkobben/kobben/D3tests" password="dfe1dfdcdfcbdfd9dfdedfc7dfc5dff5df9cdf9edff5dfdfdfde" username="adminkobben">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="1a70ffb5-307e-44f5-a15d-8bd657390159" name="StudentMapper on kartoweb" url="http://kartoweb.itc.nl/studentmapper/">
+        <fileTransfer host="kartoweb.itc.nl" port="21" rootFolder="/adminkobben" password="dfe1dfdcdfcbdfd9dfdedfc7dfc5dff5df9cdf9edff5dfdfdfde" username="adminkobben">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

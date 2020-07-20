@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="D3tests">
+  <component name="PublishConfigData" promptOnRemoteOverwrite="CHECK_TIMESTAMP" serverName="StudentMapper on kartoweb">
     <serverData>
-      <paths name="D3tests">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="http://localhost/D3tests/" />
-          </mappings>
-        </serverdata>
-      </paths>
       <paths name="D3tests_remote">
         <serverdata>
           <mappings>
@@ -16,7 +9,13 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="StudentMapper on kartoweb">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/studentmapper" local="$PROJECT_DIR$/studentmapper" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
     </serverData>
   </component>
 </project>
-

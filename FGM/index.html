@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head><title>FGM</title>
+<script src="../lib/d3.v4.min.js"></script>
+<style>
+    .mapSVG {
+        background-color: white;
+    }
+    .country {
+        fill: rgb(250,250,250);
+        stroke: rgb(200,120,120);
+        stroke-width: 0.35;
+    }
+</style>
+<body>
+
+<div id="mapDiv"></div>
+
+<script>
+
+var mapWidth = 500, mapHeight = 600;
+var mapDiv, mapSVG, svgpath;
+
+// select the mapDiv by id:
+mapDiv = d3.select("#mapDiv");
+
+// create an svg of fixed size:
+mapSVG = mapDiv.append("svg")
+        .attr("class", "mapSVG")
+        .attr("width", mapWidth)
+        .attr("height", mapHeight)
+;
+
+// Define Mercator proj to center at data (lon-lat)
+// scaled and translated to fit svg size:
+var myProj = d3.geoMercator()
+        .center([17, 0])
+        .scale(400)
+        .translate([mapWidth / 2, mapHeight / 2])
+;
+
+//Define svg path generator using the projection
+svgpath = d3.geoPath()
+        .projection(myProj);
+
+// asynchronously load geojson:
+d3.json("data/africa_fgm.geo.json", function (error, myGeoJson) {
+    // create new svg paths:
+    mapSVG.selectAll("path")
+        // bind the data:
+            .data(myGeoJson.features).enter()
+        // for each d create a path:
+            .append("path")
+            .attr("class", "country")
+            .attr("d", svgpath)
+            .attr("id", function(d) {return d.properties.gm_naam;})
+    ;
+});
+
+</script>
+
+</body>
+</html>
+

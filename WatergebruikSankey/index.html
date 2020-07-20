@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<title>Watergebruik in NL (2014)</title>
+<style>
+
+  @import url(../lib/maps.css);
+
+  #chart {
+    height: 600px;
+  }
+
+  .node rect {
+    cursor: move;
+    fill-opacity: .9;
+    shape-rendering: crispEdges;
+  }
+
+  .node text {
+    font-size: 12px;
+    pointer-events: none;
+    text-shadow: 0 1px 0 #fff;
+  }
+
+  .link {
+    fill: none;
+    stroke: #000;
+    stroke-opacity: .2;
+  }
+
+  .link:hover {
+    stroke: #f00;
+    stroke-opacity: .5;
+  }
+  .tooltip {
+    position: absolute;
+    z-index: 10;
+    pointer-events: none;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid #ddd;
+    padding: 5px 12px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px rgba(120, 120, 120, 0.65);
+    text-shadow: 0 1px 0 #eee;
+  }
+
+  .tooltip-text {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    color: #000;
+    margin-bottom: 3px;
+  }
+
+</style>
+<body>
+
+<h2>WATERGEBRUIK particuliere huishoudens en bedrijven (2014)</h2>
+
+<p id="chart">
+
+
+
+  <script src="../lib/d3.v4.min.js"></script>
+  <script src="../lib/sankey.js"></script>
+  <script>
+
+    var margin = {top: 1, right: 190, bottom: 6, left: 181},
+      width = 1200 - margin.left - margin.right,
+      height = 600 - margin.top - margin.bottom;
+
+    var formatNumber = d3.format(".1f"),
+      format = function(d) { return formatNumber(d) + " miljoen m3"; },
+      color = d3.scaleOrdinal(d3.schemeCategory20);
+
+    var mapSVG = d3.select("#chart").append("svg")
+    	.attr("id", "ChartSVG")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var sankey = d3.sankey()
+      .nodeWidth(25)
+      .nodePadding(10)
+      .size([width, height]);
+
+    var path = sankey.link();
+
+    d3.json("watergebruik.json", function(watergebruik) {
+
+      sankey
+        .nodes(watergebruik.nodes)
+        .links(watergebruik.links)
+        .layout(20);
+
+      var link = mapSVG.append("g").selectAll(".link")
+        .data(watergebruik.links)
+        .enter().append("path")
+        .attr("class", "link")
+        .attr("d", path)
+        .style("stroke-width", function(d) { return Math.max(1, d.dy); })
+        .sort(function(a, b) { return b.dy - a.dy; });
+
+      link.append("title")
+        .text(function(d) { return d.source.name + " => " + d.target.name + "\n" + format(d.value); });
+
+      var node = mapSVG.append("g").selectAll(".node")
+        .data(watergebruik.nodes)
+        .enter().append("g")
+        .attr("class", "node")
+        .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+        .call(d3.drag()
+          .subject(function(d) { return d; })
+          .on("start", function() { this.parentNode.appendChild(this); })
+          .on("drag", dragmove));
+
+      node.append("rect")
+        .attr("height", function(d) { return d.dy; })
+        .attr("width", sankey.nodeWidth())
+        .style("fill", function(d) { return d.color = color(d.name.replace(/ .*/, "")); })
+        .style("stroke", function(d) { return d3.rgb(d.color).darker(2); })
+        .append("title")
+        .text(function(d) { return d.name + "\n" + format(d.value); });
+
+      node.append("text")
+        .attr("x", 30)
+        .attr("y", function(d) { return d.dy / 2; })
+        .attr("dy", ".35em")
+        .attr("text-anchor", "start")
+        .attr("transform", null)
+        .text(function(d) { return d.name; })
+        .filter(function(d) { return d.x < width / 2; })
+        .attr("x", -30 + sankey.nodeWidth())
+        .attr("text-anchor", "end");
+
+      function dragmove(d) {
+        d3.select(this).attr("transform", "translate(" + d.x + "," + (d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))) + ")");
+        sankey.relayout();
+        link.attr("d", path);
+      }
+    });
+
+////Encode the SVG DOM for saving
+function doSave(SVGid) {
+		if (SVGid === undefined || SVGid == '' || SVGid == null) {
+			console.log("No SVG element identified.");
+		} else {
+		var serializer = new XMLSerializer();
+    //    var xmlString = serializer.serializeToString(d3.select('svgScale').node());
+    var xmlString = serializer.serializeToString(document.getElementById(SVGid));
+    var SVGDownload = 'data:image/svg+xml;base64,' + btoa(xmlString);
+    //document.getElementById("downloadLink").href = SVGDownload;
+    console.log(SVGDownload);
+		}
+    
+}
+
+  </script>
+</p>
+<p>
+  <small>Bron: Centraal Bureau voor de Statistiek</small>
+</p>
