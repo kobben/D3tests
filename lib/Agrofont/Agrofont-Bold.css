@@ -1,0 +1,12 @@
+/* Webfont: Agrofont-Bold */@font-face {
+    font-family: 'Agrofont-Normaal';
+    src: url('Agrofont-Bold.eot'); /* IE9 Compat Modes */
+    src: url('Agrofont-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('Agrofont-Bold.woff') format('woff'), /* Modern Browsers */
+         url('Agrofont-Bold.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('Agrofont-Bold.svg#Agrofont-Bold') format('svg'); /* Legacy iOS */
+    font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+

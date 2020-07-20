@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" 
+   	src="./lib/d3.v3.min.js"></script>
+</head>
+<body>
+
+<svg id="svg" height="100%" width="100%">
+  <circle cx="40" cy="60" r="10"></circle>
+  <circle cx="80" cy="60" r="10"></circle>
+  <circle cx="120" cy="60" r="10"></circle>
+</svg>
+<script>
+  var circle = d3.selectAll("circle");
+  circle.attr("fill", "steelblue");
+  circle.attr("cx", function(d, i) { return Math.random() * 500; });
+</script>
+</body>
+</html>

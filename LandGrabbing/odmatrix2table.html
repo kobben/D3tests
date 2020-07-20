@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<title>OD-matrix GROOTTE</title>
+<style>
+#chart {
+  height: 720px;
+}
+
+rect {
+    fill: white;
+    stroke: grey;
+    stroke-width: 0.5px;
+}
+
+.values {
+    fill: red;
+    stroke: none;
+    fill-opacity: .5;
+    pointer-events:
+}
+
+text, p {
+    font-family : Helvetica, Arial, sans-serif;
+    font-size: 10px;
+}
+
+.titles {
+    font-family : Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    pointer-events: none;
+}
+
+.link {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: .2;
+}
+
+.link:hover {
+    stroke: #f00;
+  stroke-opacity: .5;
+}
+
+.tooltip {
+    position: absolute;
+    z-index: 10;
+    pointer-events: none;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid #ddd;
+    padding: 5px 12px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px rgba(120, 120, 120, 0.65);
+    text-shadow: 0 1px 0 #eee;
+}
+
+.tooltip-text {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    color: #000;
+    margin-bottom: 3px;
+}
+
+</style>
+<body>
+
+<p id="chart">
+
+
+
+<script src="../lib/d3.v4.min.js"></script>
+<script>
+
+var margin = {top: 5, right: 5, bottom: 5, left: 5},
+    width = 820 - margin.left - margin.right,
+    height = 720 - margin.top - margin.bottom;
+
+var cellsize = 25, maxR = cellsize;
+
+var origins, destinations, flows;
+var odmatrix;
+
+var tooltip;
+
+//create tooltip divs:
+tooltip = d3.select("body")
+        .append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0)
+;
+tooltip.append("div")
+        .attr("class", "tooltip-text")
+;
+
+function toolTipMove(d) {
+    tooltip.style("left", (d.pageX + 7) + "px")
+            .style("top", (d.pageY + 12) + "px");
+}
+function toolTipHide() {
+    tooltip.transition()
+            .duration(250)
+            .style("opacity", 0);
+}
+function toolTipShow(o,d) {
+    var txt = origins[o].name + " -> " + destinations[d].name + ": " + formatHa(odmatrix[o][d]);
+    tooltip.transition()
+            .duration(250)
+            .style("opacity", 1);
+    tooltip.select('.tooltip-text')
+            .text(txt);
+}
+
+var formatNumber = d3.format(",.0f"),
+    formatHa = function(d) { return formatNumber(d).replace(/,/g , ".") + " ha."; },
+    color = d3.scaleOrdinal(d3.schemeCategory20);
+
+var mapSVG = d3.select("#chart");
+var cells = mapSVG.append("table");
+
+d3.json("grabbing-od.json", function(od_data) {
+
+    origins = od_data.origins;
+    destinations = od_data.destinations;
+    flows =  od_data.flows;
+
+
+    //init OD matrix:
+    odmatrix = new Array(origins.length);
+    for (o = 0; o < origins.length; o++) {
+        odmatrix[o] = new Array(destinations.length);
+        for (d = 0; d < destinations.length; d++) {
+            odmatrix[o][d] = 0;
+        }
+    }
+    var flowvalues = [];
+    for (f = 0; f < flows.length; f++) {
+        flowvalues[f] = flows[f].value;
+        odmatrix[flows[f].origin][flows[f].destination] = flows[f].value;
+    }
+    cells.append("tr");
+    cells.append("td").html("");
+    for (d = 0; d < destinations.length; d++) {
+      cells.append("td")
+        .attr("id", d)
+        .html(destinations[d].name)
+      ;
+  }
+
+  for (o = 0; o < origins.length; o++) {
+    cells.append("tr");
+    cells.append("td").html(origins[o].name);
+    for (d = 0; d < destinations.length; d++) {
+      cells.append("td")
+        .attr("id", o + "_" + d)
+        .html(odmatrix[o][d])
+      ;
+
+    }
+  }
+
+
+});
+
+////Encode the SVG DOM for saving
+//function doSave() {
+//    var serializer = new XMLSerializer();
+//        var xmlString = serializer.serializeToString(d3.select('mapSVG').node());
+////    var xmlString = serializer.serializeToString(document.getElementById("chart"));
+//    SVGDownload = 'data:image/mapSVG+xml;base64,' + btoa(xmlString);
+//    document.getElementById("downloadLink").href = SVGDownload;
+//}
+</script>
+</p>
+<!--<a id="downloadLink" href="" download='download'>Download</a>-->
+
+</body></html>

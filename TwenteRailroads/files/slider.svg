@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+    "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd" [
+    <!ATTLIST svg
+              xmlns:a3 CDATA #IMPLIED
+              a3:scriptImplementation CDATA #IMPLIED>
+    <!ATTLIST script
+              a3:scriptImplementation CDATA #IMPLIED>
+]>
+<svg xml:space="preserve" onload="init(evt)" 
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     >
+    <script type="text/ecmascript"  xlink:href="Widget.js.gz" />
+    <script type="text/ecmascript"  xlink:href="slider.js.gz" />
+    <script type="text/ecmascript" ><![CDATA[
+        var sliderJaar;
+        
+        function init(e) {
+		    if ( window.svgDocument == null )
+			svgDocument = e.ownerDocument;
+		    var world = svgDocument.getElementById("world");
+		    theJaar = svgDocument.getElementById("txtJaar").firstChild;
+
+		    sliderJaar = new Slider(62, 32, 278, 90, changeJaar,
+		    svgDocument.getElementById("body").firstChild.data, 
+		    svgDocument.getElementById("thumb").firstChild.data);
+
+		    sliderJaar.realize(world);
+		    sliderJaar.setValue(1928);
+		    sliderJaar.setMinmax(1864, 2003);
+
+		    function changeJaar(jaar) {
+			    jaar = Math.round(jaar);
+			    theJaar.data = jaar;
+			    parent.doJaar(jaar); //sits in enclosing HTML doc!!
+		    }
+       		 }
+       		 
+	function upJaar() {
+		    newjaar = sliderJaar.value;
+		    if (newjaar < sliderJaar.max) {
+		    	newjaar++;
+		    	sliderJaar.setValue(newjaar,true);
+		    	}
+  		 }
+
+	function downJaar() {
+		    newjaar = sliderJaar.value;
+		    if (newjaar > sliderJaar.min) {
+		    	newjaar--;
+		    	sliderJaar.setValue(newjaar,true);
+		    	}
+  		 }
+
+            
+            
+    ]]></script>
+    
+    <defs>
+        <style type="text/css"><![CDATA[
+            .body {
+                stroke-width: 0pt;
+                fill: rgb(255,255,255);
+            }
+            .thumb {
+                stroke: rgb(0,0,0);
+                fill: rgb(110,110,110);
+            }
+            .jaarText {
+                stroke: rgb(0,0,0);
+                font-family:Verdana,Arial,Helvetica,sans-serif; 
+                font-size: 14pt;
+            }
+        ]]></style>
+        <text id="body"><![CDATA[
+            <g >
+                <a><rect x="-20" y="-62" rx="0" ry="0" width="310"  height="124" class="body"/></a>
+                <line x1="0" y1="0" x2="278" y2="0" style="stroke: black; stroke-width: 1.5pt"/>
+            </g>
+        ]]></text>
+        <text id="thumb"><![CDATA[
+            <g  >
+               <rect x="0" y="-12" rx="1" ry="1" width="12" height="24" class="thumb" />
+            </g>
+        ]]></text>
+    	<path id="arrow" d="M 0 0, l 20 0, l -10, 10, z" style="fill:rgb(110,110,110); stroke: black"/>
+    </defs>
+    <g id="world" >
+   	<a><use xlink:href="#arrow" transform="translate(52,330)" onclick="upJaar()"  /> </a>
+   	<a><use xlink:href="#arrow" transform="translate(72,10) rotate(180)" onclick="downJaar()" /></a>
+        <text id="txtJaar"  x="38" y="370" class="jaarText">JAAR</text>
+    </g>
+</svg>
+

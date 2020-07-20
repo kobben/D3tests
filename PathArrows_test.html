@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+    @font-face {
+    font-family: arrows;
+    src: url(arrows.woff);
+}
+
+div {
+    font-family: myFirstFont;
+}
+    path {
+  fill: none;
+  stroke: red;
+  stroke-width: 3
+}
+text {
+  font-family:arrows;
+  font-size: 35px;
+  fill: red;
+  dominant-baseline: central
+}
+    </style>
+  </head>
+  <body>
+    <svg viewBox="0 0 500 500" width="300px" height="300px">
+  <path class="link" id="path1" d="M0 0 L200 400A300 300 0 0 1 490 150"></path>
+  <text >
+    <textPath xlink:href="#path1" startOffset="10%"><tspan fill="white">O</tspan></textPath>
+    <textPath xlink:href="#path1" startOffset="10%">></textPath>
+  </text>
+</svg>
+  </body>
+</html>

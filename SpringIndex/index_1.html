@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>SpringIndex</title>
+    <link rel="stylesheet" href="SpringIndex.css">
+    <script src="../lib/d3.v3.min.js"></script>
+    <!--<script src="http://d3js.org/d3.v3.min.js"></script>-->
+    <script src="SpringIndex_1.js"></script>
+</head>
+<body onload="init()">
+
+<section id="theMap">
+    <header><h1>Spring Index in Netherlands test</h1></header>
+<p></p>
+    <canvas id="myCanvas" width="266" height="315" onclick="canvasClick(event)">
+        Your browser does not support the HTML5 canvas tag...
+    </canvas><br/>
+    Day: <span id="dayTxt"></span>
+    <input type="button" value="|<" onclick="animateBegin()">
+    <input type="button" value="<<" onclick="animateBack()">
+    <input type="button" value=">>" onclick="animateForward()">
+    <input type="button" value=">|" onclick="animateEnd()">
+</section>
+
+
+
+<footer>
+    <p>&copy;<time datetime="2015" />2015 – ITC, Barend Köbben; Created in HTML5, using Canvas & d3.js</p>
+
+</footer>
+
+
+</body>
+</html>

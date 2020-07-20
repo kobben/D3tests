@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>TRACKING GEOGRAPHY &amp; TIME</title>
+    <script type="text/javascript" src="../lib/d3.v3.min.js"></script>
+    <script src="../lib/d3.geo.projection.v0.min.js"></script>
+    <!--<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script> -->
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+
+<script type="text/javascript">
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    /*
+     TRACKING GEOGRAPHY & TIME
+     D3.js Javascript web-aap to generate web pages from track data
+     */
+    // ##############################################################
+    // ##############################################################
+    // FOR EACH NEW DATASET: THE VARIABLES BELOW NEED TO BE SET
+    //
+// geojson file with points & stops:
+var dataFile = "data/bus15025.geojson";
+// lon and lat of center of map and map scale:
+var mapCenterLon = -6.3, mapCenterLat = 53.35;
+var mapScale = 200000;
+// format string for date an/or time formatter
+// see https://github.com/mbostock/d3/wiki/Time-Formatting
+var dateFormat = d3.time.format("%H:%M:%S");
+// lowest and highest time/date values found in data:
+var earliestTimeStr = "21:54:50";
+var latestTimeStr = "22:57:47";
+// lowest and highest distance values found in data:
+var smallestDist = 0;
+var largestDist = 1466.48;
+//Units & interval values for axes:
+var distLabelledTicksValue = 20;
+var distUnLabelledTicksValue = 100;
+var distSlicesLabelledTicksValue = 2;
+var distSlicesUnLabelledTicksValue = 10;
+var timeLabelledTicksUnit = d3.time.minutes;
+var timeLabelledTicksValue = 5;
+var timeUnLabelledTicksUnit = d3.time.seconds;
+var timeUnLabelledTicksValue = 20;
+//
+// ##############################################################
+// ##############################################################
+</script>
+<!--load trackviewer D3 javascript:-->
+<script src="trackViewer.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" 
+   	src="./lib/d3.v3.min.js"></script>
+</head>
+<body>
+<svg id="svg" height="100%" width="100%"></svg>
+<script>
+  var svg = d3.select("svg");
+  svg.selectAll("circle")
+    .data([500, 150, 1000, 500])
+    .enter().append("circle")
+    .attr("fill", "steelblue")
+    .attr("cy", 60)
+    .attr("cx", function(d, i) { return i * 100 + 30; })
+    .attr("r", function(d) { return Math.sqrt(d); })
+  ;
+</script>
+</body>
+</html>
